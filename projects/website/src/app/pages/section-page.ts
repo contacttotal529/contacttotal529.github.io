@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import { BlockRenderer } from '../shared/block-renderer';
 
 /** Which state list is worth flagging beside a rule. Chapter default, overridden per rule. */
@@ -28,18 +28,24 @@ const SECTION_WATCH: Record<string, string> = {
 })
 export class SectionPage {
   private readonly content = inject(ContentService);
-  private readonly titleService = inject(Title);
+  private readonly seo = inject(Seo);
 
   readonly chapterId = input<string>('');
   readonly sectionId = input<string>('');
 
   readonly chapter = computed(() => this.content.chapter(this.chapterId()));
 
-  readonly section = computed(() => {
-    const found = this.content.section(this.chapterId(), this.sectionId());
-    this.titleService.setTitle(found ? `${found.title} — Total529` : 'Not found — Total529');
-    return found;
-  });
+  readonly section = computed(() => this.content.section(this.chapterId(), this.sectionId()));
+
+  constructor() {
+    effect(() => {
+      const found = this.section();
+      this.seo.set({
+        title: found ? `${found.title} — Total529` : 'Not found — Total529',
+        description: found?.summary ?? null,
+      });
+    });
+  }
 
   readonly ruleNumber = computed(() => {
     const chapter = this.chapter();

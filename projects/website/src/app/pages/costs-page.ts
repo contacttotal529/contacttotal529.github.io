@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import type { CostRow } from '../core/content.models';
 
 type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
@@ -247,6 +248,14 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
   `,
 })
 export class CostsPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Cost of attendance by state — Total529',
+      description:
+        "In-state cost of attendance at every state's flagship public university for 2025–26, sortable and compared against the national average.",
+    });
+  }
+
   private readonly content = inject(ContentService);
 
   readonly sort = signal<SortKey>('total');

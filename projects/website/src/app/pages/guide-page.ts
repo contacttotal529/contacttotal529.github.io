@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-guide-page',
@@ -196,6 +197,14 @@ import { ContentService } from '../core/content.service';
   `,
 })
 export class GuidePage {
+  constructor() {
+    inject(Seo).set({
+      title: 'The guide — Total529',
+      description:
+        'All 13 chapters and 76 rules of Understanding, Using, and Maximizing 529 Accounts, each with its state exceptions and worked examples.',
+    });
+  }
+
   private readonly content = inject(ContentService);
   readonly book = this.content.book;
   readonly chapters = this.content.chapters;

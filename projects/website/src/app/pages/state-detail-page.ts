@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-state-detail-page',
@@ -12,17 +12,24 @@ import { ContentService } from '../core/content.service';
 })
 export class StateDetailPage {
   private readonly content = inject(ContentService);
-  private readonly titleService = inject(Title);
+  private readonly seo = inject(Seo);
 
   readonly slug = input<string>('');
 
-  readonly state = computed(() => {
-    const found = this.content.state(this.slug());
-    this.titleService.setTitle(
-      found ? `${found.name} 529 plans — Total529` : 'State not found — Total529',
-    );
-    return found;
-  });
+  readonly state = computed(() => this.content.state(this.slug()));
+
+  constructor() {
+    effect(() => {
+      const found = this.state();
+      const plans = found?.plans.length ?? 0;
+      this.seo.set({
+        title: found ? `${found.name} 529 plans — Total529` : 'State not found — Total529',
+        description: found
+          ? `${found.name} has ${plans} 529 plan${plans === 1 ? '' : 's'} in this edition: tax benefit, K–12 conformity, contribution ceiling and the official program description.`
+          : null,
+      });
+    });
+  }
 
   readonly cost = computed(
     () => this.content.costs()?.rows.find((r) => r.slug === this.slug()) ?? null,

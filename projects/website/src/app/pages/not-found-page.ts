@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-not-found-page',
@@ -38,4 +39,11 @@ import { RouterLink } from '@angular/router';
     }
   `,
 })
-export class NotFoundPage {}
+export class NotFoundPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Page not found — Total529',
+      description: null,
+    });
+  }
+}

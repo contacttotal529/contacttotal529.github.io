@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import { BlockRenderer } from '../shared/block-renderer';
 
 @Component({
@@ -174,14 +174,20 @@ import { BlockRenderer } from '../shared/block-renderer';
 })
 export class ChapterPage {
   private readonly content = inject(ContentService);
-  private readonly titleService = inject(Title);
+  private readonly seo = inject(Seo);
 
   readonly chapterId = input<string>('');
   readonly chapters = this.content.chapters;
 
-  readonly chapter = computed(() => {
-    const found = this.content.chapter(this.chapterId());
-    this.titleService.setTitle(found ? `${found.title} — Total529` : 'Not found — Total529');
-    return found;
-  });
+  readonly chapter = computed(() => this.content.chapter(this.chapterId()));
+
+  constructor() {
+    effect(() => {
+      const found = this.chapter();
+      this.seo.set({
+        title: found ? `${found.title} — Total529` : 'Not found — Total529',
+        description: found?.summary ?? null,
+      });
+    });
+  }
 }

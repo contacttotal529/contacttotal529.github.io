@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import type { Block } from '../core/content.models';
 
 interface FeaturedExample {
@@ -98,6 +99,14 @@ const CHAPTER_TINTS: Record<string, string> = {
   styleUrl: './home-page.scss',
 })
 export class HomePage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Total529 — Understanding, Using, and Maximizing 529 Accounts',
+      description:
+        'A 529 is not just for college. Every federal rule in plain language, how your state changes it, and what it looks like for a real family.',
+    });
+  }
+
   private readonly content = inject(ContentService);
   private readonly router = inject(Router);
 

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import { BlockRenderer } from '../shared/block-renderer';
 
 @Component({
@@ -70,6 +71,14 @@ import { BlockRenderer } from '../shared/block-renderer';
   `,
 })
 export class HistoryPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Thirty years of 529 plans — Total529',
+      description:
+        'How a state-capital experiment became federal law in 1996, and the eight expansions since — from tax-free withdrawals to tutors and Roth rollovers.',
+    });
+  }
+
   private readonly content = inject(ContentService);
   readonly timeline = computed(() => this.content.site()?.timeline ?? []);
   readonly chapter = computed(() => this.content.chapter('history'));

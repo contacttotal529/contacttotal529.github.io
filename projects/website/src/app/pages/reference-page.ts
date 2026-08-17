@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-reference-page',
@@ -222,6 +223,14 @@ import { ContentService } from '../core/content.service';
   `,
 })
 export class ReferencePage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Reference tables — Total529',
+      description:
+        "What a 529 will and won't pay for, who counts as a member of the family, and the figures that change every tax year.",
+    });
+  }
+
   private readonly content = inject(ContentService);
 
   readonly book = this.content.book;

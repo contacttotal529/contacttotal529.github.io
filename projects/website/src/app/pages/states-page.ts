@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import type { StateEntry } from '../core/content.models';
 
 type FilterKey = 'all' | 'credit' | 'deduction' | 'none' | 'anyPlan' | 'k12No' | 'gold';
@@ -23,6 +24,14 @@ const FILTERS: { key: FilterKey; label: string; test: (s: StateEntry) => boolean
   styleUrl: './states-page.scss',
 })
 export class StatesPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'State 529 plan guide — Total529',
+      description:
+        'All 51 jurisdictions and 89 plans: contribution tax benefit, K–12 conformity, aggregate maximum and the official program description for each.',
+    });
+  }
+
   private readonly content = inject(ContentService);
 
   readonly filters = FILTERS;

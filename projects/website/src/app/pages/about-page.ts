@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-about-page',
@@ -234,6 +235,14 @@ import { ContentService } from '../core/content.service';
   `,
 })
 export class AboutPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'About Total529',
+      description:
+        'Total529 publishes Understanding, Using, and Maximizing 529 Accounts as a free, independent website. It sells nothing and takes no plan compensation.',
+    });
+  }
+
   private readonly content = inject(ContentService);
 
   readonly book = this.content.book;
