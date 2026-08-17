@@ -1,423 +1,1238 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Total529 — Direction A: Heritage</title>
-<style>
-  :root{
-    --ink:#0B1F3A;
-    --ink-deep:#071528;
-    --ink-soft:#3A4E68;
-    --slate:#54657D;
-    --brass:#B0812A;
-    --brass-lt:#D6A845;
-    --bone:#F8F5EE;
-    --bone-2:#F1ECE1;
-    --rule:#DBD3C3;
-    --white:#FFFFFF;
-    --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
-    --sans: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-  .narrow{max-width:760px}
-  a{color:inherit}
-  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;margin:0}
-  .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);font-weight:700}
-  .eyebrow.on-dark{color:var(--brass-lt)}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Total529 — Direction A: Heritage</title>
+    <style>
+      :root {
+        --ink: #0b1f3a;
+        --ink-deep: #071528;
+        --ink-soft: #3a4e68;
+        --slate: #54657d;
+        --brass: #b0812a;
+        --brass-lt: #d6a845;
+        --bone: #f8f5ee;
+        --bone-2: #f1ece1;
+        --rule: #dbd3c3;
+        --white: #ffffff;
+        --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+        --sans: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bone);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 18px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+      .narrow {
+        max-width: 760px;
+      }
+      a {
+        color: inherit;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--serif);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--brass);
+        font-weight: 700;
+      }
+      .eyebrow.on-dark {
+        color: var(--brass-lt);
+      }
 
-  /* ---- mockup chrome ---- */
-  .specimen{background:#231F1A;color:#EDE6D8;padding:14px 0;font-size:13px;letter-spacing:.06em}
-  .specimen .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-  .swatches{display:flex;gap:8px}
-  .sw{width:26px;height:26px;border-radius:3px;border:1px solid rgba(255,255,255,.25)}
+      /* ---- mockup chrome ---- */
+      .specimen {
+        background: #231f1a;
+        color: #ede6d8;
+        padding: 14px 0;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+      .specimen .wrap {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .swatches {
+        display: flex;
+        gap: 8px;
+      }
+      .sw {
+        width: 26px;
+        height: 26px;
+        border-radius: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
 
-  /* ---- top bar ---- */
-  .topbar{background:var(--ink-deep);color:#C9D4E2;font-size:13px;padding:9px 0;letter-spacing:.04em}
-  .topbar .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+      /* ---- top bar ---- */
+      .topbar {
+        background: var(--ink-deep);
+        color: #c9d4e2;
+        font-size: 13px;
+        padding: 9px 0;
+        letter-spacing: 0.04em;
+      }
+      .topbar .wrap {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
 
-  header.masthead{background:var(--white);border-bottom:1px solid var(--rule)}
-  .masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:20px;padding-bottom:20px;flex-wrap:wrap}
-  .logo{display:flex;align-items:center;gap:14px;text-decoration:none}
-  .seal{width:46px;height:46px;border:1.5px solid var(--brass);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:15px;color:var(--brass);letter-spacing:.02em}
-  .wordmark{font-family:var(--serif);font-size:26px;letter-spacing:-.015em}
-  .wordmark small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-top:2px}
-  nav.primary{display:flex;gap:26px;font-size:15px}
-  nav.primary a{text-decoration:none;color:var(--ink);padding-bottom:3px;border-bottom:2px solid transparent}
-  nav.primary a:hover,nav.primary a.on{border-color:var(--brass)}
-  .searchbtn{border:1px solid var(--rule);background:var(--bone);padding:9px 16px;font-size:14px;color:var(--slate);border-radius:2px}
+      header.masthead {
+        background: var(--white);
+        border-bottom: 1px solid var(--rule);
+      }
+      .masthead .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .seal {
+        width: 46px;
+        height: 46px;
+        border: 1.5px solid var(--brass);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-family: var(--serif);
+        font-size: 15px;
+        color: var(--brass);
+        letter-spacing: 0.02em;
+      }
+      .wordmark {
+        font-family: var(--serif);
+        font-size: 26px;
+        letter-spacing: -0.015em;
+      }
+      .wordmark small {
+        display: block;
+        font-family: var(--sans);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--slate);
+        margin-top: 2px;
+      }
+      nav.primary {
+        display: flex;
+        gap: 26px;
+        font-size: 15px;
+      }
+      nav.primary a {
+        text-decoration: none;
+        color: var(--ink);
+        padding-bottom: 3px;
+        border-bottom: 2px solid transparent;
+      }
+      nav.primary a:hover,
+      nav.primary a.on {
+        border-color: var(--brass);
+      }
+      .searchbtn {
+        border: 1px solid var(--rule);
+        background: var(--bone);
+        padding: 9px 16px;
+        font-size: 14px;
+        color: var(--slate);
+        border-radius: 2px;
+      }
 
-  /* ---- hero ---- */
-  .hero{background:var(--ink);color:#EAF0F7;padding:84px 0 0;position:relative;overflow:hidden}
-  .hero:after{content:'';position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent)}
-  .hero .grid{display:grid;grid-template-columns:1.25fr .85fr;gap:64px;align-items:start;padding-bottom:72px}
-  .hero h1{font-size:60px;line-height:1.06;color:#fff;margin:18px 0 22px}
-  .hero h1 em{font-style:italic;color:var(--brass-lt)}
-  .hero p.lede{font-size:20px;line-height:1.6;color:#B9C7D8;max-width:44ch}
-  .cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:14px 28px;text-decoration:none;font-size:15px;letter-spacing:.04em;border-radius:2px}
-  .btn-brass{background:var(--brass);color:#12100B;font-weight:700}
-  .btn-ghost{border:1px solid rgba(255,255,255,.35);color:#EAF0F7}
-  .pull{border-left:2px solid var(--brass);padding:6px 0 6px 24px}
-  .pull ul{margin:0;padding:0;list-style:none}
-  .pull li{font-family:var(--serif);font-size:19px;line-height:1.5;color:#DCE5EF;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1)}
-  .pull li:last-child{border:0}
-  .pull li b{color:var(--brass-lt);font-weight:400;font-style:italic}
+      /* ---- hero ---- */
+      .hero {
+        background: var(--ink);
+        color: #eaf0f7;
+        padding: 84px 0 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:after {
+        content: '';
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--brass), transparent);
+      }
+      .hero .grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.85fr;
+        gap: 64px;
+        align-items: start;
+        padding-bottom: 72px;
+      }
+      .hero h1 {
+        font-size: 60px;
+        line-height: 1.06;
+        color: #fff;
+        margin: 18px 0 22px;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--brass-lt);
+      }
+      .hero p.lede {
+        font-size: 20px;
+        line-height: 1.6;
+        color: #b9c7d8;
+        max-width: 44ch;
+      }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        margin-top: 34px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 14px 28px;
+        text-decoration: none;
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        border-radius: 2px;
+      }
+      .btn-brass {
+        background: var(--brass);
+        color: #12100b;
+        font-weight: 700;
+      }
+      .btn-ghost {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #eaf0f7;
+      }
+      .pull {
+        border-left: 2px solid var(--brass);
+        padding: 6px 0 6px 24px;
+      }
+      .pull ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .pull li {
+        font-family: var(--serif);
+        font-size: 19px;
+        line-height: 1.5;
+        color: #dce5ef;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .pull li:last-child {
+        border: 0;
+      }
+      .pull li b {
+        color: var(--brass-lt);
+        font-weight: 400;
+        font-style: italic;
+      }
 
-  /* ---- stat band ---- */
-  .stats{background:var(--ink-deep);color:#fff;padding:38px 0}
-  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12)}
-  .stat{background:var(--ink-deep);padding:22px 26px}
-  .stat .n{font-family:var(--serif);font-size:38px;color:var(--brass-lt);line-height:1}
-  .stat .l{font-size:13px;color:#9FB0C4;margin-top:9px;letter-spacing:.04em}
+      /* ---- stat band ---- */
+      .stats {
+        background: var(--ink-deep);
+        color: #fff;
+        padding: 38px 0;
+      }
+      .stats .wrap {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .stat {
+        background: var(--ink-deep);
+        padding: 22px 26px;
+      }
+      .stat .n {
+        font-family: var(--serif);
+        font-size: 38px;
+        color: var(--brass-lt);
+        line-height: 1;
+      }
+      .stat .l {
+        font-size: 13px;
+        color: #9fb0c4;
+        margin-top: 9px;
+        letter-spacing: 0.04em;
+      }
 
-  /* ---- sections ---- */
-  section{padding:88px 0}
-  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:44px}
-  .sec-head h2{font-size:38px}
-  .sec-head p{margin:8px 0 0;color:var(--slate);font-size:17px;max-width:52ch}
-  .sec-head a{font-size:14px;color:var(--brass);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+      /* ---- sections ---- */
+      section {
+        padding: 88px 0;
+      }
+      .sec-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 32px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 18px;
+        margin-bottom: 44px;
+      }
+      .sec-head h2 {
+        font-size: 38px;
+      }
+      .sec-head p {
+        margin: 8px 0 0;
+        color: var(--slate);
+        font-size: 17px;
+        max-width: 52ch;
+      }
+      .sec-head a {
+        font-size: 14px;
+        color: var(--brass);
+        text-decoration: none;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  .chapters{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
-  .ch{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:28px 26px 34px;background:var(--white);text-decoration:none;display:block;transition:background .15s}
-  .ch:hover{background:var(--bone-2)}
-  .ch .num{font-family:var(--serif);font-size:13px;color:var(--brass);letter-spacing:.1em}
-  .ch h3{font-size:23px;margin:10px 0 10px}
-  .ch p{margin:0;font-size:15px;color:var(--slate);line-height:1.55}
-  .ch .cnt{margin-top:16px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9AA7B7}
+      .chapters {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-top: 1px solid var(--rule);
+        border-left: 1px solid var(--rule);
+      }
+      .ch {
+        border-right: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+        padding: 28px 26px 34px;
+        background: var(--white);
+        text-decoration: none;
+        display: block;
+        transition: background 0.15s;
+      }
+      .ch:hover {
+        background: var(--bone-2);
+      }
+      .ch .num {
+        font-family: var(--serif);
+        font-size: 13px;
+        color: var(--brass);
+        letter-spacing: 0.1em;
+      }
+      .ch h3 {
+        font-size: 23px;
+        margin: 10px 0 10px;
+      }
+      .ch p {
+        margin: 0;
+        font-size: 15px;
+        color: var(--slate);
+        line-height: 1.55;
+      }
+      .ch .cnt {
+        margin-top: 16px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9aa7b7;
+      }
 
-  /* ---- rule page specimen ---- */
-  .specimen-page{background:var(--white);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-  .rule-layout{display:grid;grid-template-columns:210px 1fr 260px;gap:48px;align-items:start}
-  .toc{position:sticky;top:20px;font-size:14px}
-  .toc div{padding:7px 0;color:var(--slate);border-left:2px solid var(--rule);padding-left:14px}
-  .toc div.on{color:var(--ink);border-color:var(--brass);font-weight:700}
-  .rule-body h2{font-size:34px;line-height:1.2;margin:10px 0 18px}
-  .rule-body p{font-size:18.5px;line-height:1.75}
-  .callout{background:var(--bone-2);border-left:3px solid var(--brass);padding:22px 26px;margin:28px 0}
-  .callout .eyebrow{display:block;margin-bottom:8px}
-  .callout p{margin:0;font-size:17px}
-  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-  .chip{font-size:13px;border:1px solid var(--rule);background:var(--white);padding:4px 11px;border-radius:2px;color:var(--slate)}
-  .chip.no{border-color:#C8A2A2;color:#8C3B3B;background:#FBF3F3}
-  .example{border:1px solid var(--rule);padding:26px 28px;margin:28px 0;position:relative;background:var(--white)}
-  .example:before{content:'EXAMPLE';position:absolute;top:-9px;left:24px;background:var(--white);padding:0 10px;font-size:11px;letter-spacing:.2em;color:var(--brass);font-weight:700}
-  .example p{margin:0;font-family:var(--serif);font-size:18px;line-height:1.7}
-  .example .who{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9AA7B7;margin-top:14px}
-  .tree{border:1px solid var(--rule);background:var(--bone);padding:26px 28px;margin:28px 0}
-  .tree ol{margin:14px 0 0;padding-left:22px}
-  .tree li{font-size:17px;padding:6px 0;color:var(--ink)}
-  aside.margin{font-size:14px;color:var(--slate);position:sticky;top:20px}
-  aside.margin h4{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:10px}
-  aside.margin a{display:block;padding:8px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--slate);font-size:14.5px}
-  aside.margin a:hover{color:var(--brass)}
+      /* ---- rule page specimen ---- */
+      .specimen-page {
+        background: var(--white);
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+      }
+      .rule-layout {
+        display: grid;
+        grid-template-columns: 210px 1fr 260px;
+        gap: 48px;
+        align-items: start;
+      }
+      .toc {
+        position: sticky;
+        top: 20px;
+        font-size: 14px;
+      }
+      .toc div {
+        padding: 7px 0;
+        color: var(--slate);
+        border-left: 2px solid var(--rule);
+        padding-left: 14px;
+      }
+      .toc div.on {
+        color: var(--ink);
+        border-color: var(--brass);
+        font-weight: 700;
+      }
+      .rule-body h2 {
+        font-size: 34px;
+        line-height: 1.2;
+        margin: 10px 0 18px;
+      }
+      .rule-body p {
+        font-size: 18.5px;
+        line-height: 1.75;
+      }
+      .callout {
+        background: var(--bone-2);
+        border-left: 3px solid var(--brass);
+        padding: 22px 26px;
+        margin: 28px 0;
+      }
+      .callout .eyebrow {
+        display: block;
+        margin-bottom: 8px;
+      }
+      .callout p {
+        margin: 0;
+        font-size: 17px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 14px;
+      }
+      .chip {
+        font-size: 13px;
+        border: 1px solid var(--rule);
+        background: var(--white);
+        padding: 4px 11px;
+        border-radius: 2px;
+        color: var(--slate);
+      }
+      .chip.no {
+        border-color: #c8a2a2;
+        color: #8c3b3b;
+        background: #fbf3f3;
+      }
+      .example {
+        border: 1px solid var(--rule);
+        padding: 26px 28px;
+        margin: 28px 0;
+        position: relative;
+        background: var(--white);
+      }
+      .example:before {
+        content: 'EXAMPLE';
+        position: absolute;
+        top: -9px;
+        left: 24px;
+        background: var(--white);
+        padding: 0 10px;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--brass);
+        font-weight: 700;
+      }
+      .example p {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+      .example .who {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #9aa7b7;
+        margin-top: 14px;
+      }
+      .tree {
+        border: 1px solid var(--rule);
+        background: var(--bone);
+        padding: 26px 28px;
+        margin: 28px 0;
+      }
+      .tree ol {
+        margin: 14px 0 0;
+        padding-left: 22px;
+      }
+      .tree li {
+        font-size: 17px;
+        padding: 6px 0;
+        color: var(--ink);
+      }
+      aside.margin {
+        font-size: 14px;
+        color: var(--slate);
+        position: sticky;
+        top: 20px;
+      }
+      aside.margin h4 {
+        font-family: var(--sans);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin-bottom: 10px;
+      }
+      aside.margin a {
+        display: block;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--rule);
+        text-decoration: none;
+        color: var(--slate);
+        font-size: 14.5px;
+      }
+      aside.margin a:hover {
+        color: var(--brass);
+      }
 
-  /* ---- state finder ---- */
-  .finder{background:var(--ink);color:#EAF0F7}
-  .finder .box{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-  .finder h2{font-size:38px;color:#fff}
-  .finder p{color:#AEBFD2;font-size:17.5px}
-  .selectrow{display:flex;gap:10px;margin-top:24px}
-  .selectrow select{flex:1;padding:14px 16px;font-size:16px;font-family:var(--sans);border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff;border-radius:2px}
-  .statecard{background:var(--white);color:var(--ink);padding:30px 32px;border-top:3px solid var(--brass)}
-  .statecard h3{font-size:26px;margin-bottom:4px}
-  .statecard .sub{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:20px}
-  .kv{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--rule);font-size:15px}
-  .kv:last-of-type{border:0}
-  .kv span:first-child{color:var(--slate)}
-  .kv span:last-child{font-weight:700;text-align:right}
-  .yes{color:#2F6B47}.nope{color:#8C3B3B}
+      /* ---- state finder ---- */
+      .finder {
+        background: var(--ink);
+        color: #eaf0f7;
+      }
+      .finder .box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+      .finder h2 {
+        font-size: 38px;
+        color: #fff;
+      }
+      .finder p {
+        color: #aebfd2;
+        font-size: 17.5px;
+      }
+      .selectrow {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      .selectrow select {
+        flex: 1;
+        padding: 14px 16px;
+        font-size: 16px;
+        font-family: var(--sans);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        border-radius: 2px;
+      }
+      .statecard {
+        background: var(--white);
+        color: var(--ink);
+        padding: 30px 32px;
+        border-top: 3px solid var(--brass);
+      }
+      .statecard h3 {
+        font-size: 26px;
+        margin-bottom: 4px;
+      }
+      .statecard .sub {
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--slate);
+        margin-bottom: 20px;
+      }
+      .kv {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--rule);
+        font-size: 15px;
+      }
+      .kv:last-of-type {
+        border: 0;
+      }
+      .kv span:first-child {
+        color: var(--slate);
+      }
+      .kv span:last-child {
+        font-weight: 700;
+        text-align: right;
+      }
+      .yes {
+        color: #2f6b47;
+      }
+      .nope {
+        color: #8c3b3b;
+      }
 
-  /* ---- comparison ---- */
-  table.cmp{width:100%;border-collapse:collapse;font-size:15.5px;background:var(--white)}
-  table.cmp th,table.cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--rule)}
-  table.cmp thead th{font-family:var(--serif);font-size:17px;font-weight:400;border-bottom:2px solid var(--ink)}
-  table.cmp thead th:first-child{width:26%}
-  table.cmp tbody th{font-weight:400;color:var(--slate);font-size:15px}
-  table.cmp .best{background:#FBF7EC}
-  table.cmp td.good{color:#2F6B47;font-weight:700}
-  table.cmp td.bad{color:#8C3B3B}
+      /* ---- comparison ---- */
+      table.cmp {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15.5px;
+        background: var(--white);
+      }
+      table.cmp th,
+      table.cmp td {
+        padding: 15px 18px;
+        text-align: left;
+        border-bottom: 1px solid var(--rule);
+      }
+      table.cmp thead th {
+        font-family: var(--serif);
+        font-size: 17px;
+        font-weight: 400;
+        border-bottom: 2px solid var(--ink);
+      }
+      table.cmp thead th:first-child {
+        width: 26%;
+      }
+      table.cmp tbody th {
+        font-weight: 400;
+        color: var(--slate);
+        font-size: 15px;
+      }
+      table.cmp .best {
+        background: #fbf7ec;
+      }
+      table.cmp td.good {
+        color: #2f6b47;
+        font-weight: 700;
+      }
+      table.cmp td.bad {
+        color: #8c3b3b;
+      }
 
-  /* ---- author ---- */
-  .author{background:var(--bone-2)}
-  .author .box{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center}
-  .portrait{aspect-ratio:1;background:var(--ink);color:var(--brass-lt);display:grid;place-items:center;font-family:var(--serif);font-size:52px;border-radius:50%}
-  .author h2{font-size:34px;margin-bottom:12px}
-  .author p{color:#41505F;max-width:60ch}
+      /* ---- author ---- */
+      .author {
+        background: var(--bone-2);
+      }
+      .author .box {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 44px;
+        align-items: center;
+      }
+      .portrait {
+        aspect-ratio: 1;
+        background: var(--ink);
+        color: var(--brass-lt);
+        display: grid;
+        place-items: center;
+        font-family: var(--serif);
+        font-size: 52px;
+        border-radius: 50%;
+      }
+      .author h2 {
+        font-size: 34px;
+        margin-bottom: 12px;
+      }
+      .author p {
+        color: #41505f;
+        max-width: 60ch;
+      }
 
-  /* ---- footer ---- */
-  footer{background:var(--ink-deep);color:#93A5BA;padding:64px 0 34px;font-size:15px}
-  .fgrid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
-  footer h5{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin:0 0 14px}
-  footer a{display:block;color:#93A5BA;text-decoration:none;padding:5px 0;font-size:14.5px}
-  footer a:hover{color:var(--brass-lt)}
-  .disclaimer{font-size:13px;line-height:1.7;color:#6F819A;margin-top:30px;max-width:100ch}
+      /* ---- footer ---- */
+      footer {
+        background: var(--ink-deep);
+        color: #93a5ba;
+        padding: 64px 0 34px;
+        font-size: 15px;
+      }
+      .fgrid {
+        display: grid;
+        grid-template-columns: 1.4fr repeat(4, 1fr);
+        gap: 36px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      footer h5 {
+        font-family: var(--sans);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #fff;
+        margin: 0 0 14px;
+      }
+      footer a {
+        display: block;
+        color: #93a5ba;
+        text-decoration: none;
+        padding: 5px 0;
+        font-size: 14.5px;
+      }
+      footer a:hover {
+        color: var(--brass-lt);
+      }
+      .disclaimer {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #6f819a;
+        margin-top: 30px;
+        max-width: 100ch;
+      }
 
-  @media(max-width:960px){
-    .hero .grid,.finder .box,.author .box{grid-template-columns:1fr;gap:36px}
-    .rule-layout{grid-template-columns:1fr}
-    .toc,aside.margin{position:static}
-    .chapters{grid-template-columns:repeat(2,1fr)}
-    .stats .wrap{grid-template-columns:repeat(2,1fr)}
-    .fgrid{grid-template-columns:1fr 1fr}
-    .hero h1{font-size:42px}
-    .portrait{max-width:160px}
-  }
-</style>
-</head>
-<body>
-
-<div class="specimen">
-  <div class="wrap">
-    <div><strong>DIRECTION A · HERITAGE</strong> &nbsp;—&nbsp; Deep navy, brass, bone. Serif headlines, formal grid. Reads as fiduciary, permanent, generational.</div>
-    <div class="swatches">
-      <div class="sw" style="background:#071528"></div>
-      <div class="sw" style="background:#0B1F3A"></div>
-      <div class="sw" style="background:#B0812A"></div>
-      <div class="sw" style="background:#D6A845"></div>
-      <div class="sw" style="background:#F8F5EE"></div>
-      <div class="sw" style="background:#54657D"></div>
-    </div>
-  </div>
-</div>
-
-<div class="topbar">
-  <div class="wrap">
-    <div>Reviewed for the 2026 tax year</div>
-    <div>Celebrating 30 years of Section 529 · 1996–2026</div>
-  </div>
-</div>
-
-<header class="masthead">
-  <div class="wrap">
-    <a class="logo" href="#">
-      <div class="seal">529</div>
-      <div class="wordmark">Total<em style="font-style:italic;color:var(--brass)">529</em><small>Understanding · Using · Maximizing</small></div>
-    </a>
-    <nav class="primary">
-      <a class="on" href="#">Start Here</a>
-      <a href="#">Basics</a>
-      <a href="#">Taxes</a>
-      <a href="#">Using It</a>
-      <a href="#">Estate</a>
-      <a href="#">States</a>
-      <a href="#">Tools</a>
-    </nav>
-    <button class="searchbtn">Search the guide ⌘K</button>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="wrap grid">
-    <div>
-      <div class="eyebrow on-dark">The 30th Anniversary Edition</div>
-      <h1>A 529 is not just for<br />college. <em>It never was.</em></h1>
-      <p class="lede">Thirty years of law have turned a narrow tuition account into a K–12 account, a credentialing account, a Roth on-ramp, and one of the most efficient estate-planning instruments available to an American family. This is the complete guide.</p>
-      <div class="cta-row">
-        <a class="btn btn-brass" href="#">Start with the basics</a>
-        <a class="btn btn-ghost" href="#">Find your state's plan</a>
-      </div>
-    </div>
-    <div class="pull">
-      <ul>
-        <li>You never stop being the owner. The money <b>never left you.</b></li>
-        <li>Up to <b>$20,000 a year</b> for K–12 tuition, materials, and tutors.</li>
-        <li>Unused funds roll to the beneficiary's <b>Roth IRA — $35,000.</b></li>
-        <li>A couple can move <b>$190,000</b> out of a taxable estate in a single day.</li>
-        <li>At death, a 529 <b>skips probate</b> entirely.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="stats">
-  <div class="wrap">
-    <div class="stat"><div class="n">17.6M</div><div class="l">Active 529 accounts nationwide</div></div>
-    <div class="stat"><div class="n">$603B</div><div class="l">Total assets as of December 2025</div></div>
-    <div class="stat"><div class="n">$34,088</div><div class="l">Reported average account balance</div></div>
-    <div class="stat"><div class="n">54%</div><div class="l">Of parents say they don't know enough to enroll</div></div>
-  </div>
-</div>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">The Guide</div>
-        <h2>Eleven chapters. One rule per page.</h2>
-        <p>Every page states the federal rule, then shows exactly where your state departs from it — with a worked example.</p>
-      </div>
-      <a href="#">View full table of contents →</a>
-    </div>
-    <div class="chapters">
-      <a class="ch" href="#"><div class="num">I</div><h3>Account Basics</h3><p>Owner, beneficiary, successor — who actually controls the money, and how to change any of it without a fee.</p><div class="cnt">9 pages</div></a>
-      <a class="ch" href="#"><div class="num">II</div><h3>Understanding Taxes</h3><p>Deduction versus credit, tax-free growth, contribution ceilings, and what a non-qualified withdrawal really costs.</p><div class="cnt">8 pages</div></a>
-      <a class="ch" href="#"><div class="num">III</div><h3>Fund Selection</h3><p>Target-date versus static allocations, the two-changes-a-year rule, and why time matters more than timing.</p><div class="cnt">4 pages</div></a>
-      <a class="ch" href="#"><div class="num">IV</div><h3>Using It for K–12</h3><p>Tuition, curriculum, tutors, therapies, AP and SAT fees — and the thirteen states that don't allow any of it.</p><div class="cnt">5 pages</div></a>
-      <a class="ch" href="#"><div class="num">V</div><h3>Post-Secondary</h3><p>Qualified schools, room and board, computers, apprenticeships, scholarships, and the financial-aid math.</p><div class="cnt">11 pages</div></a>
-      <a class="ch" href="#"><div class="num">VI</div><h3>After Graduation</h3><p>Student loans, the ladder of giving, the Roth rollover, and a lifetime of licensing and continuing education.</p><div class="cnt">7 pages</div></a>
-      <a class="ch" href="#"><div class="num">VII</div><h3>Estate Planning</h3><p>Completed gifts, superfunding, generation-skipping transfer tax, bankruptcy protection, no RMDs, no NIIT.</p><div class="cnt">6 pages</div></a>
-      <a class="ch" href="#"><div class="num">VIII</div><h3>Maximizing</h3><p>Five advanced playbooks — funding, K–12, college, post-graduation, and multigenerational transfer.</p><div class="cnt">5 pages</div></a>
-      <a class="ch" href="#"><div class="num">IX</div><h3>Comparisons</h3><p>Head to head against prepaid tuition, Coverdell ESAs, UGMA/UTMA custodial accounts, and the new 530A.</p><div class="cnt">4 pages</div></a>
-      <a class="ch" href="#"><div class="num">X</div><h3>The State Guide</h3><p>All 51 jurisdictions, 100-plus plans: tax benefit, K–12 conformity, contribution maximum, official disclosure.</p><div class="cnt">51 pages</div></a>
-      <a class="ch" href="#"><div class="num">XI</div><h3>Thirty Years</h3><p>1996 to 2026 — how the Small Business Job Protection Act became the account your grandchildren will use.</p><div class="cnt">Feature</div></a>
-      <a class="ch" href="#" style="background:var(--ink);color:#fff"><div class="num" style="color:var(--brass-lt)">✦</div><h3 style="color:#fff">Tools &amp; Trees</h3><p style="color:#A9BACD">Which state? Is it qualified? What happens after graduation? Answer a few questions.</p><div class="cnt" style="color:var(--brass-lt)">5 tools</div></a>
-    </div>
-  </div>
-</section>
-
-<div class="specimen-page">
-  <section>
-    <div class="wrap">
-      <div class="sec-head">
+      @media (max-width: 960px) {
+        .hero .grid,
+        .finder .box,
+        .author .box {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .rule-layout {
+          grid-template-columns: 1fr;
+        }
+        .toc,
+        aside.margin {
+          position: static;
+        }
+        .chapters {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stats .wrap {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .fgrid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero h1 {
+          font-size: 42px;
+        }
+        .portrait {
+          max-width: 160px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="specimen">
+      <div class="wrap">
         <div>
-          <div class="eyebrow">Interior page template</div>
-          <h2>What a rule page looks like</h2>
-          <p>Roughly eighty pages share this exact structure — the pattern the manuscript already uses.</p>
+          <strong>DIRECTION A · HERITAGE</strong> &nbsp;—&nbsp; Deep navy, brass, bone. Serif
+          headlines, formal grid. Reads as fiduciary, permanent, generational.
+        </div>
+        <div class="swatches">
+          <div class="sw" style="background: #071528"></div>
+          <div class="sw" style="background: #0b1f3a"></div>
+          <div class="sw" style="background: #b0812a"></div>
+          <div class="sw" style="background: #d6a845"></div>
+          <div class="sw" style="background: #f8f5ee"></div>
+          <div class="sw" style="background: #54657d"></div>
         </div>
       </div>
+    </div>
 
-      <div class="rule-layout">
-        <div class="toc">
-          <div class="on">The federal rule</div>
-          <div>Your state</div>
-          <div>Examples</div>
-          <div>Is it a tutor?</div>
-          <div>Watch-outs</div>
-          <div>Related rules</div>
+    <div class="topbar">
+      <div class="wrap">
+        <div>Reviewed for the 2026 tax year</div>
+        <div>Celebrating 30 years of Section 529 · 1996–2026</div>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="wrap">
+        <a class="logo" href="#">
+          <div class="seal">529</div>
+          <div class="wordmark">
+            Total<em style="font-style: italic; color: var(--brass)">529</em
+            ><small>Understanding · Using · Maximizing</small>
+          </div>
+        </a>
+        <nav class="primary">
+          <a class="on" href="#">Start Here</a>
+          <a href="#">Basics</a>
+          <a href="#">Taxes</a>
+          <a href="#">Using It</a>
+          <a href="#">Estate</a>
+          <a href="#">States</a>
+          <a href="#">Tools</a>
+        </nav>
+        <button class="searchbtn">Search the guide ⌘K</button>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="wrap grid">
+        <div>
+          <div class="eyebrow on-dark">The 30th Anniversary Edition</div>
+          <h1>A 529 is not just for<br />college. <em>It never was.</em></h1>
+          <p class="lede">
+            Thirty years of law have turned a narrow tuition account into a K–12 account, a
+            credentialing account, a Roth on-ramp, and one of the most efficient estate-planning
+            instruments available to an American family. This is the complete guide.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-brass" href="#">Start with the basics</a>
+            <a class="btn btn-ghost" href="#">Find your state's plan</a>
+          </div>
         </div>
+        <div class="pull">
+          <ul>
+            <li>You never stop being the owner. The money <b>never left you.</b></li>
+            <li>Up to <b>$20,000 a year</b> for K–12 tuition, materials, and tutors.</li>
+            <li>Unused funds roll to the beneficiary's <b>Roth IRA — $35,000.</b></li>
+            <li>A couple can move <b>$190,000</b> out of a taxable estate in a single day.</li>
+            <li>At death, a 529 <b>skips probate</b> entirely.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-        <div class="rule-body">
-          <div class="eyebrow">Chapter IV · Using It for K–12</div>
-          <h2>You may pay for a tutor through a 529 account.</h2>
-          <p>Since the 2025 legislation, qualified expenses include tuition for tutoring or educational classes taken outside the home — including at a tutoring facility — provided the tutor is not related to the student and is licensed as a teacher in any state, has taught at an eligible educational institution, or is a subject-matter expert in the relevant subject.</p>
+    <div class="stats">
+      <div class="wrap">
+        <div class="stat">
+          <div class="n">17.6M</div>
+          <div class="l">Active 529 accounts nationwide</div>
+        </div>
+        <div class="stat">
+          <div class="n">$603B</div>
+          <div class="l">Total assets as of December 2025</div>
+        </div>
+        <div class="stat">
+          <div class="n">$34,088</div>
+          <div class="l">Reported average account balance</div>
+        </div>
+        <div class="stat">
+          <div class="n">54%</div>
+          <div class="l">Of parents say they don't know enough to enroll</div>
+        </div>
+      </div>
+    </div>
 
-          <div class="callout">
-            <span class="eyebrow">Your state may differ</span>
-            <p>Thirteen states do not allow tax-free K–12 distributions at all. California applies an additional 2.5% penalty on withdrawals taken for this purpose.</p>
-            <div class="chips">
-              <span class="chip no">California</span><span class="chip no">Colorado</span><span class="chip no">Connecticut</span><span class="chip no">Hawaii</span><span class="chip no">Illinois</span><span class="chip no">Michigan</span><span class="chip no">Minnesota</span><span class="chip no">Montana</span><span class="chip no">Nebraska</span><span class="chip no">New Mexico</span><span class="chip no">New York</span><span class="chip no">Oregon</span><span class="chip no">Vermont</span>
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">The Guide</div>
+            <h2>Eleven chapters. One rule per page.</h2>
+            <p>
+              Every page states the federal rule, then shows exactly where your state departs from
+              it — with a worked example.
+            </p>
+          </div>
+          <a href="#">View full table of contents →</a>
+        </div>
+        <div class="chapters">
+          <a class="ch" href="#"
+            ><div class="num">I</div>
+            <h3>Account Basics</h3>
+            <p>
+              Owner, beneficiary, successor — who actually controls the money, and how to change any
+              of it without a fee.
+            </p>
+            <div class="cnt">9 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">II</div>
+            <h3>Understanding Taxes</h3>
+            <p>
+              Deduction versus credit, tax-free growth, contribution ceilings, and what a
+              non-qualified withdrawal really costs.
+            </p>
+            <div class="cnt">8 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">III</div>
+            <h3>Fund Selection</h3>
+            <p>
+              Target-date versus static allocations, the two-changes-a-year rule, and why time
+              matters more than timing.
+            </p>
+            <div class="cnt">4 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">IV</div>
+            <h3>Using It for K–12</h3>
+            <p>
+              Tuition, curriculum, tutors, therapies, AP and SAT fees — and the thirteen states that
+              don't allow any of it.
+            </p>
+            <div class="cnt">5 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">V</div>
+            <h3>Post-Secondary</h3>
+            <p>
+              Qualified schools, room and board, computers, apprenticeships, scholarships, and the
+              financial-aid math.
+            </p>
+            <div class="cnt">11 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">VI</div>
+            <h3>After Graduation</h3>
+            <p>
+              Student loans, the ladder of giving, the Roth rollover, and a lifetime of licensing
+              and continuing education.
+            </p>
+            <div class="cnt">7 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">VII</div>
+            <h3>Estate Planning</h3>
+            <p>
+              Completed gifts, superfunding, generation-skipping transfer tax, bankruptcy
+              protection, no RMDs, no NIIT.
+            </p>
+            <div class="cnt">6 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">VIII</div>
+            <h3>Maximizing</h3>
+            <p>
+              Five advanced playbooks — funding, K–12, college, post-graduation, and
+              multigenerational transfer.
+            </p>
+            <div class="cnt">5 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">IX</div>
+            <h3>Comparisons</h3>
+            <p>
+              Head to head against prepaid tuition, Coverdell ESAs, UGMA/UTMA custodial accounts,
+              and the new 530A.
+            </p>
+            <div class="cnt">4 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">X</div>
+            <h3>The State Guide</h3>
+            <p>
+              All 51 jurisdictions, 100-plus plans: tax benefit, K–12 conformity, contribution
+              maximum, official disclosure.
+            </p>
+            <div class="cnt">51 pages</div></a
+          >
+          <a class="ch" href="#"
+            ><div class="num">XI</div>
+            <h3>Thirty Years</h3>
+            <p>
+              1996 to 2026 — how the Small Business Job Protection Act became the account your
+              grandchildren will use.
+            </p>
+            <div class="cnt">Feature</div></a
+          >
+          <a class="ch" href="#" style="background: var(--ink); color: #fff"
+            ><div class="num" style="color: var(--brass-lt)">✦</div>
+            <h3 style="color: #fff">Tools &amp; Trees</h3>
+            <p style="color: #a9bacd">
+              Which state? Is it qualified? What happens after graduation? Answer a few questions.
+            </p>
+            <div class="cnt" style="color: var(--brass-lt)">5 tools</div></a
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="specimen-page">
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <div>
+              <div class="eyebrow">Interior page template</div>
+              <h2>What a rule page looks like</h2>
+              <p>
+                Roughly eighty pages share this exact structure — the pattern the manuscript already
+                uses.
+              </p>
             </div>
           </div>
 
-          <div class="example">
-            <p>Paul is a former spelling-bee champion who wants his grandchildren to do well at English. He pays for private spelling lessons for his four grandchildren at an expert's home. The unrelated teacher signs a note confirming subject-matter expertise and individual instruction. Paul keeps records in case of an audit or a change in IRS guidance.</p>
-            <div class="who">Grandparent · K–12 · Recordkeeping</div>
+          <div class="rule-layout">
+            <div class="toc">
+              <div class="on">The federal rule</div>
+              <div>Your state</div>
+              <div>Examples</div>
+              <div>Is it a tutor?</div>
+              <div>Watch-outs</div>
+              <div>Related rules</div>
+            </div>
+
+            <div class="rule-body">
+              <div class="eyebrow">Chapter IV · Using It for K–12</div>
+              <h2>You may pay for a tutor through a 529 account.</h2>
+              <p>
+                Since the 2025 legislation, qualified expenses include tuition for tutoring or
+                educational classes taken outside the home — including at a tutoring facility —
+                provided the tutor is not related to the student and is licensed as a teacher in any
+                state, has taught at an eligible educational institution, or is a subject-matter
+                expert in the relevant subject.
+              </p>
+
+              <div class="callout">
+                <span class="eyebrow">Your state may differ</span>
+                <p>
+                  Thirteen states do not allow tax-free K–12 distributions at all. California
+                  applies an additional 2.5% penalty on withdrawals taken for this purpose.
+                </p>
+                <div class="chips">
+                  <span class="chip no">California</span><span class="chip no">Colorado</span
+                  ><span class="chip no">Connecticut</span><span class="chip no">Hawaii</span
+                  ><span class="chip no">Illinois</span><span class="chip no">Michigan</span
+                  ><span class="chip no">Minnesota</span><span class="chip no">Montana</span
+                  ><span class="chip no">Nebraska</span><span class="chip no">New Mexico</span
+                  ><span class="chip no">New York</span><span class="chip no">Oregon</span
+                  ><span class="chip no">Vermont</span>
+                </div>
+              </div>
+
+              <div class="example">
+                <p>
+                  Paul is a former spelling-bee champion who wants his grandchildren to do well at
+                  English. He pays for private spelling lessons for his four grandchildren at an
+                  expert's home. The unrelated teacher signs a note confirming subject-matter
+                  expertise and individual instruction. Paul keeps records in case of an audit or a
+                  change in IRS guidance.
+                </p>
+                <div class="who">Grandparent · K–12 · Recordkeeping</div>
+              </div>
+
+              <div class="tree">
+                <div class="eyebrow">Decision tree — what counts as a "tutor"?</div>
+                <ol>
+                  <li>Is it a subject in which the student might one day earn a scholarship?</li>
+                  <li>
+                    Is the instruction one-on-one or in a small group, focused on that subject?
+                  </li>
+                  <li>Is the instructor unrelated to the student and located outside your home?</li>
+                  <li>Are you willing to change course as further IRS guidance arrives?</li>
+                </ol>
+              </div>
+
+              <p>
+                A math, English, or Spanish after-school tutor outside the home should qualify. A
+                violin teacher giving personalized one-on-one instruction functions similarly. A
+                dance teacher leading large studio classes likely does not. There is no IRS case
+                guidance yet — keep receipts, and have instructors sign a short attestation.
+              </p>
+            </div>
+
+            <aside class="margin">
+              <h4>Related rules</h4>
+              <a href="#">Not all states allow K–12 distributions →</a>
+              <a href="#">Tuition, books, and software →</a>
+              <a href="#">Therapies for beneficiaries with disabilities →</a>
+              <a href="#">Keeping documentation →</a>
+              <a href="#">Maximizing K–12 options →</a>
+              <h4 style="margin-top: 28px">On this rule</h4>
+              <div style="font-size: 14px; line-height: 1.6">
+                Annual K–12 cap<br /><strong
+                  style="font-size: 24px; font-family: var(--serif); color: var(--ink)"
+                  >$20,000</strong
+                ><br /><span style="color: #9aa7b7">per student, 2026 — up from $10,000</span>
+              </div>
+            </aside>
           </div>
+        </div>
+      </section>
+    </div>
 
-          <div class="tree">
-            <div class="eyebrow">Decision tree — what counts as a "tutor"?</div>
-            <ol>
-              <li>Is it a subject in which the student might one day earn a scholarship?</li>
-              <li>Is the instruction one-on-one or in a small group, focused on that subject?</li>
-              <li>Is the instructor unrelated to the student and located outside your home?</li>
-              <li>Are you willing to change course as further IRS guidance arrives?</li>
-            </ol>
+    <div class="finder">
+      <section>
+        <div class="wrap box">
+          <div>
+            <div class="eyebrow on-dark">The State Guide</div>
+            <h2>Nearly every plan is different.</h2>
+            <p>
+              Every state but Wyoming offers at least one plan — more than a hundred in total.
+              Twenty conform fully to federal rules; the rest diverge somewhere. Tell us where you
+              file, and we'll flag your state's rules on every page you read from here on.
+            </p>
+            <div class="selectrow">
+              <select>
+                <option>Select the state where you file taxes…</option>
+                <option selected>Utah</option>
+                <option>California</option>
+                <option>New York</option>
+                <option>Virginia</option>
+              </select>
+              <a class="btn btn-brass" href="#">Show me</a>
+            </div>
           </div>
-
-          <p>A math, English, or Spanish after-school tutor outside the home should qualify. A violin teacher giving personalized one-on-one instruction functions similarly. A dance teacher leading large studio classes likely does not. There is no IRS case guidance yet — keep receipts, and have instructors sign a short attestation.</p>
+          <div class="statecard">
+            <h3>Utah — my529</h3>
+            <div class="sub">Direct-sold · Morningstar Gold</div>
+            <div class="kv"><span>State tax benefit</span><span>Credit — 4.45%</span></div>
+            <div class="kv"><span>Maximum credit (joint)</span><span>$227.84</span></div>
+            <div class="kv"><span>K–12 distributions</span><span class="yes">Allowed</span></div>
+            <div class="kv"><span>Aggregate contribution limit</span><span>$606,000</span></div>
+            <div class="kv"><span>Minimum to open</span><span>None</span></div>
+            <div class="kv">
+              <span>Creditor protection</span><span>$200,000 after 18 months</span>
+            </div>
+            <div class="kv">
+              <span>Watch out</span><span class="nope">No credit if opened after age 19</span>
+            </div>
+            <div style="margin-top: 20px">
+              <a
+                href="#"
+                style="
+                  color: var(--brass);
+                  font-size: 14px;
+                  letter-spacing: 0.06em;
+                  text-transform: uppercase;
+                  text-decoration: none;
+                "
+                >Official program description (PDF) →</a
+              >
+            </div>
+          </div>
         </div>
-
-        <aside class="margin">
-          <h4>Related rules</h4>
-          <a href="#">Not all states allow K–12 distributions →</a>
-          <a href="#">Tuition, books, and software →</a>
-          <a href="#">Therapies for beneficiaries with disabilities →</a>
-          <a href="#">Keeping documentation →</a>
-          <a href="#">Maximizing K–12 options →</a>
-          <h4 style="margin-top:28px">On this rule</h4>
-          <div style="font-size:14px;line-height:1.6">Annual K–12 cap<br /><strong style="font-size:24px;font-family:var(--serif);color:var(--ink)">$20,000</strong><br /><span style="color:#9AA7B7">per student, 2026 — up from $10,000</span></div>
-        </aside>
-      </div>
+      </section>
     </div>
-  </section>
-</div>
 
-<div class="finder">
-  <section>
-    <div class="wrap box">
-      <div>
-        <div class="eyebrow on-dark">The State Guide</div>
-        <h2>Nearly every plan is different.</h2>
-        <p>Every state but Wyoming offers at least one plan — more than a hundred in total. Twenty conform fully to federal rules; the rest diverge somewhere. Tell us where you file, and we'll flag your state's rules on every page you read from here on.</p>
-        <div class="selectrow">
-          <select><option>Select the state where you file taxes…</option><option selected>Utah</option><option>California</option><option>New York</option><option>Virginia</option></select>
-          <a class="btn btn-brass" href="#">Show me</a>
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">Chapter IX</div>
+            <h2>Measured against the alternatives.</h2>
+            <p>
+              For the specific purpose of funding an education tax-efficiently, the 529 wins on
+              every meaningful dimension.
+            </p>
+          </div>
+          <a href="#">All four comparisons →</a>
         </div>
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="best">529 Plan</th>
+              <th>530A "Trump Account"</th>
+              <th>Coverdell ESA</th>
+              <th>UGMA / UTMA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>State tax break on contributions</th>
+              <td class="best good">Nearly 40 states</td>
+              <td class="bad">None</td>
+              <td class="bad">None</td>
+              <td class="bad">None</td>
+            </tr>
+            <tr>
+              <th>Growth</th>
+              <td class="best good">Tax-free for qualified use</td>
+              <td>Tax-deferred only</td>
+              <td>Tax-deferred</td>
+              <td class="bad">Taxed annually</td>
+            </tr>
+            <tr>
+              <th>Annual contribution cap</th>
+              <td class="best good">None — superfund $190,000</td>
+              <td class="bad">$5,000</td>
+              <td class="bad">$2,000</td>
+              <td>Gift-tax limits</td>
+            </tr>
+            <tr>
+              <th>Who controls it at 18</th>
+              <td class="best good">You do, permanently</td>
+              <td class="bad">The child</td>
+              <td>The child at 30</td>
+              <td class="bad">The child</td>
+            </tr>
+            <tr>
+              <th>Financial-aid assessment</th>
+              <td class="best good">5.64% (0% grandparent)</td>
+              <td class="bad">20%</td>
+              <td>5.64%</td>
+              <td class="bad">20%</td>
+            </tr>
+            <tr>
+              <th>Roth IRA rollover</th>
+              <td class="best good">Up to $35,000</td>
+              <td>Taxable conversion</td>
+              <td class="bad">No</td>
+              <td class="bad">No</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="statecard">
-        <h3>Utah — my529</h3>
-        <div class="sub">Direct-sold · Morningstar Gold</div>
-        <div class="kv"><span>State tax benefit</span><span>Credit — 4.45%</span></div>
-        <div class="kv"><span>Maximum credit (joint)</span><span>$227.84</span></div>
-        <div class="kv"><span>K–12 distributions</span><span class="yes">Allowed</span></div>
-        <div class="kv"><span>Aggregate contribution limit</span><span>$606,000</span></div>
-        <div class="kv"><span>Minimum to open</span><span>None</span></div>
-        <div class="kv"><span>Creditor protection</span><span>$200,000 after 18 months</span></div>
-        <div class="kv"><span>Watch out</span><span class="nope">No credit if opened after age 19</span></div>
-        <div style="margin-top:20px"><a href="#" style="color:var(--brass);font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none">Official program description (PDF) →</a></div>
-      </div>
-    </div>
-  </section>
-</div>
+    </section>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="eyebrow">Chapter IX</div>
-        <h2>Measured against the alternatives.</h2>
-        <p>For the specific purpose of funding an education tax-efficiently, the 529 wins on every meaningful dimension.</p>
-      </div>
-      <a href="#">All four comparisons →</a>
+    <div class="author">
+      <section>
+        <div class="wrap box">
+          <div class="portrait">CRH</div>
+          <div>
+            <div class="eyebrow">About the author</div>
+            <h2>C. Richard Hopkins, MD, CRPC</h2>
+            <p>
+              Total529 is drawn from <em>Understanding, Using, and Maximizing 529 Accounts</em> —
+              the 30th anniversary edition. Written to advertise and clarify the numerous
+              underutilized advantages Section 529 plans hold for younger children, college
+              students, parents, grandparents, and other benevolent relatives and friends.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-brass" href="#">About the book</a
+              ><a class="btn" style="border: 1px solid var(--rule); color: var(--ink)" href="#"
+                >Sources &amp; citations</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    <table class="cmp">
-      <thead>
-        <tr><th></th><th class="best">529 Plan</th><th>530A "Trump Account"</th><th>Coverdell ESA</th><th>UGMA / UTMA</th></tr>
-      </thead>
-      <tbody>
-        <tr><th>State tax break on contributions</th><td class="best good">Nearly 40 states</td><td class="bad">None</td><td class="bad">None</td><td class="bad">None</td></tr>
-        <tr><th>Growth</th><td class="best good">Tax-free for qualified use</td><td>Tax-deferred only</td><td>Tax-deferred</td><td class="bad">Taxed annually</td></tr>
-        <tr><th>Annual contribution cap</th><td class="best good">None — superfund $190,000</td><td class="bad">$5,000</td><td class="bad">$2,000</td><td>Gift-tax limits</td></tr>
-        <tr><th>Who controls it at 18</th><td class="best good">You do, permanently</td><td class="bad">The child</td><td>The child at 30</td><td class="bad">The child</td></tr>
-        <tr><th>Financial-aid assessment</th><td class="best good">5.64% (0% grandparent)</td><td class="bad">20%</td><td>5.64%</td><td class="bad">20%</td></tr>
-        <tr><th>Roth IRA rollover</th><td class="best good">Up to $35,000</td><td>Taxable conversion</td><td class="bad">No</td><td class="bad">No</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
 
-<div class="author">
-  <section>
-    <div class="wrap box">
-      <div class="portrait">CRH</div>
-      <div>
-        <div class="eyebrow">About the author</div>
-        <h2>C. Richard Hopkins, MD, CRPC</h2>
-        <p>Total529 is drawn from <em>Understanding, Using, and Maximizing 529 Accounts</em> — the 30th anniversary edition. Written to advertise and clarify the numerous underutilized advantages Section 529 plans hold for younger children, college students, parents, grandparents, and other benevolent relatives and friends.</p>
-        <div class="cta-row"><a class="btn btn-brass" href="#">About the book</a><a class="btn" style="border:1px solid var(--rule);color:var(--ink)" href="#">Sources &amp; citations</a></div>
+    <footer>
+      <div class="wrap">
+        <div class="fgrid">
+          <div>
+            <div class="wordmark" style="color: #fff; font-size: 24px">
+              Total529<small style="color: #6f819a">Understanding · Using · Maximizing</small>
+            </div>
+            <p style="font-size: 14px; margin-top: 18px; color: #7e90a6">
+              A free educational resource for the 529 community.
+            </p>
+          </div>
+          <div>
+            <h5>Learn</h5>
+            <a href="#">Start Here</a><a href="#">Account Basics</a><a href="#">Taxes</a
+            ><a href="#">Fund Selection</a>
+          </div>
+          <div>
+            <h5>Use It</h5>
+            <a href="#">K–12</a><a href="#">College</a><a href="#">After Graduation</a
+            ><a href="#">Estate Planning</a>
+          </div>
+          <div>
+            <h5>Reference</h5>
+            <a href="#">State Guide</a><a href="#">Cost of Attendance</a
+            ><a href="#">Who Is Family?</a><a href="#">Glossary</a>
+          </div>
+          <div>
+            <h5>Tools</h5>
+            <a href="#">Which State?</a><a href="#">Is It Qualified?</a><a href="#">Superfunding</a
+            ><a href="#">Roth Rollover</a>
+          </div>
+        </div>
+        <p class="disclaimer">
+          No statement or example on this site should be considered a specific recommendation for
+          your personal situation. Investing and tax strategies each carry significant risks.
+          Examples herein may not apply to your situation. Please consult your estate attorney, tax
+          advisor, or financial advisor for personal advice. Figures reviewed for the 2026 tax year.
+        </p>
       </div>
-    </div>
-  </section>
-</div>
-
-<footer>
-  <div class="wrap">
-    <div class="fgrid">
-      <div>
-        <div class="wordmark" style="color:#fff;font-size:24px">Total529<small style="color:#6F819A">Understanding · Using · Maximizing</small></div>
-        <p style="font-size:14px;margin-top:18px;color:#7E90A6">A free educational resource for the 529 community.</p>
-      </div>
-      <div><h5>Learn</h5><a href="#">Start Here</a><a href="#">Account Basics</a><a href="#">Taxes</a><a href="#">Fund Selection</a></div>
-      <div><h5>Use It</h5><a href="#">K–12</a><a href="#">College</a><a href="#">After Graduation</a><a href="#">Estate Planning</a></div>
-      <div><h5>Reference</h5><a href="#">State Guide</a><a href="#">Cost of Attendance</a><a href="#">Who Is Family?</a><a href="#">Glossary</a></div>
-      <div><h5>Tools</h5><a href="#">Which State?</a><a href="#">Is It Qualified?</a><a href="#">Superfunding</a><a href="#">Roth Rollover</a></div>
-    </div>
-    <p class="disclaimer">No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice. Figures reviewed for the 2026 tax year.</p>
-  </div>
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>

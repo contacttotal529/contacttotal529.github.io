@@ -8,10 +8,10 @@ _Draft v1 · derived from `resources/full-document.md` (529 30th Anniversary Edi
 
 An **evergreen reference site** for the 529 community. The source document is a book, but the site is not a book-reader — it is a **lookup tool with a teaching voice**. Two visitors show up:
 
-| Visitor | Arrives from | Wants |
-|---|---|---|
-| **The learner** — a parent who has heard "529" and nothing else | Search, social, word of mouth | A guided path: what it is, why it isn't only for college, how to start |
-| **The looker-up** — someone mid-decision | Search for a specific question ("can a 529 pay for a tutor?", "Utah 529 tax credit") | One page, one answer, state caveat, an example, done |
+| Visitor                                                         | Arrives from                                                                         | Wants                                                                  |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| **The learner** — a parent who has heard "529" and nothing else | Search, social, word of mouth                                                        | A guided path: what it is, why it isn't only for college, how to start |
+| **The looker-up** — someone mid-decision                        | Search for a specific question ("can a 529 pay for a tutor?", "Utah 529 tax credit") | One page, one answer, state caveat, an example, done                   |
 
 Everything below optimizes for both: **pillar pages that read start-to-finish, built from atomic rule pages that stand alone in search results.**
 
@@ -165,15 +165,15 @@ Build that as **one template**, author ~80 instances, and the whole book is on t
 
 ## 4. Page templates (7 total)
 
-| # | Template | Used by | Key blocks |
-|---|---|---|---|
-| 1 | **Home** | `/` | Hero, stats band, myth flips, 8 pillar cards, state finder, featured example, book/author, disclaimer |
-| 2 | **Hub** | 8 section landing pages | Section intro, "what you'll learn", rule list with one-line summaries, decision tree CTA, next-section link |
-| 3 | **Rule page** | ~80 pages | Rule statement, detail, state callout, example cards, decision tree, watch-outs, related rules, disclaimer |
-| 4 | **Tool** | Trees, calculators | Stepper or inputs, result panel, "here's why", links to relevant rule pages |
-| 5 | **State detail** | 51 pages | Plan card(s), tax benefit, K‑12 conformity, max contribution, protections, program PDF, flagship school cost |
-| 6 | **Comparison** | `/compare/*` | Verdict up top, feature-by-feature table, narrative, related |
-| 7 | **Editorial** | `/history`, `/about` | Long-form with timeline / pull quotes |
+| #   | Template         | Used by                 | Key blocks                                                                                                   |
+| --- | ---------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 1   | **Home**         | `/`                     | Hero, stats band, myth flips, 8 pillar cards, state finder, featured example, book/author, disclaimer        |
+| 2   | **Hub**          | 8 section landing pages | Section intro, "what you'll learn", rule list with one-line summaries, decision tree CTA, next-section link  |
+| 3   | **Rule page**    | ~80 pages               | Rule statement, detail, state callout, example cards, decision tree, watch-outs, related rules, disclaimer   |
+| 4   | **Tool**         | Trees, calculators      | Stepper or inputs, result panel, "here's why", links to relevant rule pages                                  |
+| 5   | **State detail** | 51 pages                | Plan card(s), tax benefit, K‑12 conformity, max contribution, protections, program PDF, flagship school cost |
+| 6   | **Comparison**   | `/compare/*`            | Verdict up top, feature-by-feature table, narrative, related                                                 |
+| 7   | **Editorial**    | `/history`, `/about`    | Long-form with timeline / pull quotes                                                                        |
 
 ---
 
@@ -191,25 +191,25 @@ Build that as **one template**, author ~80 instances, and the whole book is on t
 
 ## 6. Content-to-site mapping
 
-| Manuscript section | Becomes | Notes |
-|---|---|---|
-| Forward | `/start-here` + `/start-here/myths` | The 6 bullets are the site's whole value proposition — put them on the home page |
-| Federal Tip Summary | Home page pillar cards + hub intros | Works as the site's skeleton, not a page of its own |
-| History: 30 years | `/history` | Interactive timeline; strong shareable/PR asset for the 30th anniversary |
-| State Plan Differences | `/states` + every rule page's state callout | Data, not prose — belongs in a structured table |
-| Account Basics | `/basics/*` (9 pages) | |
-| Understanding Tax Differences | `/taxes/*` (8 pages) | |
-| Fund Selection | `/investing/*` (4 pages) | |
-| K–12 | `/k-12/*` (5 pages) | Tutor section is the biggest traffic opportunity — it's brand new law and nobody has written about it |
-| Post-Secondary | `/college/*` (11 pages) | |
-| After Graduation | `/after-graduation/*` (7 pages) | Roth rollover is the second-biggest search opportunity |
-| Estate Planning | `/estate/*` (6 pages) | Highest-value audience |
-| Maximizing | `/maximize/*` (5 playbooks) | Position as "advanced" — reward for scrolling |
-| Account Comparisons | `/compare/*` (4 pages) | Each one is a head-to-head search term |
-| Appendix 1 (state PDFs) | `/states/:state` | 100+ plan links, structured |
-| Appendix 2 (cost of attendance) | `/cost-of-attendance` | Sortable table |
-| Appendix 3 (family members) | `/family-members` | Also a reusable inline component |
-| ~100 named examples | Example cards, sitewide | Tag by persona (parent / grandparent / student / business owner) and surface as a browsable library |
+| Manuscript section              | Becomes                                     | Notes                                                                                                 |
+| ------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Forward                         | `/start-here` + `/start-here/myths`         | The 6 bullets are the site's whole value proposition — put them on the home page                      |
+| Federal Tip Summary             | Home page pillar cards + hub intros         | Works as the site's skeleton, not a page of its own                                                   |
+| History: 30 years               | `/history`                                  | Interactive timeline; strong shareable/PR asset for the 30th anniversary                              |
+| State Plan Differences          | `/states` + every rule page's state callout | Data, not prose — belongs in a structured table                                                       |
+| Account Basics                  | `/basics/*` (9 pages)                       |                                                                                                       |
+| Understanding Tax Differences   | `/taxes/*` (8 pages)                        |                                                                                                       |
+| Fund Selection                  | `/investing/*` (4 pages)                    |                                                                                                       |
+| K–12                            | `/k-12/*` (5 pages)                         | Tutor section is the biggest traffic opportunity — it's brand new law and nobody has written about it |
+| Post-Secondary                  | `/college/*` (11 pages)                     |                                                                                                       |
+| After Graduation                | `/after-graduation/*` (7 pages)             | Roth rollover is the second-biggest search opportunity                                                |
+| Estate Planning                 | `/estate/*` (6 pages)                       | Highest-value audience                                                                                |
+| Maximizing                      | `/maximize/*` (5 playbooks)                 | Position as "advanced" — reward for scrolling                                                         |
+| Account Comparisons             | `/compare/*` (4 pages)                      | Each one is a head-to-head search term                                                                |
+| Appendix 1 (state PDFs)         | `/states/:state`                            | 100+ plan links, structured                                                                           |
+| Appendix 2 (cost of attendance) | `/cost-of-attendance`                       | Sortable table                                                                                        |
+| Appendix 3 (family members)     | `/family-members`                           | Also a reusable inline component                                                                      |
+| ~100 named examples             | Example cards, sitewide                     | Tag by persona (parent / grandparent / student / business owner) and surface as a browsable library   |
 
 ---
 
@@ -244,18 +244,21 @@ Nothing on the site is blocked on new research — everything traces to the manu
 Three routes are mocked up in this folder. They differ in **layout and posture**, not just palette.
 
 ### A · Heritage — `01-heritage.html`
+
 **Deep navy · brass · bone. Serif headlines, formal grid.**
 Reads like a private bank or a university endowment. Signals permanence, fiduciary seriousness, generational wealth. Leans into the 30th anniversary and the estate-planning material.
 _Best if:_ the priority audience is grandparents, high-net-worth families, and financial advisors.
 _Risk:_ can feel exclusive to a 32-year-old parent opening a first account.
 
 ### B · Evergreen — `02-evergreen.html`
+
 **Forest green · warm sand · amber. Rounded sans, soft cards, generous air.**
 Warm, human, teaching-first. Growth and family without the dollar-bill-green cliché. The examples and decision trees are the heroes.
 _Best if:_ the mission is closing the 54% awareness gap — reaching parents who feel intimidated by finance.
 _Risk:_ the softness has to be balanced with real authority signals or it reads "blog."
 
 ### C · Almanac — `03-almanac.html`
+
 **Ink on warm paper · vermilion accent · slate data blue. Editorial, dense, typographic.**
 A reference handbook: strong hierarchy, tables, marginalia, numbered rules. Fastest to scan, best for the looker-up, cheapest to scale to 150 pages.
 _Best if:_ the site is meant to be _the_ 529 reference the community links to.
