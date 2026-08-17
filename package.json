@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4217",
     "build": "ng build",
     "build:pages": "ng build website --configuration production --base-href / && node tools/spa-fallback.mjs dist/website/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "build:content": "node tools/build-content.mjs",
+    "prestart": "npm run build:content",
+    "prebuild": "npm run build:content",
+    "prebuild:pages": "npm run build:content",
+    "pretest": "npm run build:content"
   },
   "private": true,
   "packageManager": "npm@10.9.8",

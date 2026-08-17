@@ -1,0 +1,739 @@
+{
+  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing.",
+  "disclaimer": "No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice.",
+  "figures": {
+    "headline": [
+      {
+        "value": "17.7M",
+        "label": "529 accounts nationwide",
+        "note": "16.9M savings plan accounts plus ~800,000 prepaid tuition accounts, 31 December 2025"
+      },
+      {
+        "value": "$602.9B",
+        "label": "Total held in 529 accounts",
+        "note": "Up 14.8% from year-end 2024: $576.7B savings, $26.2B prepaid"
+      },
+      {
+        "value": "$34,062",
+        "label": "Average account balance",
+        "note": "The median likely falls between $10,000 and $18,000"
+      },
+      {
+        "value": "54%",
+        "label": "Of parents can't enroll",
+        "note": "K–12 parents who say they don't know enough about 529 plans"
+      }
+    ],
+    "keyNumbers": [
+      {
+        "amount": "$20,000",
+        "label": "K–12 expenses per student, per year",
+        "sub": "Federal cap for tax years beginning in 2026 — double the 2018–2025 cap",
+        "link": ["k-12", "state-k12-conformity"]
+      },
+      {
+        "amount": "$35,000",
+        "label": "Lifetime Roth IRA rollover",
+        "sub": "Account must be 15 years old; no income limit applies",
+        "link": ["after-graduation", "roth-rollover"]
+      },
+      {
+        "amount": "$10,000",
+        "label": "Toward qualified student loans",
+        "sub": "Lifetime, per beneficiary — and $10,000 more for a sibling",
+        "link": ["after-graduation", "your-own-account-for-loans"]
+      },
+      {
+        "amount": "$190,000",
+        "label": "Superfunded by a couple, in one day",
+        "sub": "Five years of gifting at once, per beneficiary, via Form 709",
+        "link": ["estate-planning", "superfunding"]
+      },
+      {
+        "amount": "$19,000",
+        "label": "Annual gift-tax exclusion per beneficiary",
+        "sub": "Also the annual cap on 529-to-ABLE rollovers",
+        "link": ["basics", "able-rollovers"]
+      },
+      {
+        "amount": "5.64%",
+        "label": "Aid assessment on a parent-owned 529",
+        "sub": "Maximum rate in the Student Aid Index, which replaced the EFC. Grandparent accounts are no longer reported at all — against 20% for a student asset.",
+        "link": ["post-secondary", "financial-aid"]
+      }
+    ],
+    "awareness": [
+      {
+        "value": "58%",
+        "label": "unaware 529 plans can help cover K–12 education"
+      },
+      {
+        "value": "51%",
+        "label": "unaware plans can be used beyond traditional college"
+      },
+      {
+        "value": "60%+",
+        "label": "unaware plans can pay student loans, roll into a Roth IRA, cover professional certifications, or be funded for family and friends"
+      },
+      {
+        "value": "35%",
+        "label": "of families used a college savings fund in 2025"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "year": "1996",
+      "title": "Section 529 is created",
+      "body": "The Small Business Job Protection Act, signed 20 August 1996, gives states authority to establish Qualified Tuition Programs. Utah is among the first to launch, under its Utah Educational Savings Plan."
+    },
+    {
+      "year": "2001",
+      "title": "Withdrawals become tax-free",
+      "body": "EGTRRA exempts qualified higher-education distributions from federal income tax entirely — the change that turned an imperfect savings tool into one of the most powerful tax-advantaged vehicles available. The provisions were scheduled to expire in 2010."
+    },
+    {
+      "year": "2006",
+      "title": "Made permanent",
+      "body": "The Pension Protection Act locks in what EGTRRA created, removing the sunset. Families could finally plan knowing the rules would not shift."
+    },
+    {
+      "year": "2012",
+      "title": "Technology qualifies",
+      "body": "The American Taxpayer Relief Act acknowledges that laptops, tablets, and internet service are academic necessities rather than luxuries."
+    },
+    {
+      "year": "2015",
+      "title": "Refunds can be recontributed",
+      "body": "The PATH Act lets an account holder return a refunded tuition payment to the 529 within 60 days without penalty."
+    },
+    {
+      "year": "2018",
+      "title": "K–12 tuition qualifies",
+      "body": "The Tax Cuts and Jobs Act allows up to $10,000 per student per year for elementary and secondary tuition — public, private, or religious. Thirty-seven states and D.C. adopt conforming rules; a handful decline."
+    },
+    {
+      "year": "2019",
+      "title": "Apprenticeships and student loans",
+      "body": "The SECURE Act adds registered apprenticeship programs certified by the Department of Labor, plus $10,000 in lifetime distributions to repay the beneficiary's student loans."
+    },
+    {
+      "year": "2022",
+      "title": "SECURE 2.0 answers over-funding",
+      "body": "Enacted in the final days of December 2022 and effective 2024: unused 529 assets may be rolled into a Roth IRA in the beneficiary's name, converting a potential liability into a retirement asset."
+    },
+    {
+      "year": "2025",
+      "title": "Tutors, credentials, and ABLE",
+      "body": "H.R. 1 — the One Big Beautiful Bill Act, signed 4 July 2025 — broadened K–12 expenses to tutoring, curriculum materials, standardized test fees, dual enrollment and educational therapies, extended eligibility to vocational and professional credentialing, and made 529-to-ABLE rollovers permanent."
+    },
+    {
+      "year": "2026",
+      "title": "Thirty years on",
+      "body": "The K–12 withdrawal cap doubles to $20,000 per beneficiary. Some 17.7 million accounts hold $602.9 billion. Around 500 institutions outside the United States accept 529 funding. Parent awareness remains the biggest growth opportunity."
+    }
+  ],
+  "comparison": {
+    "columns": ["529 Plan", "530A \"Trump Account\"", "Coverdell ESA", "UGMA / UTMA"],
+    "rows": [
+      {
+        "label": "State tax break on contributions",
+        "values": [
+          "37 states and D.C. offer a deduction or credit",
+          "None — after-tax dollars only",
+          "None",
+          "None"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Growth",
+        "values": [
+          "Tax-free for qualified expenses, federal and state",
+          "Tax-deferred; taxed as ordinary income on withdrawal",
+          "Tax-deferred for qualified education expenses",
+          "Taxed annually; \"kiddie tax\" once unearned income tops $2,700 in 2026"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Annual contribution cap",
+        "values": [
+          "No cap; superfund $95,000 individual / $190,000 couple",
+          "$5,000 per child from all sources; employer may fund $2,500",
+          "$2,000 per student",
+          "Gift-tax limits"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Owner income limit",
+        "values": ["None", "None", "$110,000 single / $220,000 joint MAGI", "None"],
+        "best": 0
+      },
+      {
+        "label": "Who controls it at 18",
+        "values": [
+          "The account owner, permanently",
+          "The child — may liquidate entirely",
+          "Funds must be used by age 30",
+          "The child, with no restrictions"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Financial-aid assessment",
+        "values": [
+          "5.64% parent-owned; grandparent accounts not reported",
+          "Likely 20% as a student asset",
+          "5.64% as a parental asset",
+          "20% as a student asset"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Roth IRA rollover",
+        "values": [
+          "Up to $35,000, regardless of beneficiary income",
+          "Converts to a traditional IRA; conversion is taxable",
+          "Not available",
+          "Not available"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Change the beneficiary",
+        "values": [
+          "Any family member, unlimited, no fee",
+          "No",
+          "Limited",
+          "Never — irrevocably the named child's"
+        ],
+        "best": 0
+      }
+    ],
+    "footnote": "The 530A account offers one genuine perk: a $1,000 government seed deposit for children born between 2025 and 2028, plus possible philanthropic or employer contributions. The two are not mutually exclusive. But as an education savings vehicle the 530A falls short on every major tax dimension."
+  },
+  "quickAnswers": [
+    {
+      "item": "Private K–12 tuition",
+      "status": "qualified",
+      "detail": "Up to $20,000 per student per year federally. Thirteen states do not allow tax-free K–12 distributions.",
+      "link": ["k-12", "tuition-books-software"]
+    },
+    {
+      "item": "Curriculum, textbooks, workbooks, and educational software",
+      "status": "qualified",
+      "detail": "Including instructional digital materials for K–12 students.",
+      "link": ["k-12", "tuition-books-software"]
+    },
+    {
+      "item": "A tutor outside your home",
+      "status": "conditional",
+      "detail": "The tutor must be unrelated to the student and licensed as a teacher, have taught at an eligible institution, or be a subject-matter expert. No IRS case guidance yet — keep receipts.",
+      "link": ["k-12", "tutors"]
+    },
+    {
+      "item": "Occupational or speech therapy for a beneficiary with disabilities",
+      "status": "qualified",
+      "detail": "Educational therapy by a licensed or accredited practitioner, including occupational, behavioral, physical, and speech-language therapies.",
+      "link": ["k-12", "disability-therapies"]
+    },
+    {
+      "item": "SAT, ACT, and AP examination fees",
+      "status": "qualified",
+      "detail": "Nationally standardized achievement tests and examinations related to college admission.",
+      "link": ["k-12", "tests-and-dual-enrollment"]
+    },
+    {
+      "item": "College tuition, books, and fees",
+      "status": "qualified",
+      "detail": "At any institution eligible to participate in US federal student aid programs, domestic or foreign.",
+      "link": ["post-secondary", "tuition-books-fees"]
+    },
+    {
+      "item": "Room and board",
+      "status": "conditional",
+      "detail": "Only while the student is enrolled at least half-time, and within the school's published cost of attendance.",
+      "link": ["post-secondary", "room-and-board"]
+    },
+    {
+      "item": "A laptop, tablet, peripherals, and home internet",
+      "status": "qualified",
+      "detail": "Qualified while the beneficiary is enrolled. Internet costs for the student's residence count.",
+      "link": ["post-secondary", "computers-and-internet"]
+    },
+    {
+      "item": "Registered apprenticeship fees, books, and equipment",
+      "status": "qualified",
+      "detail": "The program must be registered and certified with the Secretary of Labor under the National Apprenticeship Act.",
+      "link": ["post-secondary", "apprenticeships"]
+    },
+    {
+      "item": "Professional licensing and credential renewal",
+      "status": "qualified",
+      "detail": "Including continuing education required to maintain a credential — for an entire career.",
+      "link": ["after-graduation", "career-credentialing"]
+    },
+    {
+      "item": "Student loan principal or interest",
+      "status": "conditional",
+      "detail": "Up to $10,000 lifetime for the beneficiary, plus $10,000 for a sibling. That interest then loses the student loan interest deduction.",
+      "link": ["after-graduation", "your-own-account-for-loans"]
+    },
+    {
+      "item": "Transportation, a car, or insurance",
+      "status": "not-qualified",
+      "detail": "Explicitly outside qualified expenses.",
+      "link": ["post-secondary", "not-qualified"]
+    },
+    {
+      "item": "Phone plans and fitness club memberships",
+      "status": "not-qualified",
+      "detail": "Not qualified expenses.",
+      "link": ["post-secondary", "not-qualified"]
+    },
+    {
+      "item": "Spring break trips and campus visits",
+      "status": "not-qualified",
+      "detail": "Trips to campuses to select a school are not qualified either.",
+      "link": ["post-secondary", "not-qualified"]
+    },
+    {
+      "item": "Collateral for a loan",
+      "status": "not-qualified",
+      "detail": "Federal law provides that the account cannot be pledged as collateral by the owner or the beneficiary.",
+      "link": ["post-secondary", "not-qualified"]
+    }
+  ],
+  "stateGroups": {
+    "anyPlanDeduction": {
+      "label": "Tax benefit for contributions to any state's plan",
+      "detail": "Nine states extend state tax benefits to contributions made to any 529 plan, not just their own — letting residents chase the best plan nationally without giving up the break. Thirty-seven states and D.C. offer a contribution deduction or credit at all.",
+      "states": [
+        "Arizona",
+        "Arkansas",
+        "Kansas",
+        "Maine",
+        "Minnesota",
+        "Missouri",
+        "Montana",
+        "Ohio",
+        "Pennsylvania"
+      ]
+    },
+    "credit": {
+      "label": "Offer a tax credit rather than a deduction",
+      "detail": "A credit reduces your tax bill dollar-for-dollar rather than reducing taxable income, which usually makes it the better of the two. Five plans provide credits: Indiana, Minnesota, Oregon, Utah and Vermont.",
+      "states": ["Indiana", "Minnesota", "Oregon", "Utah", "Vermont"]
+    },
+    "noDeduction": {
+      "label": "No state tax deduction for contributions",
+      "detail": "In states with no deduction, shopping nationally for the best plan — lowest fees, preferred allocation options — is suggested.",
+      "states": ["California", "Hawaii", "Kentucky", "North Carolina"]
+    },
+    "k12NotAllowed": {
+      "label": "Do not allow K–12 qualified distributions",
+      "detail": "A withdrawal for K–12 may be tax-free federally but taxable at the state level in these jurisdictions. California further penalizes such withdrawals by an extra 2.5%.",
+      "states": [
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Hawaii",
+        "Illinois",
+        "Michigan",
+        "Minnesota",
+        "Montana",
+        "Nebraska",
+        "New Mexico",
+        "New York",
+        "Oregon",
+        "Vermont"
+      ]
+    },
+    "morningstarGold": {
+      "label": "Morningstar Gold rated, November 2025",
+      "detail": "Morningstar's fall 2025 Medalist Ratings gave Gold to five direct-sold plans. It reviewed 59 plans representing more than 90% of industry assets; 31 earned Gold, Silver or Bronze, and no advisor-sold plan earned Gold.",
+      "states": ["Alaska", "Illinois", "Massachusetts", "Pennsylvania", "Utah"]
+    }
+  },
+  "stateSources": [
+    {
+      "label": "Morningstar 529 Medalist Ratings",
+      "url": "https://www.morningstar.com/funds/529-ratings-best-plans-2025"
+    },
+    {
+      "label": "Saving For College plan ratings",
+      "url": "https://www.savingforcollege.com/529-plan-ratings"
+    },
+    {
+      "label": "States that do not conform with federal 529 tax laws",
+      "url": "https://www.savingforcollege.com/article/states-that-do-not-conform-with-federal-529-plan-tax-laws"
+    },
+    {
+      "label": "529 Network plan data (formerly CSPN)",
+      "url": "https://www.529network.org/529-plan-data/"
+    },
+    {
+      "label": "ICI 529 plan statistics, Q4 2025",
+      "url": "https://www.iciglobal.org/research/stats/529s/529s_25_q4"
+    }
+  ],
+  "stateFacts": [
+    {
+      "state": "Utah",
+      "taxBenefit": "credit",
+      "taxBenefitDetail": "A 4.45% credit for each beneficiary's account, capped at $113.92 filing single or $227.84 filing jointly. Credits are unlimited in number for eligible state taxpayers.",
+      "k12": "not-listed",
+      "maxContribution": 606000,
+      "morningstarGold": true,
+      "protection": "State exemptions protect funds held at least 18 months before a bankruptcy petition, up to $200,000 per account owner. No protection for funds held less than 18 months.",
+      "recapture": [],
+      "notes": [
+        "The state tax credit is only available if the account was started for a beneficiary before their 19th birthday.",
+        "Entity accounts have deposit rates of a single filer — a 2026 maximum of $2,560 per beneficiary ($5,120 joint).",
+        "my529 reports a transfer to the Utah State Tax Commission for likely taxation when a Utah taxpayer moves money from an account whose beneficiary was under 19 when designated to one whose beneficiary was 19 or older.",
+        "For K–12 expenses, my529 will issue a check only to the account owner.",
+        "Rollovers for a different beneficiary are limited to 2 times per year.",
+        "No minimum initial contribution."
+      ]
+    },
+    {
+      "state": "Virginia",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Deduction capped at $4,000 per account per year, with unlimited carry-forward — excess contributions can be deducted in future years. After age 70, Virginia residents have no deduction amount limit.",
+      "k12": "not-listed",
+      "maxContribution": 675000,
+      "protection": "Significant state statutory protection of 529 funds from creditors and lawsuits.",
+      "recapture": [],
+      "notes": [],
+      "maxContributionNote": "Currently the highest aggregate limit in the nation."
+    },
+    {
+      "state": "New York",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Deduction up to $10,000 for taxpayers filing jointly.",
+      "k12": "not-allowed",
+      "protection": "Protects up to $10,000 if the account owner is an adult.",
+      "recapture": ["K–12 distributions"],
+      "notes": ["No minimum initial contribution."]
+    },
+    {
+      "state": "California",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state tax deduction for 529 contributions.",
+      "k12": "not-allowed",
+      "protection": "Virtually no protection outside of bankruptcy — an example of a state with weak protection.",
+      "recapture": ["Roth IRA conversions"],
+      "notes": [
+        "California further penalizes withdrawals taken for K–12 expenses by an extra 2.5%."
+      ]
+    },
+    {
+      "state": "Indiana",
+      "taxBenefit": "credit",
+      "taxBenefitDetail": "A 20% state tax credit worth up to $750 filing single or $1,500 filing jointly, for tax year 2026.",
+      "k12": "not-listed",
+      "recapture": ["Roth IRA conversions", "Education loan repayments"],
+      "notes": []
+    },
+    {
+      "state": "Oregon",
+      "taxBenefit": "credit",
+      "taxBenefitDetail": "A tiered credit worth up to $380 in total.",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": [
+        "Twelve states and D.C. charge a state estate tax; Oregon's reaches 16% on estates over $1,000,000. There is no state estate tax on 529 assets."
+      ]
+    },
+    {
+      "state": "Vermont",
+      "taxBenefit": "credit",
+      "taxBenefitDetail": "Provides a tax credit rather than a deduction.",
+      "k12": "not-allowed",
+      "recapture": ["Roth IRA conversions"],
+      "notes": []
+    },
+    {
+      "state": "Minnesota",
+      "taxBenefit": "credit",
+      "taxBenefitDetail": "One of five plans providing a credit rather than a deduction. Minnesota also extends its benefit to contributions made to any state's 529 plan.",
+      "k12": "not-allowed",
+      "recapture": ["Roth IRA conversions"],
+      "notes": []
+    },
+    {
+      "state": "Rhode Island",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Deducts up to $1,000, against tax brackets in the 4.8% range.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Georgia",
+      "taxBenefit": "unstated",
+      "k12": "not-listed",
+      "maxContribution": 550000,
+      "maxContributionNote": "Raised from $235,000.",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "North Dakota",
+      "taxBenefit": "unstated",
+      "k12": "not-listed",
+      "maxContribution": 269000,
+      "maxContributionNote": "Unchanged since 2022 — currently the lowest in the nation.",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "New Hampshire",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state income tax, and therefore no contribution deduction or credit.",
+      "k12": "not-listed",
+      "maxContribution": 621411,
+      "maxContributionNote": "Stated as $621,411 in this edition.",
+      "recapture": [],
+      "notes": [
+        "Has built a strong national reputation for low-cost, high-quality direct-sold options."
+      ]
+    },
+    {
+      "state": "Alaska",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state income tax.",
+      "k12": "not-listed",
+      "morningstarGold": true,
+      "recapture": [],
+      "notes": [
+        "Residents can choose to invest their Permanent Fund Dividend (PFD) directly into 529 accounts."
+      ]
+    },
+    {
+      "state": "Illinois",
+      "taxBenefit": "unstated",
+      "k12": "not-allowed",
+      "morningstarGold": true,
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Massachusetts",
+      "taxBenefit": "unstated",
+      "k12": "not-listed",
+      "morningstarGold": true,
+      "recapture": [],
+      "notes": [
+        "The U.Plan prepaid program sells tuition credits for roughly 70 Massachusetts institutions each 15 July, requires at least $300 saved over the year, and closes to new savings after the beneficiary's sophomore year of high school.",
+        "If a school outside the U.Plan program is chosen, money is returned only at the consumer price index rate."
+      ]
+    },
+    {
+      "state": "Pennsylvania",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan, not just its own.",
+      "k12": "not-listed",
+      "morningstarGold": true,
+      "recapture": [],
+      "notes": [
+        "The PA 529 Guaranteed Savings Plan grows with postsecondary tuition inflation rather than investment performance, against a designated \"Tuition Level\" that may be changed at any time.",
+        "Fees on the guaranteed plan are generally higher than on the investment 529 account."
+      ]
+    },
+    {
+      "state": "Florida",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state income tax.",
+      "k12": "not-listed",
+      "protection": "Significant state statutory protection of 529 funds from creditors and lawsuits.",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "New Jersey",
+      "taxBenefit": "unstated",
+      "k12": "not-listed",
+      "recapture": ["K–12 distributions"],
+      "notes": []
+    },
+    {
+      "state": "Louisiana",
+      "taxBenefit": "unstated",
+      "k12": "not-listed",
+      "recapture": ["Roth IRA conversions"],
+      "notes": []
+    },
+    {
+      "state": "Michigan",
+      "taxBenefit": "unstated",
+      "k12": "not-allowed",
+      "recapture": ["Roth IRA conversions"],
+      "notes": [
+        "The Michigan Education Trust, established in the late 1980s, was the country's first prepaid tuition program."
+      ]
+    },
+    {
+      "state": "Colorado",
+      "taxBenefit": "unstated",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Connecticut",
+      "taxBenefit": "unstated",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Hawaii",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state tax deduction for 529 contributions.",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Montana",
+      "taxBenefit": "unstated",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Nebraska",
+      "taxBenefit": "unstated",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "New Mexico",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "The manuscript's worked example has an account owner maxing out New Mexico deductions for the year.",
+      "k12": "not-allowed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Kentucky",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state tax deduction for 529 contributions.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "North Carolina",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state tax deduction for 529 contributions.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Arizona",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan. The manuscript's worked example uses a 2.5% Arizona state tax rate.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Arkansas",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Kansas",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Maine",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Missouri",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Ohio",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Nevada",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state income tax; the program offers neither a deduction nor a credit.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": [
+        "Has built a strong national reputation for low-cost, high-quality direct-sold options."
+      ]
+    },
+    {
+      "state": "Idaho",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "The manuscript's worked example claims a $10,000 deduction against a 5.3% state tax rate.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": []
+    },
+    {
+      "state": "Washington",
+      "taxBenefit": "none",
+      "taxBenefitDetail": "No state income tax.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": [
+        "Washington charges a state estate tax reaching 35% over $3,000,000. There is no state estate tax on 529 assets."
+      ]
+    },
+    {
+      "state": "Wyoming",
+      "taxBenefit": "deduction",
+      "taxBenefitDetail": "Wyoming sponsors no plan of its own. Residents can receive a deduction for any out-of-state direct-sold or broker-sold 529 plan available nationwide.",
+      "k12": "not-listed",
+      "recapture": [],
+      "notes": ["The only state without a sponsored 529 plan."]
+    }
+  ],
+  "chapterBlurbs": {
+    "forward": "Six things most families get wrong about 529 accounts — starting with the fact that the money never stops being yours.",
+    "federal-tips": "The whole federal framework in one place: control, deposits, taxes, K–12, college, life after graduation, and estate planning.",
+    "history": "How a state-capital experiment became federal law in 1996, and the eight expansions that followed it.",
+    "state-differences": "Every state but Wyoming runs its own plan with its own rules. What actually varies, and what to check before choosing one.",
+    "basics": "Owner, beneficiary, successor — who controls the money, how to change any of it without a fee, and every route for getting money in.",
+    "taxes": "Deduction or credit, tax-free growth, contribution ceilings and deadlines, and exactly what a non-qualified withdrawal costs you.",
+    "fund-selection": "Target-date against static allocations, the two-changes-a-year rule, the real risk of loss, and why starting early beats timing the market.",
+    "k-12": "Private tuition, curriculum and software, tutors, therapies and test fees — plus the thirteen states that don't allow any of it.",
+    "post-secondary": "Qualified schools, room and board, computers, apprenticeships, credentials and scholarships — and how a 529 affects financial aid.",
+    "after-graduation": "Student loans, transfers down the family, the Roth rollover, and paying for licensing and continuing education across a whole career.",
+    "estate-planning": "Completed gifts, superfunding, generation-skipping transfer tax, bankruptcy protection, and moving wealth across generations.",
+    "maximizing": "Five advanced playbooks — funding, K–12, post-secondary, after graduation, and estate planning.",
+    "comparisons": "Head to head against prepaid tuition plans, Coverdell ESAs, UGMA/UTMA custodial accounts, and the new 530A “Trump account”."
+  }
+}
