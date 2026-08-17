@@ -34,7 +34,10 @@ export class Seo {
       this.meta.removeTag("property='og:description'");
     }
 
-    const url = SITE_ORIGIN + this.router.url.split(/[?#]/)[0];
+    // GitHub Pages serves /guide/ and 301s /guide, so the canonical has to carry the slash
+    // or it points at a redirect.
+    const path = this.router.url.split(/[?#]/)[0];
+    const url = SITE_ORIGIN + (path === '/' ? '/' : `${path.replace(/\/$/, '')}/`);
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:url', content: url });
     this.meta.updateTag({ property: 'og:type', content: 'article' });

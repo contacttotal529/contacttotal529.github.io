@@ -590,7 +590,7 @@ const sitemap = [
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ...urls.map(
     ({ path, priority }) =>
-      `  <url><loc>${ORIGIN}/${path}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`,
+      `  <url><loc>${ORIGIN}/${path ? `${path}/` : ''}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`,
   ),
   '</urlset>',
   '',
