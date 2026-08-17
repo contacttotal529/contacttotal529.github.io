@@ -1,0 +1,155 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 252px;
+  gap: 52px;
+  align-items: start;
+  padding-top: 44px;
+  padding-bottom: 74px;
+}
+
+.body {
+  max-width: 72ch;
+}
+
+/* state watch */
+.watch {
+  background: var(--leaf-pale);
+  border-radius: var(--radius);
+  padding: 26px 30px 24px;
+  margin: 40px 0 0;
+}
+
+.watch--no {
+  background: var(--plum-pale);
+}
+
+.watch h2 {
+  font-size: 22px;
+  margin: 8px 0 10px;
+}
+
+.watch > p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 15px;
+}
+
+.watch__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* related */
+.related {
+  margin-top: 46px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.related h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.related ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.related a {
+  display: block;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.related a:hover {
+  background: var(--cream);
+}
+
+.related a:hover .related__title {
+  color: var(--moss);
+}
+
+.related__chapter {
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.related__title {
+  font-size: 17.5px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.disclaimer {
+  margin-top: 40px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* rail */
+.rail__figures {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.rail__figures li {
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--amber-pale);
+  color: #96591a;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.rail__count {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--amber);
+  margin: 0;
+  line-height: 1;
+}
+
+.rail__note {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .rail {
+    position: static;
+  }
+
+  .pager {
+    grid-template-columns: 1fr;
+  }
+
+  .pager__link--next {
+    text-align: left;
+  }
+}

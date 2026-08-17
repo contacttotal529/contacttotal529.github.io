@@ -1,0 +1,133 @@
+@if (section(); as sec) {
+  <article>
+    <div class="shell">
+      <header class="page-banner">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a routerLink="/guide">The guide</a>
+          <span aria-hidden="true">/</span>
+          <a [routerLink]="['/guide', sec.chapterId]">{{ sec.chapterTitle }}</a>
+          <span aria-hidden="true">/</span>
+          <span>Rule {{ ruleNumber() }}</span>
+        </nav>
+        <h1>{{ sec.title }}</h1>
+      </header>
+    </div>
+
+    <div class="shell layout">
+      <div class="body">
+        <app-blocks [blocks]="sec.blocks" />
+
+        @if (watch(); as w) {
+          <aside class="watch" [class.watch--no]="w.tone === 'no'">
+            <p class="eyebrow">Your state may differ</p>
+            <h2>{{ w.label }}</h2>
+            <p>{{ w.detail }}</p>
+            <div class="watch__chips">
+              @for (entry of w.entries; track entry.name) {
+                @if (entry.slug) {
+                  <a
+                    class="chip"
+                    [class.chip--no]="w.tone === 'no'"
+                    [class.chip--yes]="w.tone === 'yes'"
+                    [routerLink]="['/states', entry.slug]"
+                    >{{ entry.name }}</a
+                  >
+                } @else {
+                  <span class="chip">{{ entry.name }}</span>
+                }
+              }
+            </div>
+            <a class="link-more" routerLink="/states">Open the full state guide &rarr;</a>
+          </aside>
+        }
+
+        @if (related().length) {
+          <section class="related">
+            <h2>Related rules</h2>
+            <ul>
+              @for (item of related(); track item.chapterId + item.id) {
+                <li>
+                  <a [routerLink]="['/guide', item.chapterId, item.id]">
+                    <span class="related__chapter">{{ item.chapterTitle }}</span>
+                    <span class="related__title">{{ item.title }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        <nav class="pager" aria-label="Rule navigation">
+          @if (neighbours().prev; as prev) {
+            <a class="pager__link" [routerLink]="['/guide', prev.chapterId, prev.id]">
+              <span>&larr; Previous</span>
+              <strong>{{ prev.title }}</strong>
+            </a>
+          } @else {
+            <span></span>
+          }
+          @if (neighbours().next; as next) {
+            <a
+              class="pager__link pager__link--next"
+              [routerLink]="['/guide', next.chapterId, next.id]"
+            >
+              <span>Next &rarr;</span>
+              <strong>{{ next.title }}</strong>
+            </a>
+          }
+        </nav>
+
+        <p class="page-disclaimer">{{ disclaimer() }}</p>
+      </div>
+
+      <aside class="rail">
+        @if (figures().length) {
+          <div class="rail__block">
+            <h2>Figures in this rule</h2>
+            <ul class="rail__figures">
+              @for (figure of figures(); track figure) {
+                <li>{{ figure }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        @if (sec.exampleCount) {
+          <div class="rail__block">
+            <h2>Worked examples</h2>
+            <p class="rail__count">{{ sec.exampleCount }}</p>
+            <p class="rail__note">
+              The manuscript attaches a named family to this rule. Look for the boxed examples.
+            </p>
+          </div>
+        }
+
+        @if (chapter(); as ch) {
+          <div class="rail__block">
+            <h2>In this chapter</h2>
+            @for (other of ch.sections; track other.id) {
+              <a
+                class="rail__link"
+                [routerLink]="['/guide', ch.id, other.id]"
+                [class.on]="other.id === sec.id"
+                >{{ other.title }}</a
+              >
+            }
+          </div>
+        }
+
+        <div class="rail__block">
+          <h2>Keep reading</h2>
+          <a class="rail__link" routerLink="/read">The full book on one page</a>
+          <a class="rail__link" routerLink="/states">Your state's rules</a>
+          <a class="rail__link" routerLink="/costs">What a degree costs</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+} @else {
+  <div class="shell stack-lg">
+    <h1>Rule not found</h1>
+    <p><a class="link-more" routerLink="/guide">Back to the guide &rarr;</a></p>
+  </div>
+}

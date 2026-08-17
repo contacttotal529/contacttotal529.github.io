@@ -1,0 +1,132 @@
+<div class="shell layout">
+  <aside class="toc no-print" [class.toc--open]="tocOpen()">
+    <button class="toc__toggle" type="button" (click)="tocOpen.set(!tocOpen())">
+      {{ tocOpen() ? 'Hide contents' : 'Contents' }}
+    </button>
+
+    <div class="toc__inner">
+      <p class="toc__label">Contents</p>
+      <nav aria-label="Table of contents">
+        @for (chapter of chapters(); track chapter.id; let i = $index) {
+          <a
+            class="toc__chapter"
+            [class.on]="activeChapter() === chapter.id"
+            [href]="'#ch-' + chapter.id"
+            (click)="jump('ch-' + chapter.id, $event)"
+          >
+            <span class="toc__num">{{ numerals[i] }}</span>
+            {{ chapter.title }}
+          </a>
+
+          @if (activeChapter() === chapter.id && chapter.sections.length) {
+            <div class="toc__sections">
+              @for (section of chapter.sections; track section.id) {
+                <a
+                  [class.on]="activeSection() === section.id"
+                  [href]="'#s-' + chapter.id + '-' + section.id"
+                  (click)="jump('s-' + chapter.id + '-' + section.id, $event)"
+                  >{{ section.title }}</a
+                >
+              }
+            </div>
+          }
+        }
+
+        <a class="toc__chapter" href="#appendices" (click)="jump('appendices', $event)">
+          <span class="toc__num">&mdash;</span>
+          Appendices
+        </a>
+      </nav>
+
+      <a class="toc__top" href="#top" (click)="toTop($event)">&uarr; Back to top</a>
+    </div>
+  </aside>
+
+  <article class="document" #doc>
+    <header class="titlepage" id="top">
+      <p class="eyebrow">{{ book()?.edition }}</p>
+      <h1>{{ book()?.subtitle }}</h1>
+      <p class="titlepage__author">{{ book()?.author }}</p>
+      <p class="titlepage__meta">
+        {{ chapters().length }} chapters &middot; {{ totalSections() }} rules &middot;
+        {{ totalExamples() }} worked examples &middot; reviewed for the {{ book()?.taxYear }} tax
+        year
+      </p>
+      <p class="titlepage__note">
+        This is the complete manuscript, unedited. Every rule also has its own page in
+        <a routerLink="/guide">the guide</a>, with the relevant state list attached.
+      </p>
+    </header>
+
+    @for (chapter of chapters(); track chapter.id; let i = $index) {
+      <section class="chapter">
+        <h2 class="chapter__title" [id]="'ch-' + chapter.id" [attr.data-chapter]="chapter.id">
+          <span class="chapter__num">Chapter {{ numerals[i] }}</span>
+          {{ chapter.title }}
+          @if (chapter.subtitle) {
+            <em>{{ chapter.subtitle }}</em>
+          }
+        </h2>
+
+        @if (chapter.intro.length) {
+          <app-blocks [blocks]="chapter.intro" />
+        }
+
+        @for (section of chapter.sections; track section.id) {
+          <section class="rule">
+            <h3
+              class="rule__title"
+              [id]="'s-' + chapter.id + '-' + section.id"
+              [attr.data-chapter]="chapter.id"
+              [attr.data-section]="section.id"
+            >
+              {{ section.title }}
+              <a
+                class="rule__permalink no-print"
+                [routerLink]="['/guide', chapter.id, section.id]"
+                title="Open this rule on its own page"
+                aria-label="Open this rule on its own page"
+                >&#167;</a
+              >
+            </h3>
+            <app-blocks [blocks]="section.blocks" />
+          </section>
+        }
+      </section>
+    }
+
+    <section class="chapter" id="appendices">
+      <h2 class="chapter__title" data-chapter="appendices">Appendices</h2>
+      <p>
+        The manuscript's three appendices are reproduced as live, sortable tables rather than static
+        lists.
+      </p>
+      <ul class="appendix-links">
+        <li>
+          <a routerLink="/states"
+            ><strong>Appendix 1 &mdash; Each state's official 529 program description</strong>
+            <span
+              >Every plan in the book, with its disclosure PDF and the rules that apply.</span
+            ></a
+          >
+        </li>
+        <li>
+          <a routerLink="/costs"
+            ><strong>Appendix 2 &mdash; Each state's flagship college cost of attendance</strong>
+            <span>Sortable, compared against the national average.</span></a
+          >
+        </li>
+        <li>
+          <a routerLink="/reference"
+            ><strong>Appendix 3 &mdash; Who is a "member of my family"?</strong>
+            <span>The transfers Section 529 permits without penalty.</span></a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <footer class="colophon">
+      <p>{{ disclaimerText }}</p>
+    </footer>
+  </article>
+</div>

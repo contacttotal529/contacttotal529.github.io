@@ -1,0 +1,136 @@
+<div class="shell">
+  <header class="page-banner">
+    <p class="eyebrow eyebrow--on-dark">Appendix 1 &middot; the state guide</p>
+    <h1>Nearly every plan is different.</h1>
+    <p class="lede">
+      {{ states().length }} jurisdictions, {{ totalPlans() }} plans. Every state except Wyoming
+      sponsors at least one; many run both an advisor-guided plan and a lower-fee direct-sold one.
+      Twenty conform fully to the federal rules &mdash; the rest diverge somewhere.
+    </p>
+  </header>
+</div>
+
+<section class="shell stack-md">
+  <div class="groups">
+    @for (group of groups(); track group.key) {
+      <article class="group">
+        <h2>{{ group.label }}</h2>
+        <p>{{ group.detail }}</p>
+        <p class="group__count">{{ group.states.length }} states</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="shell stack-md">
+  <div class="controls">
+    <div class="controls__filters" role="group" aria-label="Filter states">
+      @for (filter of filters; track filter.key) {
+        <button
+          type="button"
+          class="chip"
+          [class.chip--amber]="active() === filter.key"
+          (click)="active.set(filter.key)"
+        >
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+    <div class="controls__search">
+      <label class="visually-hidden" for="state-search">Filter by state or plan name</label>
+      <input
+        id="state-search"
+        class="field"
+        type="search"
+        placeholder="Filter by state or plan name…"
+        [value]="query()"
+        (input)="setQuery($event)"
+      />
+    </div>
+  </div>
+
+  <p class="count">Showing {{ visible().length }} of {{ states().length }}</p>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th scope="col">State</th>
+          <th scope="col">Plans in this edition</th>
+          <th scope="col">Contribution benefit</th>
+          <th scope="col">K–12 distributions</th>
+          <th scope="col" class="num">Aggregate max</th>
+          <th scope="col" class="num">Flagship cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (state of visible(); track state.slug) {
+          <tr>
+            <th scope="row">
+              <a [routerLink]="['/states', state.slug]">{{ state.name }}</a>
+              @if (state.morningstarGold) {
+                <span class="badge" title="Morningstar Gold, November 2025">Gold</span>
+              }
+            </th>
+            <td class="plans">
+              @for (plan of state.plans; track plan.name) {
+                <span class="plan"
+                  >{{ plan.name }} <em>{{ plan.type }}</em></span
+                >
+              }
+            </td>
+            <td>
+              <span
+                class="chip"
+                [class.chip--yes]="state.taxBenefit === 'credit'"
+                [class.chip--no]="state.taxBenefit === 'none'"
+                >{{ benefitLabel(state) }}</span
+              >
+              @if (state.anyPlanDeduction) {
+                <span class="chip chip--amber">Any state's plan</span>
+              }
+            </td>
+            <td>
+              @if (state.k12 === 'not-allowed') {
+                <span class="chip chip--no">Not allowed</span>
+              } @else {
+                <span class="muted small">Not listed as non-conforming</span>
+              }
+            </td>
+            <td class="num">
+              @if (state.maxContribution) {
+                {{ '$' + state.maxContribution.toLocaleString('en-US') }}
+              } @else {
+                <span class="muted">&mdash;</span>
+              }
+            </td>
+            <td class="num">
+              @if (state.flagship?.total) {
+                {{ '$' + state.flagship!.total!.toLocaleString('en-US') }}
+              } @else {
+                <span class="muted">&mdash;</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footnote">
+    Blank cells mean the manuscript does not state a figure for that jurisdiction &mdash; not that
+    the figure is zero. Aggregate maximums across all states range from $235,000 to over $621,000.
+    Check the state's own program description before acting.
+  </p>
+
+  <div class="sources">
+    <h2>Where these figures come from</h2>
+    <ul>
+      @for (source of sources(); track source.url) {
+        <li>
+          <a [href]="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

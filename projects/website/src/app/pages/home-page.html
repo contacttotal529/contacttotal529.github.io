@@ -1,0 +1,303 @@
+<section class="hero">
+  <div class="shell hero__grid">
+    <div>
+      <p class="eyebrow">Free &middot; Independent &middot; 30 years of 529</p>
+      <h1>More than half of parents say they <span>don't know enough</span> to open one.</h1>
+      <p class="hero__lede">
+        Let's fix that. Total529 explains every rule in plain language &mdash; what it means
+        federally, how your state changes it, and what it looks like for a real family.
+        {{ totalSections() }} rules, {{ totalExamples() }} worked examples, all
+        {{ states().length }} states.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--amber" routerLink="/guide">Start from the beginning &rarr;</a>
+        <a class="btn btn--outline" routerLink="/search">I have a specific question</a>
+      </div>
+      <p class="hero__trust">
+        No sign-up. Nothing sold. Reviewed for the {{ book()?.taxYear }} tax year.
+      </p>
+    </div>
+
+    <div class="starter">
+      <h2>Let's find your starting point</h2>
+      <p class="starter__q">Who are you saving for?</p>
+      @for (option of startingPoints; track option.label) {
+        <a class="starter__opt" [routerLink]="option.route">
+          <span class="starter__icon" aria-hidden="true">{{ option.icon }}</span>
+          {{ option.label }}
+          <span class="starter__go" aria-hidden="true">&rarr;</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="myths">
+  <div class="shell myths__grid">
+    @for (item of myths; track item.myth) {
+      <article class="myth">
+        <span class="myth__tag">Myth</span>
+        <h2>{{ item.myth }}</h2>
+        <p>{{ item.truth }}</p>
+        <a class="link-more" [routerLink]="item.route">Read the rule &rarr;</a>
+      </article>
+    }
+  </div>
+</section>
+
+<div class="shell">
+  <section class="band">
+    <div class="band__grid">
+      @for (figure of headlineFigures(); track figure.label) {
+        <div class="band__stat">
+          <p class="band__n">{{ figure.value }}</p>
+          <p class="band__l">{{ figure.label }}</p>
+          <p class="band__note">{{ figure.note }}</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>
+
+<section class="stack-lg">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">The guide</p>
+      <h2>Everything a 529 can do</h2>
+      <p>
+        Start anywhere. Each chapter breaks into short pages &mdash; one rule each, with the state
+        exceptions and a worked example attached.
+      </p>
+    </div>
+
+    <div class="pillars">
+      @for (chapter of chapters(); track chapter.id) {
+        <a class="pill" [routerLink]="['/guide', chapter.id]">
+          <span class="pill__icon" [class]="'pill__icon--' + tint(chapter.id)" aria-hidden="true">{{
+            icon(chapter.id)
+          }}</span>
+          <h3>{{ chapter.title }}</h3>
+          <p>{{ chapter.summary }}</p>
+          <span class="pill__meta">
+            @if (chapter.sectionCount) {
+              {{ chapter.sectionCount }} short pages
+            } @else {
+              Essay
+            }
+            @if (chapter.exampleCount) {
+              &middot; {{ chapter.exampleCount }} examples
+            }
+            &rarr;
+          </span>
+        </a>
+      }
+
+      <a class="pill pill--dark" routerLink="/states">
+        <span class="pill__icon pill__icon--dark" aria-hidden="true">🗺️</span>
+        <h3>Your state</h3>
+        <p>
+          All {{ states().length }} jurisdictions and {{ totalPlans() }} plans. Tax benefit,
+          K&ndash;12 conformity, contribution ceiling, and the official program description for
+          each.
+        </p>
+        <span class="pill__meta">Look yours up &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="shell">
+    <div class="section-head">
+      <p class="eyebrow">The figures that matter</p>
+      <h2>Six numbers most families are never told</h2>
+    </div>
+    <div class="numbers__grid">
+      @for (item of keyNumbers(); track item.label) {
+        <a class="number" [routerLink]="['/guide', item.link[0], item.link[1]]">
+          <span class="number__amount">{{ item.amount }}</span>
+          <span class="number__label">{{ item.label }}</span>
+          <span class="number__sub">{{ item.sub }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+@if (featured().length) {
+  <section class="stack-lg examples">
+    <div class="section-head">
+      <p class="eyebrow">Real situations</p>
+      <h2>{{ totalExamples() }} worked examples</h2>
+      <p>Every rule in the book arrives with a family attached to it.</p>
+    </div>
+    <div class="ex-rail">
+      @for (example of featured(); track example.name) {
+        <a class="ex" [routerLink]="example.route">
+          <span class="ex__tag" [class]="'ex__tag--' + example.tone">{{ example.tag }}</span>
+          <span class="ex__name">{{ example.name }}</span>
+          <p>{{ example.text }}</p>
+        </a>
+      }
+    </div>
+  </section>
+}
+
+<section class="checker">
+  <div class="shell checker__grid">
+    <div>
+      <p class="eyebrow">Qualified expenses</p>
+      <h2>"Wait &mdash; can I actually pay for that?"</h2>
+      <p class="muted">
+        The single most common question, and the one where mistakes cost real money. Each answer
+        links to the rule behind it and what to keep in your records.
+      </p>
+      <a class="btn btn--forest" routerLink="/reference" fragment="qualified"
+        >See the full list &rarr;</a
+      >
+    </div>
+
+    <ul class="answers">
+      @for (answer of quickAnswers(); track answer.item) {
+        <li [class]="'answer answer--' + answer.status">
+          <a [routerLink]="['/guide', answer.link[0], answer.link[1]]">
+            <span class="answer__mark" aria-hidden="true">
+              @switch (answer.status) {
+                @case ('qualified') {
+                  &#10003;
+                }
+                @case ('conditional') {
+                  ?
+                }
+                @default {
+                  &#10007;
+                }
+              }
+            </span>
+            <span class="answer__item">{{ answer.item }}</span>
+            <span class="answer__status">
+              @switch (answer.status) {
+                @case ('qualified') {
+                  Qualified
+                }
+                @case ('conditional') {
+                  Conditions apply
+                }
+                @default {
+                  Not qualified
+                }
+              }
+            </span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="stack-lg">
+  <div class="shell history__grid">
+    <div>
+      <p class="eyebrow">1996 &rarr; 2026</p>
+      <h2 class="history__title">Thirty years of getting better</h2>
+      <p class="muted">
+        The account your parents opened for tuition is not the account you have today. Congress has
+        expanded it roughly every four years &mdash; and almost nobody has been told.
+      </p>
+      <a class="btn btn--outline" routerLink="/history">Read the full history &rarr;</a>
+    </div>
+
+    <ol class="timeline">
+      @for (entry of timeline(); track entry.year) {
+        <li>
+          <span class="timeline__year">{{ entry.year }}</span>
+          <h3>{{ entry.title }}</h3>
+          <p>{{ entry.body }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<section class="finder">
+  <div class="shell finder__grid">
+    <div>
+      <p class="eyebrow eyebrow--on-dark">The state guide</p>
+      <h2>Nearly every plan is different.</h2>
+      <p class="finder__lede">
+        Every state but Wyoming sponsors at least one plan &mdash; {{ totalPlans() }} of them in
+        this edition. Twenty conform fully to the federal rules; the rest diverge somewhere.
+      </p>
+      <div class="finder__control">
+        <label class="visually-hidden" for="state-picker">Choose a state</label>
+        <select id="state-picker" class="field" (change)="goToState($event)">
+          <option value="">Select the state where you file taxes&hellip;</option>
+          @for (state of states(); track state.slug) {
+            <option [value]="state.slug">{{ state.name }}</option>
+          }
+        </select>
+        <a class="btn btn--amber" routerLink="/states">Compare all states</a>
+      </div>
+    </div>
+
+    <ul class="finder__facts">
+      <li>
+        <strong>13 states</strong> don't allow tax-free K&ndash;12 distributions. California adds a
+        2.5% penalty.
+      </li>
+      <li>
+        <strong>9 states</strong> extend their benefit to any state's plan, so you can shop
+        nationally without losing it.
+      </li>
+      <li>
+        <strong>4 states</strong> give a credit rather than a deduction &mdash; usually the better
+        of the two.
+      </li>
+      <li>
+        <strong>4 states</strong> offer nothing at all, which is exactly when shopping nationally
+        makes sense.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="stack-lg">
+  <div class="shell mission__grid">
+    <div>
+      <p class="eyebrow">Why this site exists</p>
+      <h2 class="mission__title">
+        The biggest obstacle to a 529 isn't the rules. It's not knowing they exist.
+      </h2>
+      <p class="muted">
+        Parent awareness remains the largest growth opportunity for 529 plans. This book is an
+        attempt to both advertise and clarify the numerous underutilized advantages Section 529
+        plans have for younger children, college students, parents, and grandparents or other
+        benevolent relatives and friends.
+      </p>
+      <a class="link-more" routerLink="/about">About the author and the book &rarr;</a>
+    </div>
+    <ul class="mission__stats">
+      @for (item of awareness(); track item.label) {
+        <li>
+          <span>{{ item.value }}</span>
+          <p>{{ item.label }}</p>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<div class="shell">
+  <section class="final">
+    <p class="eyebrow eyebrow--on-dark">Start where you are</p>
+    <h2>The best day was the week they got a Social Security number.</h2>
+    <p>
+      The second-best day is today. Starting at birth instead of kindergarten is worth roughly
+      $23,000 by age 19 on the same $1,000 a year.
+    </p>
+    <div class="final__cta">
+      <a class="btn btn--amber" routerLink="/guide/basics">How an account works &rarr;</a>
+      <a class="btn btn--white" routerLink="/read">Read the whole book</a>
+    </div>
+  </section>
+</div>

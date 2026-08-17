@@ -1,0 +1,239 @@
+@if (state(); as s) {
+  <div class="shell">
+    <header class="page-banner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a routerLink="/states">The state guide</a>
+        <span aria-hidden="true">/</span>
+        <span>{{ s.name }}</span>
+      </nav>
+      <h1>{{ s.name }}</h1>
+      <p class="page-banner__meta">
+        {{ s.plans.length }} plan{{ s.plans.length === 1 ? '' : 's' }} in this edition
+        @if (s.morningstarGold) {
+          &middot; <span class="gold">Morningstar Gold, November 2025</span>
+        }
+      </p>
+    </header>
+  </div>
+
+  <div class="shell layout">
+    <div class="body">
+      <section class="facts">
+        <h2>At a glance</h2>
+        <dl>
+          <div>
+            <dt>Contribution benefit</dt>
+            <dd>
+              {{ benefitLabel() }}
+              @if (s.anyPlanDeduction) {
+                <span class="chip chip--amber">Applies to any state's plan</span>
+              }
+              @if (s.taxBenefitDetail) {
+                <p>{{ s.taxBenefitDetail }}</p>
+              }
+            </dd>
+          </div>
+
+          <div>
+            <dt>K–12 distributions</dt>
+            <dd>
+              @if (s.k12 === 'not-allowed') {
+                <span class="chip chip--no">Not allowed</span>
+                <p>
+                  A K–12 withdrawal may be tax-free federally but taxable here. See
+                  <a routerLink="/guide/k-12/state-k12-conformity">the conformity rule</a>.
+                </p>
+              } @else {
+                <span class="chip chip--yes">Not listed as non-conforming</span>
+                <p>
+                  {{ s.name }} is not among the thirteen states the manuscript lists as disallowing
+                  K–12 distributions. Confirm against the program description below.
+                </p>
+              }
+            </dd>
+          </div>
+
+          <div>
+            <dt>Aggregate contribution maximum</dt>
+            <dd>
+              @if (s.maxContribution) {
+                <strong class="figure">{{
+                  '$' + s.maxContribution.toLocaleString('en-US')
+                }}</strong>
+                @if (s.maxContributionNote) {
+                  <p>{{ s.maxContributionNote }}</p>
+                }
+              } @else {
+                <p class="muted">
+                  Not stated in this edition. Nationally the range runs from $235,000 to over
+                  $621,000 — see the program description.
+                </p>
+              }
+            </dd>
+          </div>
+
+          @if (s.protection) {
+            <div>
+              <dt>Creditor &amp; bankruptcy protection</dt>
+              <dd>
+                <p>{{ s.protection }}</p>
+              </dd>
+            </div>
+          }
+
+          @if (s.recapture.length) {
+            <div>
+              <dt>Recapture of state tax benefits</dt>
+              <dd>
+                <div class="chiprow">
+                  @for (item of s.recapture; track item) {
+                    <span class="chip chip--no">{{ item }}</span>
+                  }
+                </div>
+                <p>
+                  Previously deducted or credited amounts may be added back to state taxable income
+                  for these distributions.
+                </p>
+              </dd>
+            </div>
+          }
+        </dl>
+      </section>
+
+      <section class="plans">
+        <h2>Plans</h2>
+        @for (plan of s.plans; track plan.name) {
+          <article class="plan">
+            <div>
+              <h3>{{ plan.name }}</h3>
+              <p class="plan__type">{{ plan.type }}</p>
+              @if (plan.note) {
+                <p class="plan__note">{{ plan.note }}</p>
+              }
+            </div>
+            @if (plan.url) {
+              <a
+                class="btn btn--outline"
+                [href]="plan.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Program description &#8599;</a
+              >
+            }
+          </article>
+        }
+      </section>
+
+      @if (s.notes.length) {
+        <section class="notes">
+          <h2>What the book says about {{ s.name }}</h2>
+          <ul>
+            @for (note of s.notes; track note) {
+              <li>{{ note }}</li>
+            }
+          </ul>
+        </section>
+      }
+
+      @if (cost(); as c) {
+        <section class="cost">
+          <h2>Flagship public university</h2>
+          <p class="cost__school">{{ c.school }}</p>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Tuition &amp; fees</th>
+                  <th scope="col">Room</th>
+                  <th scope="col">Board</th>
+                  <th scope="col">Books</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">vs. national</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num">{{ '$' + (c.tuition ?? 0).toLocaleString('en-US') }}</td>
+                  <td class="num">{{ '$' + (c.room ?? 0).toLocaleString('en-US') }}</td>
+                  <td class="num">{{ '$' + (c.board ?? 0).toLocaleString('en-US') }}</td>
+                  <td class="num">{{ '$' + (c.books ?? 0).toLocaleString('en-US') }}</td>
+                  <td class="num">
+                    <strong>{{ '$' + (c.total ?? 0).toLocaleString('en-US') }}</strong>
+                  </td>
+                  <td class="num" [class.over]="(c.vsNational ?? 0) > 0">
+                    {{ (c.vsNational ?? 0) > 0 ? '+' : '' }}{{ c.vsNational }}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          @if (national(); as n) {
+            <p class="cost__note">
+              National average across all 50 states:
+              {{ '$' + n.total.toLocaleString('en-US') }} per year, in-state, 2025–26.
+              <a routerLink="/costs">Compare every state &rarr;</a>
+            </p>
+          }
+        </section>
+      }
+
+      <nav class="pager" aria-label="State navigation">
+        @if (neighbours().prev; as prev) {
+          <a class="pager__link" [routerLink]="['/states', prev.slug]"
+            ><span>&larr; Previous</span><strong>{{ prev.name }}</strong></a
+          >
+        } @else {
+          <span></span>
+        }
+        @if (neighbours().next; as next) {
+          <a class="pager__link pager__link--next" [routerLink]="['/states', next.slug]"
+            ><span>Next &rarr;</span><strong>{{ next.name }}</strong></a
+          >
+        }
+      </nav>
+
+      <p class="page-disclaimer">{{ disclaimer() }}</p>
+    </div>
+
+    <aside class="rail">
+      @if (memberships().length) {
+        <div class="rail__block">
+          <h2>{{ s.name }} appears on</h2>
+          @for (group of memberships(); track group.label) {
+            <p class="rail__group">{{ group.label }}</p>
+          }
+        </div>
+      }
+
+      <div class="rail__block">
+        <h2>Rules that turn on your state</h2>
+        <a class="rail__link" routerLink="/guide/taxes/which-state-plan"
+          >In which state plan should I open an account?</a
+        >
+        <a class="rail__link" routerLink="/guide/taxes/deduction-or-credit"
+          >Is a deduction or a credit better?</a
+        >
+        <a class="rail__link" routerLink="/guide/k-12/state-k12-conformity"
+          >Not all states allow K–12 distributions</a
+        >
+        <a class="rail__link" routerLink="/guide/estate-planning/bankruptcy-protection"
+          >Bankruptcy and creditor protection</a
+        >
+        <a class="rail__link" routerLink="/guide/taxes/rollovers">Account rollovers</a>
+      </div>
+
+      <div class="rail__block rail__box">
+        <p class="eyebrow">A caution</p>
+        <p>
+          Fields left blank mean this edition does not state a figure for {{ s.name }} — not that
+          the figure is zero. The official program description is authoritative.
+        </p>
+      </div>
+    </aside>
+  </div>
+} @else {
+  <div class="shell stack-lg">
+    <h1>State not found</h1>
+    <p><a class="link-more" routerLink="/states">Back to the state guide &rarr;</a></p>
+  </div>
+}

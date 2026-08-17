@@ -1,0 +1,148 @@
+export type BlockType = 'prose' | 'example' | 'list' | 'note' | 'decision-tree' | 'table' | 'links';
+
+export interface Block {
+  type: BlockType;
+  paragraphs?: string[];
+  items?: string[];
+  lead?: string | null;
+  label?: string | null;
+  header?: string[];
+  rows?: string[][];
+  links: string[];
+}
+
+export interface Section {
+  id: string;
+  chapterId: string;
+  chapterTitle: string;
+  title: string;
+  blocks: Block[];
+  summary: string | null;
+  exampleCount: number;
+  text: string;
+}
+
+export interface Chapter {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  heading: string;
+  intro: Block[];
+  sections: Section[];
+  summary: string | null;
+  text: string;
+  sectionCount: number;
+  exampleCount: number;
+}
+
+export interface FamilyAppendix {
+  id: string;
+  title: string;
+  heading: string;
+  lead: string[];
+  items: string[];
+}
+
+export interface Book {
+  title: string;
+  subtitle: string;
+  edition: string;
+  author: string;
+  taxYear: number;
+  chapters: Chapter[];
+  appendices: {
+    plans: { id: string; title: string };
+    costs: { id: string; title: string };
+    family: FamilyAppendix;
+  };
+}
+
+export type TaxBenefit = 'credit' | 'deduction' | 'none' | 'unstated';
+export type K12Status = 'not-allowed' | 'not-listed' | 'unstated';
+
+export interface Plan {
+  name: string;
+  type: 'Direct-Sold' | 'Advisor-Sold' | 'Prepaid Tuition';
+  url: string | null;
+  note: string | null;
+}
+
+export interface StateEntry {
+  name: string;
+  slug: string;
+  anyPlanDeduction: boolean;
+  plans: Plan[];
+  taxBenefit: TaxBenefit;
+  taxBenefitDetail: string | null;
+  k12: K12Status;
+  maxContribution: number | null;
+  maxContributionNote: string | null;
+  morningstarGold: boolean;
+  protection: string | null;
+  recapture: string[];
+  notes: string[];
+  flagship: { school: string; total: number | null; vsNational: number | null } | null;
+}
+
+export interface StateGroup {
+  label: string;
+  detail: string;
+  states: string[];
+}
+
+export interface StatesDoc {
+  states: StateEntry[];
+  groups: Record<string, StateGroup>;
+  sources: { label: string; url: string }[];
+}
+
+export interface CostRow {
+  state: string;
+  slug: string;
+  school: string;
+  tuition: number | null;
+  room: number | null;
+  board: number | null;
+  books: number | null;
+  total: number | null;
+  vsNational: number | null;
+}
+
+export interface CostsDoc {
+  id: string;
+  title: string;
+  heading: string;
+  rows: CostRow[];
+  national: { tuition: number; room: number; board: number; books: number; total: number } | null;
+}
+
+export interface SiteDoc {
+  figures: {
+    headline: { value: string; label: string; note: string }[];
+    keyNumbers: { amount: string; label: string; sub: string; link: [string, string] }[];
+    awareness: { value: string; label: string }[];
+  };
+  timeline: { year: string; title: string; body: string }[];
+  comparison: {
+    columns: string[];
+    rows: { label: string; values: string[]; best: number }[];
+    footnote: string;
+  };
+  quickAnswers: {
+    item: string;
+    status: 'qualified' | 'conditional' | 'not-qualified';
+    detail: string;
+    link: [string, string];
+  }[];
+  disclaimer: string;
+}
+
+export interface SearchHit {
+  kind: 'section' | 'chapter' | 'state';
+  title: string;
+  context: string;
+  route: string[];
+  fragment?: string;
+  snippet: string;
+  score: number;
+}
