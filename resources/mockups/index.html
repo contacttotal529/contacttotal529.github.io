@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Total529 — Design Directions</title>
+<style>
+  :root{
+    --ink:#1A1A1F;--grey:#6E6E78;--line:#E2DED6;--paper:#F7F5F1;--white:#fff;
+    --sans:system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.022em}
+  a{color:inherit}
+  header{padding:70px 0 44px;border-bottom:1px solid var(--line)}
+  .lbl{font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+  header h1{font-family:var(--serif);font-size:52px;font-weight:400;margin:16px 0 18px}
+  header p{max-width:64ch;color:#4A4A55;font-size:19px;margin:0}
+  section{padding:56px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+  .card:hover{box-shadow:0 14px 34px rgba(0,0,0,.09)}
+  .bar{height:72px;display:flex}
+  .bar i{flex:1}
+  .card .body{padding:24px 26px 26px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-family:var(--serif);font-size:25px;font-weight:400;margin-bottom:6px}
+  .card .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:14px}
+  .card p{margin:0 0 16px;font-size:16px;color:#4A4A55}
+  .card dl{margin:0 0 20px;font-size:14.5px}
+  .card dt{font-weight:700;color:var(--ink);margin-top:10px}
+  .card dd{margin:2px 0 0;color:var(--grey)}
+  .card .go{margin-top:auto;font-weight:700;font-size:15px}
+  .rec{background:#FFF9E8;border:1px solid #EBDBAA;border-radius:14px;padding:26px 30px;margin-top:34px}
+  .rec h3{font-family:var(--serif);font-size:23px;font-weight:400;margin-bottom:10px}
+  .rec p{margin:0;max-width:80ch;color:#4A4A55}
+  ul.files{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+  ul.files li{border-bottom:1px solid var(--line);padding:15px 0;display:flex;gap:18px;align-items:baseline}
+  ul.files code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:var(--white);border:1px solid var(--line);padding:3px 9px;border-radius:5px;flex:0 0 auto}
+  ul.files span{color:#4A4A55;font-size:16px}
+  footer{padding:40px 0 60px;color:var(--grey);font-size:14px;border-top:1px solid var(--line)}
+  @media(max-width:900px){.cards{grid-template-columns:1fr}header h1{font-size:36px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="lbl">Total529.com · Client review</div>
+    <h1>Three design directions</h1>
+    <p>Each mockup is a complete home page plus a specimen of the interior "rule page" template — the layout roughly eighty pages will share. Copy is drawn from the actual manuscript, not placeholder text, so the client can judge the design against real content. The directions differ in layout and posture, not only in palette.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="cards">
+
+      <a class="card" href="01-heritage.html">
+        <div class="bar"><i style="background:#071528"></i><i style="background:#0B1F3A"></i><i style="background:#B0812A"></i><i style="background:#D6A845"></i><i style="background:#F8F5EE"></i></div>
+        <div class="body">
+          <h3>A · Heritage</h3>
+          <div class="tag">Navy · Brass · Bone</div>
+          <p>Serif headlines on a formal grid, hairline rules, a numbered chapter structure. Reads like a private bank or a university endowment: permanent, fiduciary, generational.</p>
+          <dl>
+            <dt>Best for</dt><dd>Grandparents, high-net-worth families, financial advisors. Leans into the estate-planning material and the 30th anniversary.</dd>
+            <dt>Risk</dt><dd>Can feel exclusive to a 32-year-old opening a first account.</dd>
+          </dl>
+          <div class="go">Open mockup →</div>
+        </div>
+      </a>
+
+      <a class="card" href="02-evergreen.html">
+        <div class="bar"><i style="background:#0B2C1F"></i><i style="background:#12432F"></i><i style="background:#2E6B4C"></i><i style="background:#D9862B"></i><i style="background:#F6F1E6"></i></div>
+        <div class="body">
+          <h3>B · Evergreen</h3>
+          <div class="tag">Forest · Sand · Amber</div>
+          <p>Rounded sans, soft cards, generous whitespace, an onboarding quiz in the hero. Growth and family without the dollar-bill-green cliché. Myths, examples, and tools lead.</p>
+          <dl>
+            <dt>Best for</dt><dd>Closing the 54% awareness gap — parents who find finance intimidating.</dd>
+            <dt>Risk</dt><dd>Softness must be balanced with authority signals or it reads as a blog.</dd>
+          </dl>
+          <div class="go">Open mockup →</div>
+        </div>
+      </a>
+
+      <a class="card" href="03-almanac.html">
+        <div class="bar"><i style="background:#17171B"></i><i style="background:#C0392B"></i><i style="background:#2E4A63"></i><i style="background:#F2EDE4"></i><i style="background:#FBF8F3"></i></div>
+        <div class="body">
+          <h3>C · Almanac</h3>
+          <div class="tag">Ink · Vermilion · Slate</div>
+          <p>An editorial reference handbook. Numbered rules, dense typography, marginalia, real data tables. Fastest to scan and the cheapest system to scale across 150 pages.</p>
+          <dl>
+            <dt>Best for</dt><dd>Becoming <em>the</em> 529 reference the community links to and searches.</dd>
+            <dt>Risk</dt><dd>Least "designed" at first glance — sells on use, not on a screenshot.</dd>
+          </dl>
+          <div class="go">Open mockup →</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="rec">
+      <h3>Recommendation</h3>
+      <p><strong>Almanac for structure, Evergreen for warmth.</strong> The Almanac's typographic system and information density are the right bones for 150 rule pages that people arrive at from search. Evergreen's palette, example cards, and onboarding are what make the site inviting to the audience that doesn't yet know 529s exist. A hybrid — Almanac layout, Evergreen palette — is a legitimate fourth option worth putting to the client alongside these three.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:30px;margin-bottom:22px">What's in this folder</h2>
+    <ul class="files">
+      <li><code>site-plan.md</code><span>Information architecture: audiences, the content model derived from the manuscript's repeating structure, full sitemap, seven page templates, chapter-to-URL mapping, and the copy still to be written.</span></li>
+      <li><code>01-heritage.html</code><span>Direction A — home page and rule-page specimen.</span></li>
+      <li><code>02-evergreen.html</code><span>Direction B — home page, example rail, qualified-expense checker, history timeline.</span></li>
+      <li><code>03-almanac.html</code><span>Direction C — home page, index of rules, rule-page specimen, state table, comparison grid.</span></li>
+      <li><code>index.html</code><span>This page.</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Mockups are static HTML with no external dependencies — open any file directly in a browser, or present this page and click through. Content drawn from <em>Understanding, Using, and Maximizing 529 Accounts</em>, 30th Anniversary Edition, C. Richard Hopkins, MD, CRPC.
+  </div>
+</footer>
+
+</body>
+</html>
