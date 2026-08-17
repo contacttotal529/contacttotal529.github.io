@@ -10,16 +10,16 @@ import type {
   StatesDoc,
 } from './content.models';
 
-/** Resolve against <base href> so deep routes still find the JSON. */
-function asset(file: string): string {
-  return new URL(`content/${file}`, document.baseURI).toString();
-}
-
-async function fetchJson<T>(file: string): Promise<T> {
-  const response = await fetch(asset(file));
-  if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
-  return (await response.json()) as T;
-}
+// The manuscript is imported rather than fetched: prerendering runs this app in Node, where
+// there is no origin to fetch from. Dynamic imports keep it out of the initial bundle, so the
+// browser still pays for it only once, as a lazy chunk.
+const load = {
+  book: () => import('../../generated/book.json').then((m) => m.default as unknown as Book),
+  states: () =>
+    import('../../generated/states.json').then((m) => m.default as unknown as StatesDoc),
+  costs: () => import('../../generated/costs.json').then((m) => m.default as unknown as CostsDoc),
+  site: () => import('../../generated/site.json').then((m) => m.default as unknown as SiteDoc),
+};
 
 interface IndexEntry {
   hit: Omit<SearchHit, 'score' | 'snippet'>;
@@ -54,11 +54,13 @@ export class ContentService {
   readonly totalPlans = computed(() => this.states().reduce((n, s) => n + s.plans.length, 0));
 
   async load(): Promise<void> {
+    if (this.bookSignal()) return;
+
     const [book, states, costs, site] = await Promise.all([
-      fetchJson<Book>('book.json'),
-      fetchJson<StatesDoc>('states.json'),
-      fetchJson<CostsDoc>('costs.json'),
-      fetchJson<SiteDoc>('site.json'),
+      load.book(),
+      load.states(),
+      load.costs(),
+      load.site(),
     ]);
 
     this.bookSignal.set(book);

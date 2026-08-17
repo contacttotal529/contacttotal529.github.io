@@ -1,4 +1,6 @@
 // Turns the flat manuscript (resources/full-document.md) into the JSON the site renders.
+// Output lands in src/generated so it can be imported as a module — the prerender step runs
+// the app in Node, where there is no server to fetch assets from.
 // The manuscript stays the single source of truth for prose; curated.json holds only the
 // facts that the manuscript states in prose but that the site needs as structured data.
 //
@@ -14,7 +16,7 @@ import { outline } from './book-outline.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE = join(root, 'resources', 'full-document.md');
-const OUT_DIR = join(root, 'projects', 'website', 'public', 'content');
+const OUT_DIR = join(root, 'projects', 'website', 'src', 'generated');
 
 const PLAN_TYPES = ['Direct-Sold', 'Advisor-Sold', 'Prepaid Tuition'];
 
@@ -298,11 +300,18 @@ const BOILERPLATE_RE = /^(no statement or example|this book will give some examp
  * Skips the repeated disclaimer and stub lines like "You need to know:".
  */
 function summarise(blocks) {
-  const candidates = blocks
-    .filter((b) => b.type === 'prose' && b.paragraphs?.length)
-    .flatMap((b) => b.paragraphs);
+  // Prose first, then the lead-in and items of a list, then a decision tree or worked example.
+  // Seven rules open straight into a list or an example and would otherwise have no summary —
+  // and the summary is what becomes the page's meta description.
+  const tiers = [
+    blocks.filter((b) => b.type === 'prose').flatMap((b) => b.paragraphs ?? []),
+    blocks.flatMap((b) => (b.type === 'list' ? [b.lead, ...b.items] : [])),
+    blocks.flatMap((b) => (b.type === 'decision-tree' ? b.items : [])),
+    blocks.filter((b) => b.type === 'example').flatMap((b) => b.paragraphs ?? []),
+  ];
 
-  const text = candidates.find((p) => p.length >= 60 && !BOILERPLATE_RE.test(p));
+  const usable = (p) => p && p.length >= 60 && !BOILERPLATE_RE.test(p);
+  const text = tiers.flatMap((tier) => tier.filter(usable))[0];
   if (!text) return null;
   const match = text.match(/^.{40,220}?[.!?](\s|$)/);
   return (match ? match[0] : text.slice(0, 200)).trim();
@@ -558,3 +567,47 @@ console.log(
 );
 console.log(`content: ${appendices.family.items.length} family-member entries`);
 for (const w of warnings) console.warn(`  warning: ${w}`);
+
+// ---------------------------------------------------------------- SEO assets
+
+// Prerendering gives every route a real HTML file; the sitemap tells crawlers they exist.
+// Generated here so a rule added to the manuscript is listed without anyone remembering to.
+const ORIGIN = 'https://total529.com';
+const STATIC_ROUTES = ['', 'guide', 'read', 'states', 'costs', 'history', 'reference', 'about'];
+
+const urls = [
+  ...STATIC_ROUTES.map((path) => ({ path, priority: path === '' ? '1.0' : '0.8' })),
+  ...chapters.map((c) => ({ path: `guide/${c.id}`, priority: '0.7' })),
+  ...chapters.flatMap((c) =>
+    c.sections.map((s) => ({ path: `guide/${c.id}/${s.id}`, priority: '0.9' })),
+  ),
+  ...appendices.plans.states.map((s) => ({ path: `states/${s.slug}`, priority: '0.6' })),
+];
+
+const today = new Date().toISOString().slice(0, 10);
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...urls.map(
+    ({ path, priority }) =>
+      `  <url><loc>${ORIGIN}/${path}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`,
+  ),
+  '</urlset>',
+  '',
+].join('\n');
+
+const robots = [
+  'User-agent: *',
+  'Allow: /',
+  '',
+  '# Search results are a lookup convenience, not content worth indexing.',
+  'Disallow: /search',
+  '',
+  `Sitemap: ${ORIGIN}/sitemap.xml`,
+  '',
+].join('\n');
+
+const PUBLIC_DIR = join(root, 'projects', 'website', 'public');
+writeFileSync(join(PUBLIC_DIR, 'sitemap.xml'), sitemap);
+writeFileSync(join(PUBLIC_DIR, 'robots.txt'), robots);
+console.log(`content: sitemap lists ${urls.length} URLs`);

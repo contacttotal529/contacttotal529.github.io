@@ -30,7 +30,9 @@
                 "input": "projects/website/public"
               }
             ],
-            "styles": ["projects/website/src/styles.scss"]
+            "styles": ["projects/website/src/styles.scss"],
+            "server": "projects/website/src/main.server.ts",
+            "outputMode": "static"
           },
           "configurations": {
             "production": {

@@ -1,3 +1,4 @@
 resources/full-document.md
-projects/website/public/content/
+projects/website/src/generated/
 dist/
+projects/website/public/sitemap.xml

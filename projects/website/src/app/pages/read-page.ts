@@ -1,15 +1,16 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
+  afterNextRender,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 import { BlockRenderer } from '../shared/block-renderer';
 
 @Component({
@@ -19,7 +20,7 @@ import { BlockRenderer } from '../shared/block-renderer';
   templateUrl: './read-page.html',
   styleUrl: './read-page.scss',
 })
-export class ReadPage implements AfterViewInit, OnDestroy {
+export class ReadPage implements OnDestroy {
   private readonly content = inject(ContentService);
   private readonly host = viewChild.required<ElementRef<HTMLElement>>('doc');
   private observer?: IntersectionObserver;
@@ -50,7 +51,16 @@ export class ReadPage implements AfterViewInit, OnDestroy {
   ];
   readonly disclaimerText = this.content.site()?.disclaimer ?? '';
 
-  ngAfterViewInit(): void {
+  constructor() {
+    inject(Seo).set({
+      title: 'Read the book — Total529',
+      description:
+        'The complete text of Understanding, Using, and Maximizing 529 Accounts, 30th anniversary edition, by C. Richard Hopkins, MD, CRPC.',
+    });
+    afterNextRender(() => this.watchHeadings());
+  }
+
+  private watchHeadings(): void {
     const targets = this.host().nativeElement.querySelectorAll<HTMLElement>('[data-chapter]');
     if (!targets.length) return;
 

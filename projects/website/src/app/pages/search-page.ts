@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { Seo } from '../core/seo.service';
 
 @Component({
   selector: 'app-search-page',
@@ -180,11 +181,21 @@ import { ContentService } from '../core/content.service';
   `,
 })
 export class SearchPage {
+  constructor() {
+    inject(Seo).set({
+      title: 'Search — Total529',
+      description: null,
+    });
+  }
+
   private readonly content = inject(ContentService);
   private readonly router = inject(Router);
 
-  /** Bound from ?q= by withComponentInputBinding, mirrored into a local signal for typing. */
-  readonly query = signal(new URLSearchParams(location.search).get('q') ?? '');
+  /**
+   * Seeded from ?q= through the router rather than `location`, which does not exist during
+   * prerendering, then owned locally so typing does not push a history entry per keystroke.
+   */
+  readonly query = signal(inject(ActivatedRoute).snapshot.queryParamMap.get('q') ?? '');
 
   readonly suggestions = [
     'tutor',

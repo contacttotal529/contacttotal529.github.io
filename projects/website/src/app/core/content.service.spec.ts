@@ -1,46 +1,37 @@
 import { TestBed } from '@angular/core/testing';
 import { ContentService } from './content.service';
 
-import book from '../../../public/content/book.json';
-import states from '../../../public/content/states.json';
-import costs from '../../../public/content/costs.json';
-import site from '../../../public/content/site.json';
-
-const FIXTURES: Record<string, unknown> = {
-  'book.json': book,
-  'states.json': states,
-  'costs.json': costs,
-  'site.json': site,
-};
+import book from '../../generated/book.json';
+import states from '../../generated/states.json';
+import costs from '../../generated/costs.json';
+import site from '../../generated/site.json';
 
 /**
  * Runs against the real output of tools/build-content.mjs rather than a hand-written fixture,
  * so a drift in the manuscript parser fails here instead of rendering blanks in production.
- * There is no server under test, so fetch is served from the generated files on disk.
  */
 describe('ContentService', () => {
   let service: ContentService;
-  const realFetch = globalThis.fetch;
 
   beforeAll(async () => {
-    globalThis.fetch = ((input: RequestInfo | URL) => {
-      const name = String(input).split('/').pop() ?? '';
-      const body = FIXTURES[name];
-      if (!body) return Promise.reject(new Error(`Unexpected fetch: ${input}`));
-      return Promise.resolve({
-        ok: true,
-        status: 200,
-        json: () => Promise.resolve(body),
-      } as Response);
-    }) as typeof fetch;
-
     TestBed.configureTestingModule({});
     service = TestBed.inject(ContentService);
     await service.load();
   });
 
-  afterAll(() => {
-    globalThis.fetch = realFetch;
+  it('loads the same content the prerender step imports', () => {
+    expect(service.book()?.chapters.length).toBe(book.chapters.length);
+    expect(service.states().length).toBe(states.states.length);
+    expect(service.costs()?.rows.length).toBe(costs.rows.length);
+    expect(service.site()?.timeline.length).toBe(site.timeline.length);
+  });
+
+  it('gives every rule a summary for its meta description', () => {
+    const missing = service
+      .chapters()
+      .flatMap((c) => c.sections)
+      .filter((s) => !s.summary);
+    expect(missing).toEqual([]);
   });
 
   it('loads every chapter with rules and examples', () => {
