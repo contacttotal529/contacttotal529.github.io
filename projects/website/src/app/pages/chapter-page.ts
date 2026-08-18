@@ -75,10 +75,10 @@ import { BlockRenderer } from '../shared/block-renderer';
           <div class="rail__box">
             <p class="eyebrow">Reading the book</p>
             <p>
-              Every chapter here is the manuscript's text, unedited. To read it end to end instead,
-              open the full book.
+              Every chapter here is the author's text, unedited. The guide lists all of them, with
+              each rule broken out onto its own page.
             </p>
-            <a class="link-more" routerLink="/read">Read the full book &rarr;</a>
+            <a class="link-more" routerLink="/guide">Every chapter and rule &rarr;</a>
           </div>
         </aside>
       </div>

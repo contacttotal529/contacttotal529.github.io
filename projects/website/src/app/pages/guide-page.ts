@@ -18,7 +18,7 @@ import { Seo } from '../core/seo.service';
           its own page; each chapter reads straight through.
         </p>
         <div class="page-banner__cta">
-          <a class="btn btn--amber" routerLink="/read">Read the whole book on one page</a>
+          <a class="btn btn--amber" routerLink="/guide/basics">Start with the basics</a>
           <a class="btn btn--white" routerLink="/states">Look up your state</a>
         </div>
       </header>

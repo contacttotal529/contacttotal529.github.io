@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing.",
+  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing.",
   "disclaimer": "No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice.",
   "figures": {
     "headline": [

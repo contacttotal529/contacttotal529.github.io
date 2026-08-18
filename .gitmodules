@@ -1,0 +1,3 @@
+[submodule "resources/manuscript"]
+	path = resources/manuscript
+	url = git@github.com:contacttotal529/total529resources.git

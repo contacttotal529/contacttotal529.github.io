@@ -18,10 +18,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/section-page').then((m) => m.SectionPage),
   },
   {
-    path: 'read',
-    loadComponent: () => import('./pages/read-page').then((m) => m.ReadPage),
-  },
-  {
     path: 'states',
     loadComponent: () => import('./pages/states-page').then((m) => m.StatesPage),
   },

@@ -21,10 +21,9 @@ import { Seo } from '../core/seo.service';
         <div>
           <h2>What this site is</h2>
           <p>
-            Total529 is the full text of <em>{{ book()?.subtitle }}</em> published as a website.
-            Every chapter, rule, example, and appendix in the book is here, unedited &mdash;
-            reorganised so that a rule you need at 11pm is one search away instead of forty pages
-            in.
+            Total529 publishes <em>{{ book()?.subtitle }}</em> as a website, chapter by chapter.
+            Every rule, worked example and appendix has its own page, unedited &mdash; reorganised
+            so that a rule you need at 11pm is one search away instead of forty pages in.
           </p>
           <p>
             The book is an attempt to both advertise and clarify the numerous underutilized
@@ -92,8 +91,8 @@ import { Seo } from '../core/seo.service';
 
           <div class="side__card side__card--amber">
             <p class="eyebrow">Start reading</p>
-            <a class="btn btn--forest" routerLink="/read">The full book</a>
-            <a class="btn btn--outline" routerLink="/guide">Chapter by chapter</a>
+            <a class="btn btn--forest" routerLink="/guide">Chapter by chapter</a>
+            <a class="btn btn--outline" routerLink="/states">Look up your state</a>
           </div>
         </aside>
       </div>

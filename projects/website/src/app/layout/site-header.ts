@@ -210,7 +210,6 @@ export class SiteHeader {
 
   readonly links = [
     { path: '/guide', label: 'The guide' },
-    { path: '/read', label: 'Read the book' },
     { path: '/states', label: 'Your state' },
     { path: '/costs', label: 'College costs' },
     { path: '/history', label: 'History' },

@@ -19,7 +19,7 @@ import { ContentService } from '../core/content.service';
               A free educational resource built from <em>{{ book()?.subtitle }}</em
               >, {{ book()?.edition }}, by {{ book()?.author }}.
             </p>
-            <a class="link-more" routerLink="/read">Read the full book &rarr;</a>
+            <a class="link-more" routerLink="/guide">Read the guide &rarr;</a>
           </div>
 
           <div>

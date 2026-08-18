@@ -21,6 +21,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The manuscript lives in a private repo, so the default GITHUB_TOKEN cannot reach it.
+      # A read-only deploy key on total529resources, held here as MANUSCRIPT_DEPLOY_KEY, is
+      # what the content build reads its source from.
+      - name: Check out the manuscript submodule
+        env:
+          GIT_SSH_COMMAND: ssh -i ~/.ssh/manuscript -o IdentitiesOnly=yes
+        run: |
+          install -m 700 -d ~/.ssh
+          install -m 600 /dev/stdin ~/.ssh/manuscript <<< "${{ secrets.MANUSCRIPT_DEPLOY_KEY }}"
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+          git submodule update --init --depth 1 resources/manuscript
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22

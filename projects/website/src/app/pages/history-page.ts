@@ -40,7 +40,7 @@ import { BlockRenderer } from '../shared/block-renderer';
           <h2 class="essay__title">A brief history of 529 plans</h2>
           <app-blocks [blocks]="ch.intro" />
           <p class="essay__more">
-            <a class="link-more" routerLink="/read">Read the whole book &rarr;</a>
+            <a class="link-more" routerLink="/guide">Read the whole guide &rarr;</a>
           </p>
         </div>
       </section>

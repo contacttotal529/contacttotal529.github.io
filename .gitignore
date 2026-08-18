@@ -48,7 +48,7 @@ Thumbs.db
 .env.*
 !.env.example
 
-# Generated from resources/full-document.md by tools/build-content.mjs
+# Generated from the manuscript submodule by tools/build-content.mjs
 /projects/website/src/generated
 /projects/website/public/sitemap.xml
 /projects/website/public/robots.txt

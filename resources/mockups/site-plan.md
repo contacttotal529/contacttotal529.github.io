@@ -1,6 +1,6 @@
 # Total529.com — Site Plan
 
-_Draft v1 · derived from `resources/full-document.md` (529 30th Anniversary Edition, C. Richard Hopkins, MD, CRPC)_
+_Draft v1 · derived from `resources/manuscript/full-document.md` (529 30th Anniversary Edition, C. Richard Hopkins, MD, CRPC)_
 
 ---
 
