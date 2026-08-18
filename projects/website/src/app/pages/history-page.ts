@@ -38,7 +38,7 @@ import { BlockRenderer } from '../shared/block-renderer';
         <div class="shell shell--narrow">
           <p class="eyebrow">The full chapter</p>
           <h2 class="essay__title">A brief history of 529 plans</h2>
-          <app-blocks [blocks]="ch.intro" />
+          <app-blocks [blocks]="intro()" />
           <p class="essay__more">
             <a class="link-more" routerLink="/guide">Read the whole guide &rarr;</a>
           </p>
@@ -82,4 +82,5 @@ export class HistoryPage {
   private readonly content = inject(ContentService);
   readonly timeline = computed(() => this.content.site()?.timeline ?? []);
   readonly chapter = computed(() => this.content.chapter('history'));
+  readonly intro = computed(() => this.content.chapterIntro('history'));
 }

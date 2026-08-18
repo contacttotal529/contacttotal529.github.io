@@ -1,30 +1,38 @@
 import { Injectable, computed, signal } from '@angular/core';
+import { chapterLoaders } from '../../generated/chapter-loaders';
 import type {
+  Block,
   Book,
   Chapter,
+  ChapterContent,
   CostsDoc,
+  SearchEntry,
   SearchHit,
+  SearchIndex,
   Section,
   SiteDoc,
   StateEntry,
   StatesDoc,
 } from './content.models';
 
-// The manuscript is imported rather than fetched: prerendering runs this app in Node, where
-// there is no origin to fetch from. Dynamic imports keep it out of the initial bundle, so the
-// browser still pays for it only once, as a lazy chunk.
+// Content is imported rather than fetched: prerendering runs this app in Node, where there is
+// no origin to fetch from. Dynamic imports keep each piece in its own lazy chunk.
+//
+// The split is deliberate. book.json is the table of contents; the prose sits in a file per
+// chapter, and the search index carries sorted token lists instead of sentences. No single
+// asset on the site is the book — that is what the printed edition is for.
 const load = {
   book: () => import('../../generated/book.json').then((m) => m.default as unknown as Book),
   states: () =>
     import('../../generated/states.json').then((m) => m.default as unknown as StatesDoc),
   costs: () => import('../../generated/costs.json').then((m) => m.default as unknown as CostsDoc),
   site: () => import('../../generated/site.json').then((m) => m.default as unknown as SiteDoc),
+  searchIndex: () =>
+    import('../../generated/search-index.json').then((m) => m.default as unknown as SearchIndex),
 };
 
-interface IndexEntry {
-  hit: Omit<SearchHit, 'score' | 'snippet'>;
+interface IndexEntry extends SearchEntry {
   haystack: string;
-  source: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +41,14 @@ export class ContentService {
   private readonly statesSignal = signal<StatesDoc | null>(null);
   private readonly costsSignal = signal<CostsDoc | null>(null);
   private readonly siteSignal = signal<SiteDoc | null>(null);
+
+  /** Chapter prose, keyed by chapter id, as each one is opened. */
+  private readonly contentSignal = signal<Record<string, ChapterContent>>({});
+  private readonly pending = new Map<string, Promise<void>>();
+
   private index: IndexEntry[] = [];
+  private indexLoad: Promise<void> | null = null;
+  private readonly indexReady = signal(false);
 
   readonly book = this.bookSignal.asReadonly();
   readonly statesDoc = this.statesSignal.asReadonly();
@@ -67,7 +82,29 @@ export class ContentService {
     this.statesSignal.set(states);
     this.costsSignal.set(costs);
     this.siteSignal.set(site);
-    this.buildIndex(book, states);
+  }
+
+  /**
+   * Fetches one chapter's prose. Routes that render prose resolve this before activating, so
+   * a prerendered page never ships with an empty body.
+   */
+  loadChapter(id: string): Promise<void> {
+    if (this.contentSignal()[id]) return Promise.resolve();
+
+    const existing = this.pending.get(id);
+    if (existing) return existing;
+
+    const loader = chapterLoaders[id];
+    if (!loader) return Promise.resolve();
+
+    const run = loader()
+      .then((content) => {
+        this.contentSignal.update((all) => ({ ...all, [id]: content }));
+      })
+      .finally(() => this.pending.delete(id));
+
+    this.pending.set(id, run);
+    return run;
   }
 
   chapter(id: string): Chapter | undefined {
@@ -76,6 +113,17 @@ export class ContentService {
 
   section(chapterId: string, sectionId: string): Section | undefined {
     return this.chapter(chapterId)?.sections.find((s) => s.id === sectionId);
+  }
+
+  /** A chapter's own opening blocks. Empty until its prose has been loaded. */
+  chapterIntro(chapterId: string): Block[] {
+    return this.contentSignal()[chapterId]?.intro ?? [];
+  }
+
+  /** One rule's blocks. Empty until its chapter's prose has been loaded. */
+  sectionBlocks(chapterId: string, sectionId: string): Block[] {
+    const content = this.contentSignal()[chapterId];
+    return content?.sections.find((s) => s.id === sectionId)?.blocks ?? [];
   }
 
   state(slug: string): StateEntry | undefined {
@@ -92,31 +140,28 @@ export class ContentService {
     };
   }
 
-  /**
-   * Sections that mention any of the given terms, excluding the one being read. Used to
-   * suggest related rules without hand-maintaining a cross-reference table.
-   */
-  related(section: Section, limit = 5): Section[] {
-    const terms = keyTerms(section.title);
-    if (!terms.length) return [];
+  /** Rules that discuss the same thing. Scored at build time; resolved here by identity. */
+  related(section: Section): Section[] {
+    return section.related
+      .map((ref) => this.section(ref.chapterId, ref.id))
+      .filter((s): s is Section => !!s);
+  }
 
-    return this.chapters()
-      .flatMap((c) => c.sections)
-      .filter((s) => !(s.chapterId === section.chapterId && s.id === section.id))
-      .map((s) => {
-        const haystack = `${s.title} ${s.text}`.toLowerCase();
-        const score =
-          terms.reduce((n, term) => n + (haystack.includes(term) ? 1 : 0), 0) +
-          (s.chapterId === section.chapterId ? 0.5 : 0);
-        return { s, score };
-      })
-      .filter((r) => r.score >= 1.5)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit)
-      .map((r) => r.s);
+  /**
+   * Pulls in the search index on demand. It is the largest asset on the site and only /search
+   * has any use for it, so no other page pays for it.
+   */
+  ensureSearchIndex(): Promise<void> {
+    return (this.indexLoad ??= load.searchIndex().then((doc) => {
+      this.index = doc.entries.map((entry) => ({ ...entry, haystack: entry.tokens.join(' ') }));
+      this.indexReady.set(true);
+    }));
   }
 
   search(query: string, limit = 40): SearchHit[] {
+    // Read as a signal so results recompute when the index lands, not just when typing.
+    if (!this.indexReady()) return [];
+
     const terms = query
       .toLowerCase()
       .split(/[^a-z0-9$%]+/i)
@@ -129,140 +174,24 @@ export class ContentService {
     for (const entry of this.index) {
       let score = 0;
       for (const term of terms) {
-        const inTitle = entry.hit.title.toLowerCase().includes(term);
+        const inTitle = entry.title.toLowerCase().includes(term);
         const inBody = entry.haystack.includes(term);
         if (inTitle) score += 6;
         if (inBody) score += 1;
       }
       if (score === 0) continue;
-      hits.push({ ...entry.hit, score, snippet: snippetAround(entry.source, terms) });
+      hits.push({
+        kind: entry.kind,
+        title: entry.title,
+        context: entry.context,
+        route: entry.route,
+        score,
+        snippet: snippetAround(entry.excerpt, terms),
+      });
     }
 
     return hits.sort((a, b) => b.score - a.score).slice(0, limit);
   }
-
-  private buildIndex(book: Book, states: StatesDoc): void {
-    const entries: IndexEntry[] = [];
-
-    for (const chapter of book.chapters) {
-      entries.push({
-        hit: {
-          kind: 'chapter',
-          title: chapter.title,
-          context: 'Chapter',
-          route: ['/guide', chapter.id],
-        },
-        haystack: `${chapter.title} ${chapter.text}`.toLowerCase(),
-        source: chapter.text || chapter.title,
-      });
-
-      for (const section of chapter.sections) {
-        entries.push({
-          hit: {
-            kind: 'section',
-            title: section.title,
-            context: chapter.title,
-            route: ['/guide', chapter.id, section.id],
-          },
-          haystack: `${section.title} ${section.text}`.toLowerCase(),
-          source: section.text || section.title,
-        });
-      }
-    }
-
-    for (const state of states.states) {
-      const source = [
-        state.taxBenefitDetail,
-        state.protection,
-        ...state.notes,
-        ...state.plans.map((p) => `${p.name} (${p.type})`),
-      ]
-        .filter(Boolean)
-        .join(' ');
-
-      entries.push({
-        hit: {
-          kind: 'state',
-          title: state.name,
-          context: 'State plan guide',
-          route: ['/states', state.slug],
-        },
-        haystack: `${state.name} ${source}`.toLowerCase(),
-        source,
-      });
-    }
-
-    this.index = entries;
-  }
-}
-
-const STOP_WORDS = new Set([
-  'the',
-  'and',
-  'for',
-  'you',
-  'your',
-  'may',
-  'can',
-  'are',
-  'with',
-  'from',
-  'that',
-  'this',
-  'any',
-  'all',
-  'account',
-  'accounts',
-  '529',
-  'plan',
-  'plans',
-  'without',
-  'through',
-  'into',
-  'their',
-  'they',
-  'have',
-  'has',
-  'not',
-  'but',
-  'per',
-  'own',
-  'one',
-  'out',
-  'who',
-  'what',
-  'when',
-  'how',
-  'much',
-  'more',
-  'other',
-  'each',
-  'some',
-  'time',
-  'made',
-  'make',
-  'over',
-  'used',
-  'using',
-  'use',
-  'should',
-  'consider',
-  'decide',
-  'change',
-  'well',
-  'else',
-  'someone',
-]);
-
-function keyTerms(title: string): string[] {
-  return [
-    ...new Set(
-      title
-        .toLowerCase()
-        .split(/[^a-z0-9]+/)
-        .filter((w) => w.length > 3 && !STOP_WORDS.has(w)),
-    ),
-  ];
 }
 
 function snippetAround(source: string, terms: string[], span = 190): string {

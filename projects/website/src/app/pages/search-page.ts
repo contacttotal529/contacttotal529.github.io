@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 import { Seo } from '../core/seo.service';
@@ -185,6 +192,12 @@ export class SearchPage {
     inject(Seo).set({
       title: 'Search — Total529',
       description: null,
+    });
+
+    // The index is the site's largest asset, so it is fetched on the first real query rather
+    // than by everyone who lands here. Results recompute once it arrives.
+    effect(() => {
+      if (this.query().trim()) void this.content.ensureSearchIndex();
     });
   }
 

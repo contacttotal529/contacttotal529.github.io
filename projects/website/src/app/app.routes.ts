@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { chapterContentResolver, resolveChapter } from './core/chapter.resolver';
+
 export const routes: Routes = [
   {
     path: '',
@@ -11,10 +13,12 @@ export const routes: Routes = [
   },
   {
     path: 'guide/:chapterId',
+    resolve: { chapterContent: chapterContentResolver },
     loadComponent: () => import('./pages/chapter-page').then((m) => m.ChapterPage),
   },
   {
     path: 'guide/:chapterId/:sectionId',
+    resolve: { chapterContent: chapterContentResolver },
     loadComponent: () => import('./pages/section-page').then((m) => m.SectionPage),
   },
   {
@@ -31,6 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'history',
+    resolve: { chapterContent: resolveChapter('history') },
     loadComponent: () => import('./pages/history-page').then((m) => m.HistoryPage),
   },
   {

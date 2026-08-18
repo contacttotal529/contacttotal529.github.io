@@ -36,8 +36,8 @@ import { BlockRenderer } from '../shared/block-renderer';
 
       <div class="shell layout">
         <article class="body">
-          @if (ch.intro.length) {
-            <app-blocks [blocks]="ch.intro" />
+          @if (intro().length) {
+            <app-blocks [blocks]="intro()" />
           }
 
           @if (ch.sections.length) {
@@ -178,6 +178,8 @@ export class ChapterPage {
 
   readonly chapterId = input<string>('');
   readonly chapters = this.content.chapters;
+
+  readonly intro = computed(() => this.content.chapterIntro(this.chapterId()));
 
   readonly chapter = computed(() => this.content.chapter(this.chapterId()));
 

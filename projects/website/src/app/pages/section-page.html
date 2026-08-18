@@ -15,7 +15,7 @@
 
     <div class="shell layout">
       <div class="body">
-        <app-blocks [blocks]="sec.blocks" />
+        <app-blocks [blocks]="blocks()" />
 
         @if (watch(); as w) {
           <aside class="watch" [class.watch--no]="w.tone === 'no'">

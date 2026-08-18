@@ -5,6 +5,7 @@ import book from '../../generated/book.json';
 import states from '../../generated/states.json';
 import costs from '../../generated/costs.json';
 import site from '../../generated/site.json';
+import searchIndex from '../../generated/search-index.json';
 
 /**
  * Runs against the real output of tools/build-content.mjs rather than a hand-written fixture,
@@ -49,7 +50,39 @@ describe('ContentService', () => {
   it('finds a rule by chapter and section id', () => {
     const section = service.section('k-12', 'tutors');
     expect(section?.title).toContain('tutor');
-    expect(section?.blocks.some((b) => b.type === 'example')).toBe(true);
+  });
+
+  it('serves a rule no prose until its chapter has been loaded', async () => {
+    expect(service.sectionBlocks('k-12', 'tutors')).toEqual([]);
+
+    await service.loadChapter('k-12');
+
+    expect(service.sectionBlocks('k-12', 'tutors').some((b) => b.type === 'example')).toBe(true);
+    expect(service.chapterIntro('k-12').length).toBeGreaterThan(0);
+  });
+
+  /**
+   * The book is published in print, so no single asset the site serves may be the book. The
+   * table of contents carries titles and summaries; the prose lives in a file per chapter and
+   * the search index in sorted token lists. These are the invariants that keep it that way.
+   */
+  it('keeps prose out of the table of contents', () => {
+    const serialised = JSON.stringify(book);
+    expect(serialised).not.toContain('"blocks"');
+    expect(serialised).not.toContain('"intro"');
+    expect(serialised).not.toContain('"paragraphs"');
+  });
+
+  it('keeps the search index unreadable as prose', async () => {
+    await service.ensureSearchIndex();
+    const entries = (searchIndex as unknown as { entries: { tokens: string[] }[] }).entries;
+
+    expect(entries.length).toBeGreaterThan(100);
+    for (const entry of entries) {
+      const sorted = [...entry.tokens].sort();
+      expect(entry.tokens).toEqual(sorted);
+      expect(new Set(entry.tokens).size).toBe(entry.tokens.length);
+    }
   });
 
   it('walks previous and next across chapter boundaries', () => {
@@ -59,13 +92,22 @@ describe('ContentService', () => {
     expect(next).not.toBeNull();
   });
 
-  it('ranks title matches above body matches when searching', () => {
+  it('ranks title matches above body matches when searching', async () => {
+    await service.ensureSearchIndex();
     const hits = service.search('tutor');
     expect(hits.length).toBeGreaterThan(0);
     expect(hits[0].title.toLowerCase()).toContain('tutor');
   });
 
-  it('returns no search hits for an empty query', () => {
+  it('still matches words the rule only mentions in passing', async () => {
+    await service.ensureSearchIndex();
+    const hits = service.search('superfunding');
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.some((h) => h.snippet.length > 0)).toBe(true);
+  });
+
+  it('returns no search hits for an empty query', async () => {
+    await service.ensureSearchIndex();
     expect(service.search('   ')).toEqual([]);
   });
 

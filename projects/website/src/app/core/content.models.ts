@@ -11,15 +11,26 @@ export interface Block {
   links: string[];
 }
 
+/** Points at another rule by identity; its title is read from the table of contents. */
+export interface RelatedRef {
+  chapterId: string;
+  id: string;
+}
+
+// book.json is a table of contents, not the book: it carries what every page needs to render
+// navigation and metadata, and no prose beyond a one-line summary. The blocks themselves live
+// in a per-chapter file that is fetched only when a reader opens that chapter.
+
 export interface Section {
   id: string;
   chapterId: string;
   chapterTitle: string;
   title: string;
-  blocks: Block[];
   summary: string | null;
   exampleCount: number;
-  text: string;
+  /** Dollar and percentage figures the rule itself states, lifted at build time. */
+  figures: string[];
+  related: RelatedRef[];
 }
 
 export interface Chapter {
@@ -27,12 +38,21 @@ export interface Chapter {
   title: string;
   subtitle: string | null;
   heading: string;
-  intro: Block[];
   sections: Section[];
   summary: string | null;
-  text: string;
   sectionCount: number;
   exampleCount: number;
+}
+
+export interface SectionContent {
+  id: string;
+  blocks: Block[];
+}
+
+export interface ChapterContent {
+  id: string;
+  intro: Block[];
+  sections: SectionContent[];
 }
 
 export interface FamilyAppendix {
@@ -135,6 +155,15 @@ export interface SiteDoc {
     link: [string, string];
   }[];
   disclaimer: string;
+  highlights: {
+    featured: {
+      name: string;
+      tag: string;
+      tone: 'gp' | 'parent' | 'student' | 'business';
+      text: string;
+      route: string[];
+    }[];
+  };
 }
 
 export interface SearchHit {
@@ -145,4 +174,21 @@ export interface SearchHit {
   fragment?: string;
   snippet: string;
   score: number;
+}
+
+/**
+ * Search matches against `tokens` joined back together. They are unique and sorted, so the
+ * index behaves like the prose for substring matching but cannot be read as the book.
+ */
+export interface SearchEntry {
+  kind: SearchHit['kind'];
+  title: string;
+  context: string;
+  route: string[];
+  tokens: string[];
+  excerpt: string;
+}
+
+export interface SearchIndex {
+  entries: SearchEntry[];
 }

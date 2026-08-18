@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing.",
+  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing. homeFeatured names the worked examples the front page shows; build-content.mjs lifts their text into site.json so the home page needs no chapter prose.",
   "disclaimer": "No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice.",
   "figures": {
     "headline": [
@@ -735,5 +735,47 @@
     "estate-planning": "Completed gifts, superfunding, generation-skipping transfer tax, bankruptcy protection, and moving wealth across generations.",
     "maximizing": "Five advanced playbooks — funding, K–12, post-secondary, after graduation, and estate planning.",
     "comparisons": "Head to head against prepaid tuition plans, Coverdell ESAs, UGMA/UTMA custodial accounts, and the new 530A “Trump account”."
-  }
+  },
+  "homeFeatured": [
+    {
+      "chapter": "post-secondary",
+      "section": "financial-aid",
+      "index": 0,
+      "name": "Vinni",
+      "tag": "Student · Financial aid",
+      "tone": "student"
+    },
+    {
+      "chapter": "basics",
+      "section": "change-beneficiary",
+      "index": 0,
+      "name": "Bob",
+      "tag": "Parent · Beneficiary change",
+      "tone": "parent"
+    },
+    {
+      "chapter": "basics",
+      "section": "change-successor",
+      "index": 0,
+      "name": "Isaac",
+      "tag": "Grandparent · Control",
+      "tone": "gp"
+    },
+    {
+      "chapter": "basics",
+      "section": "employers-and-trusts",
+      "index": 0,
+      "name": "Don",
+      "tag": "Employer · Institutional account",
+      "tone": "business"
+    },
+    {
+      "chapter": "estate-planning",
+      "section": "superfunding",
+      "index": 0,
+      "name": "Robert",
+      "tag": "Grandparent · Estate",
+      "tone": "gp"
+    }
+  ]
 }

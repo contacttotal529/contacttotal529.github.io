@@ -2,66 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Router, RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 import { Seo } from '../core/seo.service';
-import type { Block } from '../core/content.models';
-
-interface FeaturedExample {
-  name: string;
-  tag: string;
-  tone: 'gp' | 'parent' | 'student' | 'business';
-  text: string;
-  route: string[];
-}
-
-/** Worked examples worth putting on the front page, keyed by chapter/section/example index. */
-const FEATURED: {
-  chapter: string;
-  section: string;
-  index: number;
-  name: string;
-  tag: string;
-  tone: FeaturedExample['tone'];
-}[] = [
-  {
-    chapter: 'post-secondary',
-    section: 'financial-aid',
-    index: 0,
-    name: 'Vinni',
-    tag: 'Student · Financial aid',
-    tone: 'student',
-  },
-  {
-    chapter: 'basics',
-    section: 'change-beneficiary',
-    index: 0,
-    name: 'Bob',
-    tag: 'Parent · Beneficiary change',
-    tone: 'parent',
-  },
-  {
-    chapter: 'basics',
-    section: 'change-successor',
-    index: 0,
-    name: 'Isaac',
-    tag: 'Grandparent · Control',
-    tone: 'gp',
-  },
-  {
-    chapter: 'basics',
-    section: 'employers-and-trusts',
-    index: 0,
-    name: 'Don',
-    tag: 'Employer · Institutional account',
-    tone: 'business',
-  },
-  {
-    chapter: 'estate-planning',
-    section: 'superfunding',
-    index: 0,
-    name: 'Robert',
-    tag: 'Grandparent · Estate',
-    tone: 'gp',
-  },
-];
 
 const CHAPTER_ICONS: Record<string, string> = {
   forward: '📖',
@@ -136,15 +76,6 @@ export class HomePage {
     },
   ];
 
-  /** The Forward's opening bullets carry the whole value proposition. */
-  readonly forwardPoints = computed(() => {
-    const forward = this.content.chapter('forward');
-    const block = forward?.intro.find((b): b is Block => b.type === 'prose');
-    return (block?.paragraphs ?? [])
-      .filter((p) => p.startsWith('–') || p.startsWith('-'))
-      .map((p) => p.replace(/^[–-]\s*/, '').trim());
-  });
-
   readonly myths = [
     {
       myth: "It's only for college.",
@@ -166,19 +97,8 @@ export class HomePage {
     },
   ];
 
-  readonly featured = computed<FeaturedExample[]>(() =>
-    FEATURED.map((pick) => {
-      const section = this.content.section(pick.chapter, pick.section);
-      const examples = section?.blocks.filter((b) => b.type === 'example') ?? [];
-      return {
-        name: pick.name,
-        tag: pick.tag,
-        tone: pick.tone,
-        text: examples[pick.index]?.paragraphs?.[0] ?? '',
-        route: ['/guide', pick.chapter, pick.section],
-      };
-    }).filter((e) => e.text),
-  );
+  /** Worked examples worth putting on the front page, picked in tools/curated.json. */
+  readonly featured = computed(() => this.content.site()?.highlights.featured ?? []);
 
   icon(chapterId: string): string {
     return CHAPTER_ICONS[chapterId] ?? '📄';

@@ -37,6 +37,8 @@ export class SectionPage {
 
   readonly section = computed(() => this.content.section(this.chapterId(), this.sectionId()));
 
+  readonly blocks = computed(() => this.content.sectionBlocks(this.chapterId(), this.sectionId()));
+
   constructor() {
     effect(() => {
       const found = this.section();
@@ -62,12 +64,7 @@ export class SectionPage {
   });
 
   /** Dollar and percentage figures the rule itself mentions — no derived numbers. */
-  readonly figures = computed(() => {
-    const section = this.section();
-    if (!section) return [];
-    const found = section.text.match(/\$[\d,]+(?:\.\d+)?|\b\d+(?:\.\d+)?%/g) ?? [];
-    return [...new Set(found)].slice(0, 6);
-  });
+  readonly figures = computed(() => this.section()?.figures ?? []);
 
   readonly watch = computed(() => {
     const key = `${this.chapterId()}/${this.sectionId()}`;

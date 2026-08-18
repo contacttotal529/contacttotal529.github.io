@@ -524,13 +524,164 @@ if (unmatched.length) {
   );
 }
 
+// ---------------------------------------------------------------- derive, then split
+
+// The site publishes the book one rule at a time. Shipping it as a single JSON document would
+// also publish it as a single downloadable file, which is what the printed edition is for. So
+// the prose is emitted per chapter and loaded on demand, and everything derived from it —
+// search, related rules, the figures rail — is precomputed here rather than by handing the
+// browser the full text to scan.
+
+const FIGURE_RE = /\$[\d,]+(?:\.\d+)?|\b\d+(?:\.\d+)?%/g;
+
+// Titles are matched word by word, so the words that carry no signal have to go. Tuned for
+// this book: "plan" and "account" appear in nearly every rule and would relate everything to
+// everything.
+const TITLE_STOP_WORDS = new Set([
+  'the',
+  'and',
+  'for',
+  'you',
+  'your',
+  'may',
+  'can',
+  'are',
+  'with',
+  'from',
+  'that',
+  'this',
+  'any',
+  'all',
+  'account',
+  'accounts',
+  '529',
+  'plan',
+  'plans',
+  'without',
+  'through',
+  'into',
+  'their',
+  'they',
+  'have',
+  'has',
+  'not',
+  'but',
+  'per',
+  'own',
+  'one',
+  'out',
+  'who',
+  'what',
+  'when',
+  'how',
+  'much',
+  'more',
+  'other',
+  'each',
+  'some',
+  'time',
+  'made',
+  'make',
+  'over',
+  'used',
+  'using',
+  'use',
+  'should',
+  'consider',
+  'decide',
+  'change',
+  'well',
+  'else',
+  'someone',
+]);
+
+function keyTerms(title) {
+  return [
+    ...new Set(
+      title
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter((w) => w.length > 3 && !TITLE_STOP_WORDS.has(w)),
+    ),
+  ];
+}
+
+/**
+ * Unique words, sorted alphabetically. Search matches substrings against these joined back
+ * together, which behaves identically to matching against the prose — but sorting and
+ * deduplicating destroys the sentences, so the index cannot be read as the book.
+ */
+function tokenise(text) {
+  return [
+    ...new Set(
+      text
+        .toLowerCase()
+        .split(/[^a-z0-9$%]+/)
+        .filter((t) => t.length > 1),
+    ),
+  ].sort();
+}
+
+/** Enough prose to show a search result in context, and deliberately not much more. */
+function excerptOf(text, span = 240) {
+  if (text.length <= span) return text;
+  const cut = text.slice(0, span);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > span * 0.6 ? cut.slice(0, lastSpace) : cut).trim();
+}
+
+const allSections = chapters.flatMap((c) => c.sections);
+
+for (const section of allSections) {
+  section.figures = [...new Set(section.text.match(FIGURE_RE) ?? [])].slice(0, 6);
+
+  // Rules that discuss the same thing, without anyone hand-maintaining a cross-reference
+  // table. Scored here so the browser never needs every rule's text to work it out.
+  const terms = keyTerms(section.title);
+  section.related = !terms.length
+    ? []
+    : allSections
+        .filter((other) => !(other.chapterId === section.chapterId && other.id === section.id))
+        .map((other) => {
+          const haystack = `${other.title} ${other.text}`.toLowerCase();
+          const score =
+            terms.reduce((n, term) => n + (haystack.includes(term) ? 1 : 0), 0) +
+            (other.chapterId === section.chapterId ? 0.5 : 0);
+          return { other, score };
+        })
+        .filter((r) => r.score >= 1.5)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 5)
+        .map((r) => ({ chapterId: r.other.chapterId, id: r.other.id }));
+}
+
+// book.json is the table of contents and nothing more: titles, counts, and the derived bits
+// above. Every block of prose lives in a per-chapter file beside it.
 const book = {
   title: 'Total529.com',
   subtitle: 'Understanding, Using, and Maximizing 529 Accounts',
   edition: '529 30th Anniversary Edition',
   author: 'C. Richard Hopkins, MD, CRPC',
   taxYear: 2026,
-  chapters,
+  chapters: chapters.map((chapter) => ({
+    id: chapter.id,
+    title: chapter.title,
+    subtitle: chapter.subtitle,
+    heading: chapter.heading,
+    summary: chapter.summary,
+    sectionCount: chapter.sectionCount,
+    exampleCount: chapter.exampleCount,
+    sections: chapter.sections.map((section) => ({
+      id: section.id,
+      chapterId: section.chapterId,
+      chapterTitle: section.chapterTitle,
+      title: section.title,
+      summary: section.summary,
+      exampleCount: section.exampleCount,
+      figures: section.figures,
+      related: section.related,
+    })),
+  })),
   appendices: {
     plans: { id: appendices.plans.id, title: appendices.plans.title },
     costs: { id: appendices.costs.id, title: appendices.costs.title },
@@ -539,7 +690,81 @@ const book = {
 };
 
 mkdirSync(OUT_DIR, { recursive: true });
+mkdirSync(join(OUT_DIR, 'chapters'), { recursive: true });
 writeFileSync(join(OUT_DIR, 'book.json'), JSON.stringify(book));
+
+for (const chapter of chapters) {
+  writeFileSync(
+    join(OUT_DIR, 'chapters', `${chapter.id}.json`),
+    JSON.stringify({
+      id: chapter.id,
+      intro: chapter.intro,
+      sections: chapter.sections.map((section) => ({ id: section.id, blocks: section.blocks })),
+    }),
+  );
+}
+
+// One literal import expression per chapter. A template-literal path would defeat the
+// bundler's static analysis and collapse the whole book back into a single chunk.
+writeFileSync(
+  join(OUT_DIR, 'chapter-loaders.ts'),
+  [
+    '// Generated by tools/build-content.mjs. Do not edit.',
+    "import type { ChapterContent } from '../app/core/content.models';",
+    '',
+    'export const chapterLoaders: Record<string, () => Promise<ChapterContent>> = {',
+    ...chapters.map(
+      (chapter) =>
+        `  '${chapter.id}': () =>\n    import('./chapters/${chapter.id}.json').then((m) => m.default as unknown as ChapterContent),`,
+    ),
+    '};',
+    '',
+  ].join('\n'),
+);
+
+// Loaded only when someone actually searches, so no page pays for it up front.
+writeFileSync(
+  join(OUT_DIR, 'search-index.json'),
+  JSON.stringify({
+    entries: [
+      ...chapters.map((chapter) => ({
+        kind: 'chapter',
+        title: chapter.title,
+        context: 'Chapter',
+        route: ['/guide', chapter.id],
+        tokens: tokenise(`${chapter.title} ${chapter.text}`),
+        excerpt: excerptOf(chapter.text || chapter.title),
+      })),
+      ...allSections.map((section) => ({
+        kind: 'section',
+        title: section.title,
+        context: section.chapterTitle,
+        route: ['/guide', section.chapterId, section.id],
+        tokens: tokenise(`${section.title} ${section.text}`),
+        excerpt: excerptOf(section.text || section.title),
+      })),
+      ...appendices.plans.states.map((state) => {
+        const source = [
+          state.taxBenefitDetail,
+          state.protection,
+          ...state.notes,
+          ...state.plans.map((plan) => `${plan.name} (${plan.type})`),
+        ]
+          .filter(Boolean)
+          .join(' ');
+        return {
+          kind: 'state',
+          title: state.name,
+          context: 'State plan guide',
+          route: ['/states', state.slug],
+          tokens: tokenise(`${state.name} ${source}`),
+          excerpt: excerptOf(source || state.name),
+        };
+      }),
+    ],
+  }),
+);
+
 writeFileSync(
   join(OUT_DIR, 'states.json'),
   JSON.stringify({
@@ -549,6 +774,26 @@ writeFileSync(
   }),
 );
 writeFileSync(join(OUT_DIR, 'costs.json'), JSON.stringify(appendices.costs));
+// The front page quotes five worked examples. Lifting just those here keeps it from having to
+// load four chapters to render above the fold.
+const featured = curated.homeFeatured
+  .map((pick) => {
+    const section = allSections.find((s) => s.chapterId === pick.chapter && s.id === pick.section);
+    if (!section) {
+      warnings.push(`homeFeatured points at a missing rule: ${pick.chapter}/${pick.section}`);
+      return null;
+    }
+    const examples = section.blocks.filter((b) => b.type === 'example');
+    return {
+      name: pick.name,
+      tag: pick.tag,
+      tone: pick.tone,
+      text: examples[pick.index]?.paragraphs?.[0] ?? '',
+      route: ['/guide', pick.chapter, pick.section],
+    };
+  })
+  .filter((e) => e && e.text);
+
 writeFileSync(
   join(OUT_DIR, 'site.json'),
   JSON.stringify({
@@ -557,6 +802,7 @@ writeFileSync(
     comparison: curated.comparison,
     quickAnswers: curated.quickAnswers,
     disclaimer: curated.disclaimer,
+    highlights: { featured },
   }),
 );
 
