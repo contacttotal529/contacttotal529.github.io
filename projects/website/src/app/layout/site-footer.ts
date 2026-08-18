@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 
+export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
+
 @Component({
   selector: 'app-site-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +19,8 @@ import { ContentService } from '../core/content.service';
             </a>
             <p>
               A free educational resource built from <em>{{ book()?.subtitle }}</em
-              >, {{ book()?.edition }}, by {{ book()?.author }}.
+              >, {{ book()?.edition }}, by {{ book()?.author }}. The book itself is
+              <strong>coming soon</strong> in print and ebook.
             </p>
             <a class="link-more" routerLink="/guide">Read the guide &rarr;</a>
           </div>
@@ -38,6 +41,7 @@ import { ContentService } from '../core/content.service';
 
           <div>
             <h2>Reference</h2>
+            <a routerLink="/examples">Real situations</a>
             <a routerLink="/states">All 51 state plans</a>
             <a routerLink="/costs">Cost of attendance</a>
             <a routerLink="/reference">Who counts as family?</a>
@@ -49,6 +53,7 @@ import { ContentService } from '../core/content.service';
             <a routerLink="/about">The author &amp; the book</a>
             <a routerLink="/history">Thirty years of 529</a>
             <a routerLink="/about" fragment="sources">Sources</a>
+            <a [href]="feedbackHref">Send feedback</a>
           </div>
         </div>
 
@@ -162,4 +167,7 @@ export class SiteFooter {
   readonly book = this.content.book;
   readonly chapters = this.content.chapters;
   readonly disclaimer = () => this.content.site()?.disclaimer ?? '';
+
+  /** The site is static, so corrections and questions arrive by mail rather than through a form. */
+  readonly feedbackHref = `mailto:${FEEDBACK_ADDRESS}?subject=${encodeURIComponent('Total529 site feedback')}`;
 }

@@ -142,8 +142,8 @@
 }
 
 .myth h2 {
-  font-size: 19px;
-  color: var(--muted);
+  font-size: 22px;
+  color: var(--text);
   font-weight: 700;
   text-decoration: line-through;
   text-decoration-color: var(--plum);
@@ -152,8 +152,9 @@
 }
 
 .myth p {
-  font-size: 16.5px;
+  font-size: 17.5px;
   line-height: 1.62;
+  color: var(--text);
 }
 
 /* stat band */
@@ -192,6 +193,15 @@
   color: #a9c6b5;
   line-height: 1.5;
   margin: 0;
+}
+
+.band__asof {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #7f9f8d;
+  margin: 8px 0 0;
 }
 
 /* pillars */
@@ -292,55 +302,6 @@
   color: var(--amber-lt);
 }
 
-/* key numbers */
-.numbers {
-  background: var(--sand-2);
-  padding: 70px 0;
-}
-
-.numbers__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.number {
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 24px 26px 26px;
-  text-decoration: none;
-  color: var(--text);
-  display: block;
-}
-
-.number:hover {
-  border-color: var(--moss);
-}
-
-.number__amount {
-  display: block;
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--forest);
-  line-height: 1;
-}
-
-.number__label {
-  display: block;
-  font-size: 15.5px;
-  font-weight: 700;
-  margin: 12px 0 6px;
-}
-
-.number__sub {
-  display: block;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
 /* examples rail */
 .ex-rail {
   display: flex;
@@ -426,6 +387,10 @@
   padding: 10px 8px;
 }
 
+.examples__more {
+  margin-top: 6px;
+}
+
 /* checker */
 .checker {
   background: var(--sand-2);
@@ -446,124 +411,6 @@
 
 .checker .muted {
   margin-bottom: 26px;
-}
-
-/* history */
-.history__grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 56px;
-  align-items: start;
-}
-
-.history__title {
-  font-size: 38px;
-  margin: 13px 0 16px;
-}
-
-/* finder */
-.finder {
-  background: var(--forest);
-  color: #e7f1ea;
-  padding: 68px 0;
-}
-
-.finder__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 52px;
-  align-items: center;
-}
-
-.finder h2 {
-  font-size: 38px;
-  color: #fff;
-  margin: 13px 0 15px;
-}
-
-.finder__lede {
-  color: #a9c6b5;
-  font-size: 17.5px;
-  max-width: 50ch;
-}
-
-.finder__control {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
-
-.finder__control select {
-  flex: 1 1 260px;
-}
-
-.finder__facts {
-  background: var(--cream);
-  color: var(--text);
-  border-radius: var(--radius);
-  padding: 10px 30px;
-  list-style: none;
-  margin: 0;
-}
-
-.finder__facts li {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--line-soft);
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.finder__facts li:last-child {
-  border-bottom: 0;
-}
-
-.finder__facts strong {
-  color: var(--forest);
-}
-
-/* mission */
-.mission__grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 52px;
-  align-items: center;
-}
-
-.mission__title {
-  font-size: 34px;
-  margin: 13px 0 16px;
-  max-width: 22ch;
-}
-
-.mission__stats {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-}
-
-.mission__stats li {
-  display: flex;
-  gap: 20px;
-  align-items: baseline;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.mission__stats span {
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--amber);
-  flex: 0 0 76px;
-}
-
-.mission__stats p {
-  margin: 0;
-  font-size: 16px;
-  color: var(--muted);
-  line-height: 1.5;
 }
 
 /* final */
@@ -597,18 +444,14 @@
 }
 
 @media (max-width: 1080px) {
-  .pillars,
-  .numbers__grid {
+  .pillars {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 900px) {
   .hero__grid,
-  .checker__grid,
-  .history__grid,
-  .finder__grid,
-  .mission__grid {
+  .checker__grid {
     grid-template-columns: 1fr;
     gap: 36px;
   }
@@ -618,15 +461,12 @@
   }
 
   .checker h2,
-  .finder h2,
-  .history__title,
   .final h2 {
     font-size: 28px;
   }
 
   .myths__grid,
   .pillars,
-  .numbers__grid,
   .band__grid {
     grid-template-columns: 1fr;
   }

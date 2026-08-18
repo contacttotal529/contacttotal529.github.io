@@ -53,6 +53,7 @@
           <p class="band__n">{{ figure.value }}</p>
           <p class="band__l">{{ figure.label }}</p>
           <p class="band__note">{{ figure.note }}</p>
+          <p class="band__asof">As of {{ figure.asOf }}</p>
         </div>
       }
     </div>
@@ -63,7 +64,7 @@
   <div class="shell">
     <div class="section-head">
       <p class="eyebrow">The guide</p>
-      <h2>Everything a 529 can do</h2>
+      <h2>What can a 529 do?</h2>
       <p>
         Start anywhere. Each chapter breaks into short pages &mdash; one rule each, with the state
         exceptions and a worked example attached.
@@ -71,54 +72,41 @@
     </div>
 
     <div class="pillars">
-      @for (chapter of chapters(); track chapter.id) {
-        <a class="pill" [routerLink]="['/guide', chapter.id]">
-          <span class="pill__icon" [class]="'pill__icon--' + tint(chapter.id)" aria-hidden="true">{{
-            icon(chapter.id)
-          }}</span>
-          <h3>{{ chapter.title }}</h3>
-          <p>{{ chapter.summary }}</p>
-          <span class="pill__meta">
-            @if (chapter.sectionCount) {
-              {{ chapter.sectionCount }} short pages
-            } @else {
-              Essay
-            }
-            @if (chapter.exampleCount) {
-              &middot; {{ chapter.exampleCount }} examples
-            }
-            &rarr;
-          </span>
-        </a>
-      }
-
-      <a class="pill pill--dark" routerLink="/states">
-        <span class="pill__icon pill__icon--dark" aria-hidden="true">🗺️</span>
-        <h3>Your state</h3>
-        <p>
-          All {{ states().length }} jurisdictions and {{ totalPlans() }} plans. Tax benefit,
-          K&ndash;12 conformity, contribution ceiling, and the official program description for
-          each.
-        </p>
-        <span class="pill__meta">Look yours up &rarr;</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="numbers">
-  <div class="shell">
-    <div class="section-head">
-      <p class="eyebrow">The figures that matter</p>
-      <h2>Six numbers most families are never told</h2>
-    </div>
-    <div class="numbers__grid">
-      @for (item of keyNumbers(); track item.label) {
-        <a class="number" [routerLink]="['/guide', item.link[0], item.link[1]]">
-          <span class="number__amount">{{ item.amount }}</span>
-          <span class="number__label">{{ item.label }}</span>
-          <span class="number__sub">{{ item.sub }}</span>
-        </a>
+      @for (pillar of pillars(); track pillar.id) {
+        @if (pillar.chapter; as chapter) {
+          <a class="pill" [routerLink]="['/guide', chapter.id]">
+            <span
+              class="pill__icon"
+              [class]="'pill__icon--' + tint(chapter.id)"
+              aria-hidden="true"
+              >{{ icon(chapter.id) }}</span
+            >
+            <h3>{{ chapter.title }}</h3>
+            <p>{{ chapter.summary }}</p>
+            <span class="pill__meta">
+              @if (chapter.sectionCount) {
+                {{ chapter.sectionCount }} short pages
+              } @else {
+                Essay
+              }
+              @if (chapter.exampleCount) {
+                &middot; {{ chapter.exampleCount }} examples
+              }
+              &rarr;
+            </span>
+          </a>
+        } @else {
+          <a class="pill pill--dark" routerLink="/states">
+            <span class="pill__icon pill__icon--dark" aria-hidden="true">🗺️</span>
+            <h3>Your state</h3>
+            <p>
+              All {{ states().length }} jurisdictions and {{ totalPlans() }} plans. Tax benefit,
+              K&ndash;12 conformity, contribution ceiling, and the official program description for
+              each.
+            </p>
+            <span class="pill__meta">Look yours up &rarr;</span>
+          </a>
+        }
       }
     </div>
   </div>
@@ -139,6 +127,9 @@
           <p>{{ example.text }}</p>
         </a>
       }
+    </div>
+    <div class="shell examples__more">
+      <a class="btn btn--outline" routerLink="/examples">See every worked example &rarr;</a>
     </div>
   </section>
 }
@@ -189,98 +180,6 @@
               }
             </span>
           </a>
-        </li>
-      }
-    </ul>
-  </div>
-</section>
-
-<section class="stack-lg">
-  <div class="shell history__grid">
-    <div>
-      <p class="eyebrow">1996 &rarr; 2026</p>
-      <h2 class="history__title">Thirty years of getting better</h2>
-      <p class="muted">
-        The account your parents opened for tuition is not the account you have today. Congress has
-        expanded it roughly every four years &mdash; and almost nobody has been told.
-      </p>
-      <a class="btn btn--outline" routerLink="/history">Read the full history &rarr;</a>
-    </div>
-
-    <ol class="timeline">
-      @for (entry of timeline(); track entry.year) {
-        <li>
-          <span class="timeline__year">{{ entry.year }}</span>
-          <h3>{{ entry.title }}</h3>
-          <p>{{ entry.body }}</p>
-        </li>
-      }
-    </ol>
-  </div>
-</section>
-
-<section class="finder">
-  <div class="shell finder__grid">
-    <div>
-      <p class="eyebrow eyebrow--on-dark">The state guide</p>
-      <h2>Nearly every plan is different.</h2>
-      <p class="finder__lede">
-        Every state but Wyoming sponsors at least one plan &mdash; {{ totalPlans() }} of them in
-        this edition. Twenty conform fully to the federal rules; the rest diverge somewhere.
-      </p>
-      <div class="finder__control">
-        <label class="visually-hidden" for="state-picker">Choose a state</label>
-        <select id="state-picker" class="field" (change)="goToState($event)">
-          <option value="">Select the state where you file taxes&hellip;</option>
-          @for (state of states(); track state.slug) {
-            <option [value]="state.slug">{{ state.name }}</option>
-          }
-        </select>
-        <a class="btn btn--amber" routerLink="/states">Compare all states</a>
-      </div>
-    </div>
-
-    <ul class="finder__facts">
-      <li>
-        <strong>13 states</strong> don't allow tax-free K&ndash;12 distributions. California adds a
-        2.5% penalty.
-      </li>
-      <li>
-        <strong>9 states</strong> extend their benefit to any state's plan, so you can shop
-        nationally without losing it.
-      </li>
-      <li>
-        <strong>4 states</strong> give a credit rather than a deduction &mdash; usually the better
-        of the two.
-      </li>
-      <li>
-        <strong>4 states</strong> offer nothing at all, which is exactly when shopping nationally
-        makes sense.
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="stack-lg">
-  <div class="shell mission__grid">
-    <div>
-      <p class="eyebrow">Why this site exists</p>
-      <h2 class="mission__title">
-        The biggest obstacle to a 529 isn't the rules. It's not knowing they exist.
-      </h2>
-      <p class="muted">
-        Parent awareness remains the largest growth opportunity for 529 plans. This book is an
-        attempt to both advertise and clarify the numerous underutilized advantages Section 529
-        plans have for younger children, college students, parents, and grandparents or other
-        benevolent relatives and friends.
-      </p>
-      <a class="link-more" routerLink="/about">About the author and the book &rarr;</a>
-    </div>
-    <ul class="mission__stats">
-      @for (item of awareness(); track item.label) {
-        <li>
-          <span>{{ item.value }}</span>
-          <p>{{ item.label }}</p>
         </li>
       }
     </ul>

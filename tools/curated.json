@@ -1,27 +1,31 @@
 {
-  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing. homeFeatured names the worked examples the front page shows; build-content.mjs lifts their text into site.json so the home page needs no chapter prose.",
+  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing. homeFeatured names the worked examples the front page shows; build-content.mjs lifts their text into site.json so the home page needs no chapter prose. One exception to \"traces to the manuscript\": the headline awareness figure reads 52%, which the author corrected in August 2026; the manuscript still prints the older 54%.",
   "disclaimer": "No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice.",
   "figures": {
     "headline": [
       {
         "value": "17.7M",
         "label": "529 accounts nationwide",
-        "note": "16.9M savings plan accounts plus ~800,000 prepaid tuition accounts, 31 December 2025"
+        "note": "16.9M savings plan accounts plus ~800,000 prepaid tuition accounts",
+        "asOf": "31 December 2025"
       },
       {
         "value": "$602.9B",
         "label": "Total held in 529 accounts",
-        "note": "Up 14.8% from year-end 2024: $576.7B savings, $26.2B prepaid"
+        "note": "Up 14.8% from year-end 2024: $576.7B savings, $26.2B prepaid",
+        "asOf": "31 December 2025"
       },
       {
         "value": "$34,062",
         "label": "Average account balance",
-        "note": "The median likely falls between $10,000 and $18,000"
+        "note": "The median likely falls between $10,000 and $18,000",
+        "asOf": "31 December 2025"
       },
       {
-        "value": "54%",
+        "value": "52%",
         "label": "Of parents can't enroll",
-        "note": "K–12 parents who say they don't know enough about 529 plans"
+        "note": "K–12 parents who say they don't know enough about 529 plans",
+        "asOf": "2026"
       }
     ],
     "keyNumbers": [

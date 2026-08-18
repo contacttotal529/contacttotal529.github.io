@@ -138,7 +138,7 @@ export interface CostsDoc {
 
 export interface SiteDoc {
   figures: {
-    headline: { value: string; label: string; note: string }[];
+    headline: { value: string; label: string; note: string; asOf: string }[];
     keyNumbers: { amount: string; label: string; sub: string; link: [string, string] }[];
     awareness: { value: string; label: string }[];
   };

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import { FEEDBACK_ADDRESS } from '../layout/site-footer';
 import { Seo } from '../core/seo.service';
 
 @Component({
@@ -29,7 +30,7 @@ import { Seo } from '../core/seo.service';
             The book is an attempt to both advertise and clarify the numerous underutilized
             advantages Section 529 plans have for younger children, college students, parents, and
             grandparents or other benevolent relatives and friends. Thirty-five percent of families
-            use a college savings fund; fifty-four percent of parents say they don't know enough
+            use a college savings fund; fifty-two percent of parents say they don't know enough
             about 529 plans to enroll. That gap is the reason this exists.
           </p>
 
@@ -44,6 +45,15 @@ import { Seo } from '../core/seo.service';
           <p>
             Where the book is silent about a state, the site says so rather than guessing. A blank
             field means "not stated in this edition", never "zero".
+          </p>
+
+          <h2 id="feedback">Corrections and questions</h2>
+          <p>
+            The figures and state rules here change every year, and a reader who spots one that has
+            moved is doing everyone a favour. Write to
+            <a [href]="feedbackHref">{{ feedbackAddress }}</a> &mdash; corrections, questions about
+            a rule, or a state whose plan has changed. Nothing is collected from you here; there is
+            no form and no tracking, just an inbox.
           </p>
 
           <h2 id="sources">Sources</h2>
@@ -94,6 +104,23 @@ import { Seo } from '../core/seo.service';
             <a class="btn btn--forest" routerLink="/guide">Chapter by chapter</a>
             <a class="btn btn--outline" routerLink="/states">Look up your state</a>
           </div>
+
+          <div class="side__card">
+            <p class="eyebrow">The printed book</p>
+            <p class="side__note">
+              <strong>Coming soon.</strong> {{ book()?.subtitle }} is being published now; this site
+              carries the guide in the meantime.
+            </p>
+          </div>
+
+          <div class="side__card">
+            <p class="eyebrow">Feedback</p>
+            <p class="side__note">
+              Found something out of date? Write to
+              <a [href]="feedbackHref">{{ feedbackAddress }}</a
+              >.
+            </p>
+          </div>
         </aside>
       </div>
     </section>
@@ -132,6 +159,17 @@ import { Seo } from '../core/seo.service';
       line-height: 1.75;
       color: var(--text);
       max-width: 68ch;
+    }
+
+    .side__note {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 10px 0 0;
+    }
+
+    .side__note a {
+      word-break: break-word;
     }
 
     .sources {
@@ -251,4 +289,7 @@ export class AboutPage {
   readonly totalPlans = this.content.totalPlans;
   readonly sources = computed(() => this.content.statesDoc()?.sources ?? []);
   readonly disclaimer = computed(() => this.content.site()?.disclaimer ?? '');
+
+  readonly feedbackAddress = FEEDBACK_ADDRESS;
+  readonly feedbackHref = `mailto:${FEEDBACK_ADDRESS}?subject=${encodeURIComponent('Total529 site feedback')}`;
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
+import type { Chapter } from '../core/content.models';
 import { Seo } from '../core/seo.service';
 
 const CHAPTER_ICONS: Record<string, string> = {
@@ -31,6 +32,33 @@ const CHAPTER_TINTS: Record<string, string> = {
   comparisons: 'sky',
 };
 
+/**
+ * Card order on the front page, set by the author rather than by book order: the three rows a
+ * newcomer needs first, then the remaining chapters, then the two summary chapters. `states` is
+ * the state-lookup card, not a chapter, and sits deliberately in the middle of the second row.
+ * The foreword is absent on purpose — it is still reachable from /guide.
+ */
+const PILLAR_ORDER = [
+  'basics',
+  'comparisons',
+  'state-differences',
+  'taxes',
+  'states',
+  'fund-selection',
+  'k-12',
+  'post-secondary',
+  'after-graduation',
+  'estate-planning',
+  'maximizing',
+  'history',
+  'federal-tips',
+];
+
+interface Pillar {
+  id: string;
+  chapter: Chapter | null;
+}
+
 @Component({
   selector: 'app-home-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +76,6 @@ export class HomePage {
   }
 
   private readonly content = inject(ContentService);
-  private readonly router = inject(Router);
 
   readonly book = this.content.book;
   readonly site = this.content.site;
@@ -59,21 +86,24 @@ export class HomePage {
   readonly totalPlans = this.content.totalPlans;
 
   readonly headlineFigures = computed(() => this.site()?.figures.headline ?? []);
-  readonly keyNumbers = computed(() => this.site()?.figures.keyNumbers ?? []);
-  readonly awareness = computed(() => this.site()?.figures.awareness ?? []);
-  readonly timeline = computed(() => (this.site()?.timeline ?? []).slice(0, 6));
   readonly quickAnswers = computed(() => (this.site()?.quickAnswers ?? []).slice(0, 9));
+
+  readonly pillars = computed<Pillar[]>(() => {
+    const byId = new Map(this.chapters().map((chapter) => [chapter.id, chapter]));
+    return PILLAR_ORDER.flatMap((id): Pillar[] => {
+      if (id === 'states') return [{ id, chapter: null }];
+      const chapter = byId.get(id);
+      return chapter ? [{ id, chapter }] : [];
+    });
+  });
 
   /** Where each kind of visitor most usefully starts. */
   readonly startingPoints = [
-    { icon: '👶', label: "My child, and they're young", route: ['/guide', 'basics'] },
-    { icon: '🎓', label: "A student who's close to college", route: ['/guide', 'post-secondary'] },
-    { icon: '👵', label: 'My grandchildren', route: ['/guide', 'estate-planning'] },
-    {
-      icon: '🙋',
-      label: 'Myself — school, loans, or licensing',
-      route: ['/guide', 'after-graduation'],
-    },
+    { icon: '👶', label: 'My young child', route: ['/guide', 'basics'] },
+    { icon: '🎓', label: 'A student near or in college', route: ['/guide', 'post-secondary'] },
+    { icon: '🧑‍🎓', label: 'A mid-age college graduate', route: ['/guide', 'after-graduation'] },
+    { icon: '👵', label: 'My grandchildren', route: ['/guide', 'estate-planning', 'superfunding'] },
+    { icon: '🏡', label: 'Estate planning', route: ['/guide', 'estate-planning'] },
   ];
 
   readonly myths = [
@@ -92,7 +122,7 @@ export class HomePage {
     {
       myth: 'Leftover money is wasted.',
       truth:
-        'Up to $35,000 rolls into the beneficiary’s Roth IRA. Another $10,000 can pay down their student loans — and $10,000 more for a sibling’s.',
+        'Up to $35,000 rolls into the beneficiary’s Roth IRA. Another $10,000 can pay down their (or their sibling’s) student loans.',
       route: ['/guide', 'after-graduation', 'roth-rollover'],
     },
   ];
@@ -106,10 +136,5 @@ export class HomePage {
 
   tint(chapterId: string): string {
     return CHAPTER_TINTS[chapterId] ?? 'leaf';
-  }
-
-  goToState(event: Event): void {
-    const slug = (event.target as HTMLSelectElement).value;
-    if (slug) void this.router.navigate(['/states', slug]);
   }
 }
