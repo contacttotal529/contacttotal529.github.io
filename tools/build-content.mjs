@@ -655,6 +655,11 @@ for (const section of allSections) {
         .map((r) => ({ chapterId: r.other.chapterId, id: r.other.id }));
 }
 
+// Three chapters carry no rules and no page links to them, so the site never renders their
+// prose. They stay in book.json as a heading and nothing else — no summary lifted from the
+// text, no chapter file, no loader entry, so none of their prose is shipped at all.
+const HEADING_ONLY = new Set(['forward', 'federal-tips', 'state-differences']);
+
 // book.json is the table of contents and nothing more: titles, counts, and the derived bits
 // above. Every block of prose lives in a per-chapter file beside it.
 const book = {
@@ -668,7 +673,7 @@ const book = {
     title: chapter.title,
     subtitle: chapter.subtitle,
     heading: chapter.heading,
-    summary: chapter.summary,
+    summary: HEADING_ONLY.has(chapter.id) ? null : chapter.summary,
     sectionCount: chapter.sectionCount,
     exampleCount: chapter.exampleCount,
     sections: chapter.sections.map((section) => ({
@@ -694,6 +699,7 @@ mkdirSync(join(OUT_DIR, 'chapters'), { recursive: true });
 writeFileSync(join(OUT_DIR, 'book.json'), JSON.stringify(book));
 
 for (const chapter of chapters) {
+  if (HEADING_ONLY.has(chapter.id)) continue;
   writeFileSync(
     join(OUT_DIR, 'chapters', `${chapter.id}.json`),
     JSON.stringify({
@@ -713,10 +719,12 @@ writeFileSync(
     "import type { ChapterContent } from '../app/core/content.models';",
     '',
     'export const chapterLoaders: Record<string, () => Promise<ChapterContent>> = {',
-    ...chapters.map(
-      (chapter) =>
-        `  '${chapter.id}': () =>\n    import('./chapters/${chapter.id}.json').then((m) => m.default as unknown as ChapterContent),`,
-    ),
+    ...chapters
+      .filter((chapter) => !HEADING_ONLY.has(chapter.id))
+      .map(
+        (chapter) =>
+          `  '${chapter.id}': () =>\n    import('./chapters/${chapter.id}.json').then((m) => m.default as unknown as ChapterContent),`,
+      ),
     '};',
     '',
   ].join('\n'),
