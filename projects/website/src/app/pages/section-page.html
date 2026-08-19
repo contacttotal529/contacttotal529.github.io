@@ -2,13 +2,7 @@
   <article>
     <div class="shell">
       <header class="page-banner">
-        <nav class="crumbs" aria-label="Breadcrumb">
-          <a routerLink="/guide">The guide</a>
-          <span aria-hidden="true">/</span>
-          <a [routerLink]="['/guide', sec.chapterId]">{{ sec.chapterTitle }}</a>
-          <span aria-hidden="true">/</span>
-          <span>Rule {{ ruleNumber() }}</span>
-        </nav>
+        <p class="crumbs">{{ sec.chapterTitle }}</p>
         <h1>{{ sec.title }}</h1>
       </header>
     </div>
@@ -57,26 +51,6 @@
           </section>
         }
 
-        <nav class="pager" aria-label="Rule navigation">
-          @if (neighbours().prev; as prev) {
-            <a class="pager__link" [routerLink]="['/guide', prev.chapterId, prev.id]">
-              <span>&larr; Previous</span>
-              <strong>{{ prev.title }}</strong>
-            </a>
-          } @else {
-            <span></span>
-          }
-          @if (neighbours().next; as next) {
-            <a
-              class="pager__link pager__link--next"
-              [routerLink]="['/guide', next.chapterId, next.id]"
-            >
-              <span>Next &rarr;</span>
-              <strong>{{ next.title }}</strong>
-            </a>
-          }
-        </nav>
-
         <p class="page-disclaimer">{{ disclaimer() }}</p>
       </div>
 
@@ -102,23 +76,9 @@
           </div>
         }
 
-        @if (chapter(); as ch) {
-          <div class="rail__block">
-            <h2>In this chapter</h2>
-            @for (other of ch.sections; track other.id) {
-              <a
-                class="rail__link"
-                [routerLink]="['/guide', ch.id, other.id]"
-                [class.on]="other.id === sec.id"
-                >{{ other.title }}</a
-              >
-            }
-          </div>
-        }
-
         <div class="rail__block">
           <h2>Keep reading</h2>
-          <a class="rail__link" routerLink="/guide">Every chapter and rule</a>
+          <a class="rail__link" routerLink="/examples">Real situations</a>
           <a class="rail__link" routerLink="/states">Your state's rules</a>
           <a class="rail__link" routerLink="/costs">What a degree costs</a>
         </div>
@@ -128,6 +88,6 @@
 } @else {
   <div class="shell stack-lg">
     <h1>Rule not found</h1>
-    <p><a class="link-more" routerLink="/guide">Back to the guide &rarr;</a></p>
+    <p><a class="link-more" routerLink="/search">Search for a rule &rarr;</a></p>
   </div>
 }

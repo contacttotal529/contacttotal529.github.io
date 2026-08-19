@@ -10,7 +10,9 @@
         {{ states().length }} states.
       </p>
       <div class="hero__cta">
-        <a class="btn btn--amber" routerLink="/guide">Start from the beginning &rarr;</a>
+        <a class="btn btn--amber" [routerLink]="['/guide', 'basics', 'you-are-in-control']"
+          >Start with the basics &rarr;</a
+        >
         <a class="btn btn--outline" routerLink="/search">I have a specific question</a>
       </div>
       <p class="hero__trust">
@@ -74,7 +76,7 @@
     <div class="pillars">
       @for (pillar of pillars(); track pillar.id) {
         @if (pillar.chapter; as chapter) {
-          <a class="pill" [routerLink]="['/guide', chapter.id]">
+          <a class="pill" [routerLink]="pillar.route">
             <span
               class="pill__icon"
               [class]="'pill__icon--' + tint(chapter.id)"
@@ -84,19 +86,15 @@
             <h3>{{ chapter.title }}</h3>
             <p>{{ chapter.summary }}</p>
             <span class="pill__meta">
-              @if (chapter.sectionCount) {
-                {{ chapter.sectionCount }} short pages
-              } @else {
-                Essay
-              }
+              {{ chapter.sectionCount }} short pages
               @if (chapter.exampleCount) {
                 &middot; {{ chapter.exampleCount }} examples
               }
               &rarr;
             </span>
           </a>
-        } @else {
-          <a class="pill pill--dark" routerLink="/states">
+        } @else if (pillar.id === 'states') {
+          <a class="pill pill--dark" [routerLink]="pillar.route">
             <span class="pill__icon pill__icon--dark" aria-hidden="true">🗺️</span>
             <h3>Your state</h3>
             <p>
@@ -104,7 +102,17 @@
               K&ndash;12 conformity, contribution ceiling, and the official program description for
               each.
             </p>
-            <span class="pill__meta">Look yours up &rarr;</span>
+            <span class="pill__meta">{{ pillar.label }} &rarr;</span>
+          </a>
+        } @else {
+          <a class="pill" [routerLink]="pillar.route">
+            <span class="pill__icon pill__icon--amber" aria-hidden="true">🕰️</span>
+            <h3>Thirty years of 529 plans</h3>
+            <p>
+              1996 to 2026 — how a state-capital experiment became federal law, and the eight
+              expansions that followed it.
+            </p>
+            <span class="pill__meta">{{ pillar.label }} &rarr;</span>
           </a>
         }
       }
@@ -195,8 +203,10 @@
       $23,000 by age 19 on the same $1,000 a year.
     </p>
     <div class="final__cta">
-      <a class="btn btn--amber" routerLink="/guide/basics">How an account works &rarr;</a>
-      <a class="btn btn--white" routerLink="/guide">Browse the whole guide</a>
+      <a class="btn btn--amber" [routerLink]="['/guide', 'basics', 'you-are-in-control']"
+        >How an account works &rarr;</a
+      >
+      <a class="btn btn--white" routerLink="/search">Search every rule</a>
     </div>
   </section>
 </div>

@@ -61,7 +61,7 @@ import { Seo } from '../core/seo.service';
             <li class="empty">
               <p>Nothing matched that. Try a plainer word &mdash; the book's own vocabulary.</p>
               <p>
-                <a class="link-more" routerLink="/guide">Browse the guide instead &rarr;</a>
+                <a class="link-more" routerLink="/examples">Browse real situations &rarr;</a>
               </p>
             </li>
           }

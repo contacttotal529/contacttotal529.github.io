@@ -33,15 +33,15 @@ const CHAPTER_TINTS: Record<string, string> = {
 };
 
 /**
- * Card order on the front page, set by the author rather than by book order: the three rows a
- * newcomer needs first, then the remaining chapters, then the two summary chapters. `states` is
- * the state-lookup card, not a chapter, and sits deliberately in the middle of the second row.
- * The foreword is absent on purpose — it is still reachable from /guide.
+ * Card order on the front page, set by the author rather than by book order. `states` is the
+ * state-lookup card and `history` is the standalone history page; neither is a chapter.
+ *
+ * Chapters with no page of their own — the foreword, the federal tip summary and the state
+ * differences essay — are absent, because there is nowhere for their card to go.
  */
 const PILLAR_ORDER = [
   'basics',
   'comparisons',
-  'state-differences',
   'taxes',
   'states',
   'fund-selection',
@@ -51,12 +51,13 @@ const PILLAR_ORDER = [
   'estate-planning',
   'maximizing',
   'history',
-  'federal-tips',
 ];
 
 interface Pillar {
   id: string;
   chapter: Chapter | null;
+  route: string[];
+  label: string;
 }
 
 @Component({
@@ -88,22 +89,44 @@ export class HomePage {
   readonly headlineFigures = computed(() => this.site()?.figures.headline ?? []);
   readonly quickAnswers = computed(() => (this.site()?.quickAnswers ?? []).slice(0, 9));
 
+  /**
+   * Each card opens the chapter's first rule rather than a chapter page, so the site answers a
+   * question instead of offering the book to be read straight through.
+   */
   readonly pillars = computed<Pillar[]>(() => {
     const byId = new Map(this.chapters().map((chapter) => [chapter.id, chapter]));
     return PILLAR_ORDER.flatMap((id): Pillar[] => {
-      if (id === 'states') return [{ id, chapter: null }];
+      if (id === 'states')
+        return [{ id, chapter: null, route: ['/states'], label: 'Look yours up' }];
+      if (id === 'history')
+        return [{ id, chapter: null, route: ['/history'], label: 'Read the history' }];
+
       const chapter = byId.get(id);
-      return chapter ? [{ id, chapter }] : [];
+      const first = chapter?.sections[0];
+      if (!chapter || !first) return [];
+      return [{ id, chapter, route: ['/guide', chapter.id, first.id], label: 'Start with rule 1' }];
     });
   });
 
-  /** Where each kind of visitor most usefully starts. */
+  /** The single rule each kind of visitor most usefully starts on. */
   readonly startingPoints = [
-    { icon: '👶', label: 'My young child', route: ['/guide', 'basics'] },
-    { icon: '🎓', label: 'A student near or in college', route: ['/guide', 'post-secondary'] },
-    { icon: '🧑‍🎓', label: 'A mid-age college graduate', route: ['/guide', 'after-graduation'] },
+    { icon: '👶', label: 'My young child', route: ['/guide', 'basics', 'you-are-in-control'] },
+    {
+      icon: '🎓',
+      label: 'A student near or in college',
+      route: ['/guide', 'post-secondary', 'getting-a-plan'],
+    },
+    {
+      icon: '🧑‍🎓',
+      label: 'A mid-age college graduate',
+      route: ['/guide', 'after-graduation', 'continuing-education'],
+    },
     { icon: '👵', label: 'My grandchildren', route: ['/guide', 'estate-planning', 'superfunding'] },
-    { icon: '🏡', label: 'Estate planning', route: ['/guide', 'estate-planning'] },
+    {
+      icon: '🏡',
+      label: 'Estate planning',
+      route: ['/guide', 'estate-planning', 'completed-gifts'],
+    },
   ];
 
   readonly myths = [
@@ -111,7 +134,7 @@ export class HomePage {
       myth: "It's only for college.",
       truth:
         'It is a K–12 account, a trade-school account, a credentialing account, and an estate-planning account too. Up to $20,000 a year can go toward K–12 tuition, curriculum, and tutoring.',
-      route: ['/guide', 'k-12'],
+      route: ['/guide', 'k-12', 'tuition-books-software'],
     },
     {
       myth: 'I lose the money if they skip college.',

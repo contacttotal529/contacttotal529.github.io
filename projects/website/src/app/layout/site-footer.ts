@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 
@@ -22,20 +22,20 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
               >, {{ book()?.edition }}, by {{ book()?.author }}. The book itself is
               <strong>coming soon</strong> in print and ebook.
             </p>
-            <a class="link-more" routerLink="/guide">Read the guide &rarr;</a>
+            <a class="link-more" routerLink="/examples">See the worked examples &rarr;</a>
           </div>
 
           <div>
-            <h2>The guide</h2>
-            @for (chapter of chapters().slice(0, 7); track chapter.id) {
-              <a [routerLink]="['/guide', chapter.id]">{{ chapter.title }}</a>
+            <h2>Start a topic</h2>
+            @for (entry of entryPoints().slice(0, 5); track entry.id) {
+              <a [routerLink]="entry.route">{{ entry.title }}</a>
             }
           </div>
 
           <div>
-            <h2>More chapters</h2>
-            @for (chapter of chapters().slice(7); track chapter.id) {
-              <a [routerLink]="['/guide', chapter.id]">{{ chapter.title }}</a>
+            <h2>More topics</h2>
+            @for (entry of entryPoints().slice(5); track entry.id) {
+              <a [routerLink]="entry.route">{{ entry.title }}</a>
             }
           </div>
 
@@ -167,6 +167,20 @@ export class SiteFooter {
   readonly book = this.content.book;
   readonly chapters = this.content.chapters;
   readonly disclaimer = () => this.content.site()?.disclaimer ?? '';
+
+  /**
+   * Chapters open at their first rule. There is no chapter page to link to, and listing every
+   * rule here would rebuild the table of contents the site deliberately does without.
+   */
+  readonly entryPoints = computed(() =>
+    this.chapters()
+      .filter((chapter) => chapter.sections.length > 0)
+      .map((chapter) => ({
+        id: chapter.id,
+        title: chapter.title,
+        route: ['/guide', chapter.id, chapter.sections[0].id],
+      })),
+  );
 
   /** The site is static, so corrections and questions arrive by mail rather than through a form. */
   readonly feedbackHref = `mailto:${FEEDBACK_ADDRESS}?subject=${encodeURIComponent('Total529 site feedback')}`;

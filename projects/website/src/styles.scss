@@ -389,23 +389,10 @@ button.chip:hover {
 .crumbs {
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--amber-lt);
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.crumbs a {
-  color: var(--amber-lt);
-  text-decoration: none;
-}
-
-.crumbs a:hover {
-  text-decoration: underline;
-}
-
-.crumbs span:last-child {
-  color: #7fa38c;
+  margin: 0 0 4px;
 }
 
 /* ---------------------------------------------------------------- qualified answers */
@@ -513,49 +500,6 @@ button.chip:hover {
   color: var(--muted);
   font-size: 16.5px;
   line-height: 1.65;
-}
-
-/* ---------------------------------------------------------------- pager */
-
-.pager {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 44px;
-}
-
-.pager__link {
-  text-decoration: none;
-  color: var(--text);
-  border: 1px solid var(--line);
-  background: var(--cream);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  display: block;
-}
-
-.pager__link:hover {
-  border-color: var(--moss);
-}
-
-.pager__link--next {
-  text-align: right;
-}
-
-.pager__link span {
-  display: block;
-  font-size: 12.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--moss);
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.pager__link strong {
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.4;
 }
 
 /* ---------------------------------------------------------------- side rail */
@@ -690,14 +634,6 @@ button.chip:hover {
 
   .rail {
     position: static;
-  }
-
-  .pager {
-    grid-template-columns: 1fr;
-  }
-
-  .pager__link--next {
-    text-align: left;
   }
 }
 

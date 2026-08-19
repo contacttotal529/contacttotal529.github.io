@@ -8,15 +8,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home-page').then((m) => m.HomePage),
   },
   {
-    path: 'guide',
-    loadComponent: () => import('./pages/guide-page').then((m) => m.GuidePage),
-  },
-  {
-    path: 'guide/:chapterId',
-    resolve: { chapterContent: chapterContentResolver },
-    loadComponent: () => import('./pages/chapter-page').then((m) => m.ChapterPage),
-  },
-  {
+    // Rules stand alone and are reached by search or by topic. There is deliberately no table
+    // of contents and no chapter page: the site answers a question, it does not serve the book.
     path: 'guide/:chapterId/:sectionId',
     resolve: { chapterContent: chapterContentResolver },
     loadComponent: () => import('./pages/section-page').then((m) => m.SectionPage),

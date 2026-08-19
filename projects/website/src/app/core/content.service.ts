@@ -130,16 +130,6 @@ export class ContentService {
     return this.states().find((s) => s.slug === slug);
   }
 
-  /** Previous/next across the whole book, so the site can still be read cover to cover. */
-  neighbours(chapterId: string, sectionId: string): { prev: Section | null; next: Section | null } {
-    const flat = this.chapters().flatMap((c) => c.sections);
-    const at = flat.findIndex((s) => s.chapterId === chapterId && s.id === sectionId);
-    return {
-      prev: at > 0 ? flat[at - 1] : null,
-      next: at >= 0 && at < flat.length - 1 ? flat[at + 1] : null,
-    };
-  }
-
   /** Rules that discuss the same thing. Scored at build time; resolved here by identity. */
   related(section: Section): Section[] {
     return section.related

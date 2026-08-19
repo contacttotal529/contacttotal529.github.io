@@ -209,7 +209,6 @@ export class SiteHeader {
   readonly taxYear = () => this.content.book()?.taxYear ?? 2026;
 
   readonly links = [
-    { path: '/guide', label: 'The guide' },
     { path: '/examples', label: 'Real situations' },
     { path: '/states', label: 'Your state' },
     { path: '/costs', label: 'College costs' },

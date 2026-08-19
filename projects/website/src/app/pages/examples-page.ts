@@ -54,7 +54,7 @@ import { Seo } from '../core/seo.service';
         @for (group of groups(); track group.chapterId) {
           <section class="group">
             <h3>
-              <a [routerLink]="['/guide', group.chapterId]">{{ group.chapterTitle }}</a>
+              {{ group.chapterTitle }}
               <span class="group__count">{{ group.total }} examples</span>
             </h3>
             <ol class="rules">
@@ -162,14 +162,6 @@ import { Seo } from '../core/seo.service';
       gap: 14px;
       font-size: 22px;
       margin: 0 0 14px;
-    }
-
-    .group h3 a {
-      text-decoration: none;
-    }
-
-    .group h3 a:hover {
-      color: var(--moss);
     }
 
     .group__count {

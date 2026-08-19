@@ -33,8 +33,6 @@ export class SectionPage {
   readonly chapterId = input<string>('');
   readonly sectionId = input<string>('');
 
-  readonly chapter = computed(() => this.content.chapter(this.chapterId()));
-
   readonly section = computed(() => this.content.section(this.chapterId(), this.sectionId()));
 
   readonly blocks = computed(() => this.content.sectionBlocks(this.chapterId(), this.sectionId()));
@@ -48,15 +46,6 @@ export class SectionPage {
       });
     });
   }
-
-  readonly ruleNumber = computed(() => {
-    const chapter = this.chapter();
-    const index = this.content.chapters().findIndex((c) => c.id === this.chapterId());
-    const position = chapter?.sections.findIndex((s) => s.id === this.sectionId()) ?? -1;
-    return index >= 0 && position >= 0 ? `${index + 1}.${position + 1}` : '';
-  });
-
-  readonly neighbours = computed(() => this.content.neighbours(this.chapterId(), this.sectionId()));
 
   readonly related = computed(() => {
     const section = this.section();

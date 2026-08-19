@@ -727,14 +727,7 @@ writeFileSync(
   join(OUT_DIR, 'search-index.json'),
   JSON.stringify({
     entries: [
-      ...chapters.map((chapter) => ({
-        kind: 'chapter',
-        title: chapter.title,
-        context: 'Chapter',
-        route: ['/guide', chapter.id],
-        tokens: tokenise(`${chapter.title} ${chapter.text}`),
-        excerpt: excerptOf(chapter.text || chapter.title),
-      })),
+      // Chapters have no page of their own, so a chapter hit would land on a 404.
       ...allSections.map((section) => ({
         kind: 'section',
         title: section.title,
@@ -823,11 +816,10 @@ for (const w of warnings) console.warn(`  warning: ${w}`);
 // Prerendering gives every route a real HTML file; the sitemap tells crawlers they exist.
 // Generated here so a rule added to the manuscript is listed without anyone remembering to.
 const ORIGIN = 'https://total529.com';
-const STATIC_ROUTES = ['', 'guide', 'examples', 'states', 'costs', 'history', 'reference', 'about'];
+const STATIC_ROUTES = ['', 'examples', 'states', 'costs', 'history', 'reference', 'about'];
 
 const urls = [
   ...STATIC_ROUTES.map((path) => ({ path, priority: path === '' ? '1.0' : '0.8' })),
-  ...chapters.map((c) => ({ path: `guide/${c.id}`, priority: '0.7' })),
   ...chapters.flatMap((c) =>
     c.sections.map((s) => ({ path: `guide/${c.id}/${s.id}`, priority: '0.9' })),
   ),

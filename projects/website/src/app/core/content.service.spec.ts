@@ -85,13 +85,6 @@ describe('ContentService', () => {
     }
   });
 
-  it('walks previous and next across chapter boundaries', () => {
-    const first = service.chapters().find((c) => c.sections.length)!;
-    const { prev, next } = service.neighbours(first.id, first.sections[0].id);
-    expect(prev).toBeNull();
-    expect(next).not.toBeNull();
-  });
-
   it('ranks title matches above body matches when searching', async () => {
     await service.ensureSearchIndex();
     const hits = service.search('tutor');

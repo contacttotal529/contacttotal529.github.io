@@ -19,11 +19,6 @@ const states = statesJson as unknown as { states: { slug: string }[] };
  */
 export const serverRoutes: ServerRoute[] = [
   {
-    path: 'guide/:chapterId',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => book.chapters.map((chapter) => ({ chapterId: chapter.id })),
-  },
-  {
     path: 'guide/:chapterId/:sectionId',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () =>

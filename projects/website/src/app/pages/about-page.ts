@@ -101,7 +101,7 @@ import { Seo } from '../core/seo.service';
 
           <div class="side__card side__card--amber">
             <p class="eyebrow">Start reading</p>
-            <a class="btn btn--forest" routerLink="/guide">Chapter by chapter</a>
+            <a class="btn btn--forest" routerLink="/search">Search for a rule</a>
             <a class="btn btn--outline" routerLink="/states">Look up your state</a>
           </div>
 

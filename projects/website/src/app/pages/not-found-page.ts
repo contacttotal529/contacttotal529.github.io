@@ -14,7 +14,7 @@ import { Seo } from '../core/seo.service';
         It may have moved, or the link may be wrong. The whole book is still one click away.
       </p>
       <div class="cta">
-        <a class="btn btn--forest" routerLink="/guide">Browse the guide</a>
+        <a class="btn btn--forest" routerLink="/search">Search for a rule</a>
         <a class="btn btn--outline" routerLink="/search">Search instead</a>
       </div>
     </div>
