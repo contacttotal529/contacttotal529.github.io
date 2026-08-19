@@ -473,7 +473,7 @@ for (const { boundary, start, end, headingLine } of slices) {
     id: boundary.id,
     chapterId: currentChapter.id,
     chapterTitle: currentChapter.title,
-    title: rawLines[headingLine].trim().replace(/\s+/g, ' '),
+    title: boundary.title ?? rawLines[headingLine].trim().replace(/\s+/g, ' '),
     blocks,
     summary: summarise(blocks),
     exampleCount: blocks.filter((b) => b.type === 'example').length,

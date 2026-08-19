@@ -140,7 +140,6 @@ export interface SiteDoc {
   figures: {
     headline: { value: string; label: string; note: string; asOf: string }[];
     keyNumbers: { amount: string; label: string; sub: string; link: [string, string] }[];
-    awareness: { value: string; label: string }[];
   };
   timeline: { year: string; title: string; body: string }[];
   comparison: {

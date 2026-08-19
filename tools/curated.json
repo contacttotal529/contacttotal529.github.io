@@ -1,38 +1,38 @@
 {
-  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing. homeFeatured names the worked examples the front page shows; build-content.mjs lifts their text into site.json so the home page needs no chapter prose. One exception to \"traces to the manuscript\": the headline awareness figure reads 52%, which the author corrected in August 2026; the manuscript still prints the older 54%.",
+  "_comment": "Facts the manuscript states in prose but that the site needs as structured data. Nothing here is invented: every value traces to a claim in resources/manuscript/full-document.md. Where the manuscript is silent about a state, the field is omitted and the site says so rather than guessing. homeFeatured names the worked examples the front page shows; build-content.mjs lifts their text into site.json so the home page needs no chapter prose.",
   "disclaimer": "No statement or example on this site should be considered a specific recommendation for your personal situation. Investing and tax strategies each carry significant risks. Examples herein may not apply to your situation. Please consult your estate attorney, tax advisor, or financial advisor for personal advice.",
   "figures": {
     "headline": [
       {
         "value": "17.7M",
-        "label": "529 accounts nationwide",
-        "note": "16.9M savings plan accounts plus ~800,000 prepaid tuition accounts",
-        "asOf": "31 December 2025"
+        "label": "Active 529 accounts",
+        "note": "Across 90 plans in all 50 states and D.C., plus roughly 800,000 prepaid tuition accounts",
+        "asOf": "December 2025"
       },
       {
-        "value": "$602.9B",
+        "value": "$603B",
         "label": "Total held in 529 accounts",
-        "note": "Up 14.8% from year-end 2024: $576.7B savings, $26.2B prepaid",
-        "asOf": "31 December 2025"
+        "note": "The value of every 529 account nationwide",
+        "asOf": "December 2025"
       },
       {
-        "value": "$34,062",
+        "value": "$34,088",
         "label": "Average account balance",
-        "note": "The median likely falls between $10,000 and $18,000",
-        "asOf": "31 December 2025"
+        "note": "High enough to show the accounts skew to wealthier families; the median likely falls between $10,000 and $18,000",
+        "asOf": "December 2025"
       },
       {
         "value": "52%",
-        "label": "Of parents can't enroll",
-        "note": "K–12 parents who say they don't know enough about 529 plans",
-        "asOf": "2026"
+        "label": "Of parents didn't know what a 529 was",
+        "note": "Parent awareness remains the largest growth opportunity for 529 plans",
+        "asOf": "2025"
       }
     ],
     "keyNumbers": [
       {
         "amount": "$20,000",
         "label": "K–12 expenses per student, per year",
-        "sub": "Federal cap for tax years beginning in 2026 — double the 2018–2025 cap",
+        "sub": "The federal annual cap as of 2026, up from the $10,000 allowed in 2024",
         "link": ["k-12", "state-k12-conformity"]
       },
       {
@@ -65,24 +65,6 @@
         "sub": "Maximum rate in the Student Aid Index, which replaced the EFC. Grandparent accounts are no longer reported at all — against 20% for a student asset.",
         "link": ["post-secondary", "financial-aid"]
       }
-    ],
-    "awareness": [
-      {
-        "value": "58%",
-        "label": "unaware 529 plans can help cover K–12 education"
-      },
-      {
-        "value": "51%",
-        "label": "unaware plans can be used beyond traditional college"
-      },
-      {
-        "value": "60%+",
-        "label": "unaware plans can pay student loans, roll into a Roth IRA, cover professional certifications, or be funded for family and friends"
-      },
-      {
-        "value": "35%",
-        "label": "of families used a college savings fund in 2025"
-      }
     ]
   },
   "timeline": [
@@ -114,7 +96,7 @@
     {
       "year": "2018",
       "title": "K–12 tuition qualifies",
-      "body": "The Tax Cuts and Jobs Act allows up to $10,000 per student per year for elementary and secondary tuition — public, private, or religious. Thirty-seven states and D.C. adopt conforming rules; a handful decline."
+      "body": "The Tax Cuts and Jobs Act allows up to $10,000 per beneficiary per year for elementary and secondary tuition — public, private, or religious. Thirty-seven states and D.C. adopt conforming rules; a handful decline."
     },
     {
       "year": "2019",
@@ -129,12 +111,12 @@
     {
       "year": "2025",
       "title": "Tutors, credentials, and ABLE",
-      "body": "H.R. 1 — the One Big Beautiful Bill Act, signed 4 July 2025 — broadened K–12 expenses to tutoring, curriculum materials, standardized test fees, dual enrollment and educational therapies, extended eligibility to vocational and professional credentialing, and made 529-to-ABLE rollovers permanent."
+      "body": "H.R. 1 — the One Big Beautiful Bill — doubles the K–12 cap to $20,000 and broadens it beyond tuition to tutors, curriculum materials and standardized test fees. It extends eligibility to vocational and professional credential programs, and removes the expiry on 529-to-ABLE rollovers."
     },
     {
       "year": "2026",
       "title": "Thirty years on",
-      "body": "The K–12 withdrawal cap doubles to $20,000 per beneficiary. Some 17.7 million accounts hold $602.9 billion. Around 500 institutions outside the United States accept 529 funding. Parent awareness remains the biggest growth opportunity."
+      "body": "Thirty years in, some 17.7 million accounts hold around $603 billion across 90 plans. Around 500 institutions outside the United States accept 529 funding. Half of families now save with one — and parent awareness remains the biggest growth opportunity."
     }
   ],
   "comparison": {
@@ -156,7 +138,7 @@
           "Tax-free for qualified expenses, federal and state",
           "Tax-deferred; taxed as ordinary income on withdrawal",
           "Tax-deferred for qualified education expenses",
-          "Taxed annually; \"kiddie tax\" once unearned income tops $2,700 in 2026"
+          "Taxed annually; \"kiddie tax\" once gains top $1,350"
         ],
         "best": 0
       },
@@ -328,7 +310,7 @@
     },
     "credit": {
       "label": "Offer a tax credit rather than a deduction",
-      "detail": "A credit reduces your tax bill dollar-for-dollar rather than reducing taxable income, which usually makes it the better of the two. Five plans provide credits: Indiana, Minnesota, Oregon, Utah and Vermont.",
+      "detail": "A credit reduces your tax bill dollar-for-dollar rather than reducing taxable income, which usually makes it the better of the two. Four plans provide a credit instead of a deduction — Indiana, Oregon, Utah and Vermont — while Minnesota lets you choose between the two.",
       "states": ["Indiana", "Minnesota", "Oregon", "Utah", "Vermont"]
     },
     "noDeduction": {
@@ -357,13 +339,13 @@
     },
     "morningstarGold": {
       "label": "Morningstar Gold rated, November 2025",
-      "detail": "Morningstar's fall 2025 Medalist Ratings gave Gold to five direct-sold plans. It reviewed 59 plans representing more than 90% of industry assets; 31 earned Gold, Silver or Bronze, and no advisor-sold plan earned Gold.",
+      "detail": "Morningstar's 529 ratings, released in November 2025, gave Gold to these five plans for their investment option design and low fees. Plans elsewhere carry higher expense ratios that erode returns over eighteen years.",
       "states": ["Alaska", "Illinois", "Massachusetts", "Pennsylvania", "Utah"]
     }
   },
   "stateSources": [
     {
-      "label": "Morningstar 529 Medalist Ratings",
+      "label": "Morningstar 529 Ratings: The Best Plans of 2025",
       "url": "https://www.morningstar.com/funds/529-ratings-best-plans-2025"
     },
     {
@@ -375,12 +357,20 @@
       "url": "https://www.savingforcollege.com/article/states-that-do-not-conform-with-federal-529-plan-tax-laws"
     },
     {
-      "label": "529 Network plan data (formerly CSPN)",
-      "url": "https://www.529network.org/529-plan-data/"
+      "label": "529 Network (formerly CSPN)",
+      "url": "https://www.529network.org/"
     },
     {
-      "label": "ICI 529 plan statistics, Q4 2025",
-      "url": "https://www.iciglobal.org/research/stats/529s/529s_25_q4"
+      "label": "CSPN plan data, 31 December 2025",
+      "url": "https://www.collegesavings.org/wp-content/uploads/2026/02/CSPN-data-for-12.31.25.pdf"
+    },
+    {
+      "label": "College Savings Foundation parents survey, 2026",
+      "url": "https://collegesavingsfoundation.org/press-releases/parents-survey-2026/"
+    },
+    {
+      "label": "Edward Jones: Americans unaware of 529 plans",
+      "url": "https://www.edwardjones.com/us-en/why-edward-jones/news-media/press-releases/americans-unaware-529-plans"
     }
   ],
   "stateFacts": [
@@ -480,7 +470,7 @@
       "taxBenefit": "unstated",
       "k12": "not-listed",
       "maxContribution": 550000,
-      "maxContributionNote": "Raised from $235,000.",
+      "maxContributionNote": "Raised from $235,000 in July 2026.",
       "recapture": [],
       "notes": []
     },
@@ -498,8 +488,6 @@
       "taxBenefit": "none",
       "taxBenefitDetail": "No state income tax, and therefore no contribution deduction or credit.",
       "k12": "not-listed",
-      "maxContribution": 621411,
-      "maxContributionNote": "Stated as $621,411 in this edition.",
       "recapture": [],
       "notes": [
         "Has built a strong national reputation for low-cost, high-quality direct-sold options."

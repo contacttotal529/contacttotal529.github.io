@@ -3,11 +3,16 @@
 // normalising smart quotes, dashes and whitespace); build-content.mjs fails loudly if any
 // heading stops matching, which is what keeps this file honest when the manuscript is edited.
 
-/** @typedef {{type:'chapter'|'section'|'skip'|'appendix', id?:string, title?:string, heading:string, kind?:string}} Boundary */
+/**
+ * `heading` must match the manuscript verbatim; `title` overrides what the site shows, and is
+ * only for headings the manuscript typos.
+ *
+ * @typedef {{type:'chapter'|'section'|'skip'|'appendix', id?:string, title?:string, heading:string, kind?:string}} Boundary
+ */
 
 /** @type {Boundary[]} */
 export const outline = [
-  { type: 'chapter', id: 'forward', title: 'Foreword', heading: 'Foreword' },
+  { type: 'chapter', id: 'forward', title: 'Foreword', heading: 'Forward' },
   { type: 'skip', heading: 'Table of Contents' },
 
   {
@@ -212,7 +217,7 @@ export const outline = [
   {
     type: 'section',
     id: 'financial-aid',
-    heading: '529 accounts have limited effects on the need-based student aid calculation.',
+    heading: '529 accounts have limited effects on need-based student aid SAI calculations.',
   },
   {
     type: 'section',
@@ -392,7 +397,10 @@ export const outline = [
   {
     type: 'section',
     id: 'vs-coverdell',
-    heading: 'A 529 account is better than a Coverdell ESA.',
+    // The manuscript heading misspells Coverdell as "Coverdale"; its own body text spells it
+    // correctly. Title the page correctly so a reader searching "Coverdell" finds it.
+    heading: 'A 529 account is better than a Coverdale account.',
+    title: 'A 529 account is better than a Coverdell ESA.',
   },
   {
     type: 'section',
@@ -402,7 +410,9 @@ export const outline = [
   {
     type: 'section',
     id: 'vs-trump-account',
-    heading: 'A 529 account is better than a 530A “Trump account” child IRA.',
+    // "529 count" in the manuscript heading is a typo for "529 account".
+    heading: 'A 529 count is better than a 530A “Trump account” child IRA.',
+    title: 'A 529 account is better than a 530A “Trump account” child IRA.',
   },
   {
     type: 'section',
