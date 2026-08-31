@@ -108,10 +108,12 @@
 
 @if (featured().length) {
   <section class="stack-lg examples">
-    <div class="section-head">
-      <p class="eyebrow">Real situations</p>
-      <h2>{{ totalExamples() }} worked examples</h2>
-      <p>Every rule in the book arrives with a family attached to it.</p>
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Real situations</p>
+        <h2>{{ totalExamples() }} worked examples</h2>
+        <p>Every rule in the book arrives with a family attached to it.</p>
+      </div>
     </div>
     <div class="ex-rail">
       @for (example of featured(); track example.name) {
