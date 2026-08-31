@@ -219,9 +219,8 @@ export class SiteHeader {
 
   submit(event: Event): void {
     event.preventDefault();
-    const q = this.query().trim();
-    if (!q) return;
+    if (!this.query().trim()) return;
     this.open.set(false);
-    void this.router.navigate(['/search'], { queryParams: { q } });
+    void this.router.navigate(['/coming-soon']);
   }
 }

@@ -22,38 +22,35 @@ import { Seo } from '../core/seo.service';
         <div>
           <h2>What this site is</h2>
           <p>
-            Total529 publishes <em>{{ book()?.subtitle }}</em> as a website, chapter by chapter.
-            Every rule, worked example and appendix has its own page, unedited &mdash; reorganised
-            so that a rule you need at 11pm is one search away instead of forty pages in.
+            Total529.com is the website for the Total529 book, written to help regular people,
+            educators, accountants, and estate attorneys understand, utilize, and maximize 529
+            accounts. Federal rules are organized and explained with worked examples and comparisons
+            to other account types.
           </p>
           <p>
             The book is an attempt to both advertise and clarify the numerous underutilized
-            advantages IRS Section 529 plans have for young children, vocational school and college
-            students, parents, grandparents, and other benevolent relatives and friends. Half of
-            families now save with a 529 account; as recently as 2025, fifty-two percent of parents
-            said they did not know what a 529 plan was. That gap is the reason this exists.
+            advantages IRS Section 529 plans have for younger children, college students, parents,
+            and grandparents or other benevolent relatives and friends.
           </p>
 
           <h2>How it's put together</h2>
           <p>
-            The manuscript is the single source of truth. The site's chapters, rules, worked
-            examples and appendix tables are generated directly from it, so the text you read here
-            is the text the author wrote. Where the site adds structure &mdash; the state tables,
-            the qualified-expense list, the timeline &mdash; every value traces back to a statement
-            in the book.
+            The site's chapters, rules, worked examples and appendix tables are generated directly
+            from the book. The site adds links and structure &mdash; the state tables, the
+            qualified-expense list, the timeline &mdash; as well as other quick references.
           </p>
           <p>
-            Where the book is silent about a state, the site says so rather than guessing. A blank
-            field means "not stated in this edition", never "zero".
+            There are over 100 changing plans, making this site difficult to keep updated. A blank
+            field in a chart means &ldquo;not stated in this edition&rdquo;, not &ldquo;zero&rdquo;.
           </p>
 
           <h2 id="feedback">Corrections and questions</h2>
           <p>
             The figures and state rules here change every year, and a reader who spots one that has
-            moved is doing everyone a favour. Write to
+            moved is doing everyone a favor. Write to
             <a [href]="feedbackHref">{{ feedbackAddress }}</a> &mdash; corrections, questions about
-            a rule, or a state whose plan has changed. Nothing is collected from you here; there is
-            no form and no tracking, just an inbox.
+            a rule, or a state whose plan has changed. There is no form and no tracking, just an
+            inbox.
           </p>
 
           <h2 id="sources">Sources</h2>
@@ -108,8 +105,7 @@ import { Seo } from '../core/seo.service';
           <div class="side__card">
             <p class="eyebrow">The printed book</p>
             <p class="side__note">
-              <strong>Coming soon.</strong> {{ book()?.subtitle }} is being published now; this site
-              carries the guide in the meantime.
+              <strong>Coming soon.</strong> Total529 is currently in the publishing process.
             </p>
           </div>
 

@@ -52,9 +52,6 @@ export class SectionPage {
     return section ? this.content.related(section) : [];
   });
 
-  /** Dollar and percentage figures the rule itself mentions — no derived numbers. */
-  readonly figures = computed(() => this.section()?.figures ?? []);
-
   readonly watch = computed(() => {
     const key = `${this.chapterId()}/${this.sectionId()}`;
     const groupKey = key in SECTION_WATCH ? SECTION_WATCH[key] : CHAPTER_WATCH[this.chapterId()];

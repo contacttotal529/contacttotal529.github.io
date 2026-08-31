@@ -90,7 +90,7 @@ import { Seo } from '../core/seo.service';
     <section class="shell stack-lg" id="figures">
       <div class="section-head section-head--left">
         <p class="eyebrow">{{ book()?.taxYear }} figures</p>
-        <h2>The numbers that change every year</h2>
+        <h2>Frequently Changing Numbers</h2>
         <p>Check these against the current year before acting on them.</p>
       </div>
 

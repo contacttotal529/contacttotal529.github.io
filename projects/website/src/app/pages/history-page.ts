@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 import { Seo } from '../core/seo.service';
-import { BlockRenderer } from '../shared/block-renderer';
 
 @Component({
   selector: 'app-history-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, BlockRenderer],
   template: `
     <div class="shell">
       <header class="page-banner">
@@ -32,42 +29,6 @@ import { BlockRenderer } from '../shared/block-renderer';
         }
       </ol>
     </section>
-
-    @if (chapter(); as ch) {
-      <section class="essay">
-        <div class="shell shell--narrow">
-          <p class="eyebrow">The full chapter</p>
-          <h2 class="essay__title">A brief history of 529 plans</h2>
-          <app-blocks [blocks]="intro()" />
-          <p class="essay__more">
-            <a class="link-more" routerLink="/examples">See the worked examples &rarr;</a>
-          </p>
-        </div>
-      </section>
-    }
-  `,
-  styles: `
-    .essay {
-      background: var(--sand-2);
-      padding: 66px 0 74px;
-    }
-
-    .essay__title {
-      font-size: 34px;
-      margin: 13px 0 24px;
-    }
-
-    .essay__more {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-    }
-
-    @media (max-width: 900px) {
-      .essay__title {
-        font-size: 26px;
-      }
-    }
   `,
 })
 export class HistoryPage {
@@ -81,6 +42,4 @@ export class HistoryPage {
 
   private readonly content = inject(ContentService);
   readonly timeline = computed(() => this.content.site()?.timeline ?? []);
-  readonly chapter = computed(() => this.content.chapter('history'));
-  readonly intro = computed(() => this.content.chapterIntro('history'));
 }

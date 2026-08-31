@@ -28,7 +28,7 @@ export class StatesPage {
     inject(Seo).set({
       title: 'State 529 plan guide — Total529',
       description:
-        'All 51 jurisdictions and 89 plans: contribution tax benefit, K–12 conformity, aggregate maximum and the official program description the book cites for each.',
+        'All 51 jurisdictions and 89 plans: the plans in each state, K–12 conformity, flagship cost and the official program description the book cites for each.',
     });
   }
 
@@ -57,19 +57,6 @@ export class StatesPage {
           s.plans.some((p) => p.name.toLowerCase().includes(q))),
     );
   });
-
-  benefitLabel(state: StateEntry): string {
-    switch (state.taxBenefit) {
-      case 'credit':
-        return 'Credit';
-      case 'deduction':
-        return 'Deduction';
-      case 'none':
-        return 'None';
-      default:
-        return 'Not stated';
-    }
-  }
 
   setQuery(event: Event): void {
     this.query.set((event.target as HTMLInputElement).value);

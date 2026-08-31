@@ -4,16 +4,15 @@
       <p class="eyebrow">Free &middot; Independent &middot; 30 years of 529</p>
       <h1>More than half of parents <span>didn't know what a 529 was</span>.</h1>
       <p class="hero__lede">
-        Let's fix that. Total529 explains every rule in plain language &mdash; what it means
-        federally, how your state changes it, and what it looks like for a real family.
-        {{ totalSections() }} rules, {{ totalExamples() }} worked examples, all
-        {{ states().length }} states.
+        Total529.com is the website for the Total529 book, written to help regular people,
+        educators, accountants, and estate attorneys understand, utilize, and maximize 529 accounts.
       </p>
       <div class="hero__cta">
         <a class="btn btn--amber" [routerLink]="['/guide', 'basics', 'you-are-in-control']"
           >Start with the basics &rarr;</a
         >
         <a class="btn btn--outline" routerLink="/search">I have a specific question</a>
+        <a class="btn btn--outline" [href]="feedbackHref">{{ feedbackAddress }}</a>
       </div>
       <p class="hero__trust">
         No sign-up. Nothing sold. Reviewed for the {{ book()?.taxYear }} tax year.
@@ -67,10 +66,7 @@
     <div class="section-head">
       <p class="eyebrow">The guide</p>
       <h2>What can a 529 do?</h2>
-      <p>
-        Start anywhere. Each chapter breaks into short pages &mdash; one rule each, with the state
-        exceptions and a worked example attached.
-      </p>
+      <p>Chapter outlines with summary text and examples.</p>
     </div>
 
     <div class="pillars">
@@ -86,14 +82,14 @@
             <h3>{{ chapter.title }}</h3>
             <p>{{ chapter.summary }}</p>
             <span class="pill__meta">
-              {{ chapter.sectionCount }} short pages
+              {{ chapter.sectionCount }} pages
               @if (chapter.exampleCount) {
                 &middot; {{ chapter.exampleCount }} examples
               }
               &rarr;
             </span>
           </a>
-        } @else if (pillar.id === 'states') {
+        } @else {
           <a class="pill pill--dark" [routerLink]="pillar.route">
             <span class="pill__icon pill__icon--dark" aria-hidden="true">🗺️</span>
             <h3>Your state</h3>
@@ -101,16 +97,6 @@
               All {{ states().length }} jurisdictions and {{ totalPlans() }} plans. Tax benefit,
               K&ndash;12 conformity, contribution ceiling, and the official program description the
               book cites for each.
-            </p>
-            <span class="pill__meta">{{ pillar.label }} &rarr;</span>
-          </a>
-        } @else {
-          <a class="pill" [routerLink]="pillar.route">
-            <span class="pill__icon pill__icon--amber" aria-hidden="true">🕰️</span>
-            <h3>Thirty years of 529 plans</h3>
-            <p>
-              1996 to 2026 — how a state-capital experiment became federal law, and the eight
-              expansions that followed it.
             </p>
             <span class="pill__meta">{{ pillar.label }} &rarr;</span>
           </a>
@@ -137,7 +123,7 @@
       }
     </div>
     <div class="shell examples__more">
-      <a class="btn btn--outline" routerLink="/examples">See every worked example &rarr;</a>
+      <a class="btn btn--outline" routerLink="/coming-soon">See every worked example &rarr;</a>
     </div>
   </section>
 }
@@ -151,9 +137,7 @@
         The single most common question, and the one where mistakes cost real money. Each answer
         links to the rule behind it and what to keep in your records.
       </p>
-      <a class="btn btn--forest" routerLink="/reference" fragment="qualified"
-        >See the full list &rarr;</a
-      >
+      <a class="btn btn--forest" routerLink="/coming-soon">See the full list &rarr;</a>
     </div>
 
     <ul class="answers">

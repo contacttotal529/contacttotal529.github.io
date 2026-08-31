@@ -57,9 +57,7 @@
         <tr>
           <th scope="col">State</th>
           <th scope="col">Plans in this edition</th>
-          <th scope="col">Contribution benefit</th>
           <th scope="col">K–12 distributions</th>
-          <th scope="col" class="num">Aggregate max</th>
           <th scope="col" class="num">Flagship cost</th>
         </tr>
       </thead>
@@ -80,28 +78,10 @@
               }
             </td>
             <td>
-              <span
-                class="chip"
-                [class.chip--yes]="state.taxBenefit === 'credit'"
-                [class.chip--no]="state.taxBenefit === 'none'"
-                >{{ benefitLabel(state) }}</span
-              >
-              @if (state.anyPlanDeduction) {
-                <span class="chip chip--amber">Any state's plan</span>
-              }
-            </td>
-            <td>
               @if (state.k12 === 'not-allowed') {
                 <span class="chip chip--no">Not allowed</span>
               } @else {
                 <span class="muted small">Not listed as non-conforming</span>
-              }
-            </td>
-            <td class="num">
-              @if (state.maxContribution) {
-                {{ '$' + state.maxContribution.toLocaleString('en-US') }}
-              } @else {
-                <span class="muted">&mdash;</span>
               }
             </td>
             <td class="num">
@@ -119,8 +99,7 @@
 
   <p class="footnote">
     Blank cells mean the manuscript does not state a figure for that jurisdiction &mdash; not that
-    the figure is zero. Aggregate maximums across all states range from $269,000 to over $675,000.
-    Check the state's own program description before acting.
+    the figure is zero. Check the state's own program description before acting.
   </p>
 
   <div class="sources">

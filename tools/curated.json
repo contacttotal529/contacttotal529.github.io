@@ -44,13 +44,13 @@
       {
         "amount": "$10,000",
         "label": "Toward qualified student loans",
-        "sub": "Lifetime, per beneficiary — and $10,000 more for a sibling",
+        "sub": "Lifetime per beneficiary–or for a sibling.",
         "link": ["after-graduation", "your-own-account-for-loans"]
       },
       {
         "amount": "$190,000",
         "label": "Superfunded by a couple, in one day",
-        "sub": "Five years of gifting at once, per beneficiary, via Form 709",
+        "sub": "Five years of gifting at once, per beneficiary, via IRS Form 709",
         "link": ["estate-planning", "superfunding"]
       },
       {
@@ -255,9 +255,9 @@
       "link": ["k-12", "tuition-books-software"]
     },
     {
-      "item": "A tutor outside your home",
+      "item": "A tutor",
       "status": "conditional",
-      "detail": "The tutoring must happen outside your home, and the tutor must be unrelated to the student and licensed as a teacher, have taught at an eligible institution, or be a subject-matter expert. No IRS case guidance yet — keep receipts.",
+      "detail": "The tutor must be outside of your home unrelated to the student, and be a teacher or subject matter expert.",
       "link": ["k-12", "tutors"]
     },
     {
@@ -267,7 +267,7 @@
       "link": ["k-12", "disability-therapies"]
     },
     {
-      "item": "SAT, ACT, and AP examination fees",
+      "item": "SAT, ACT, and AP preparation course and examination fees",
       "status": "qualified",
       "detail": "Nationally standardized achievement tests and examinations related to college admission. Preparation courses for them qualify too.",
       "link": ["k-12", "tests-and-dual-enrollment"]

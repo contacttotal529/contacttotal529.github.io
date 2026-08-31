@@ -41,7 +41,7 @@
             <ul>
               @for (item of related(); track item.chapterId + item.id) {
                 <li>
-                  <a [routerLink]="['/guide', item.chapterId, item.id]">
+                  <a routerLink="/coming-soon">
                     <span class="related__chapter">{{ item.chapterTitle }}</span>
                     <span class="related__title">{{ item.title }}</span>
                   </a>
@@ -55,27 +55,6 @@
       </div>
 
       <aside class="rail">
-        @if (figures().length) {
-          <div class="rail__block">
-            <h2>Figures in this rule</h2>
-            <ul class="rail__figures">
-              @for (figure of figures(); track figure) {
-                <li>{{ figure }}</li>
-              }
-            </ul>
-          </div>
-        }
-
-        @if (sec.exampleCount) {
-          <div class="rail__block">
-            <h2>Worked examples</h2>
-            <p class="rail__count">{{ sec.exampleCount }}</p>
-            <p class="rail__note">
-              The manuscript attaches a named family to this rule. Look for the boxed examples.
-            </p>
-          </div>
-        }
-
         <div class="rail__block">
           <h2>Keep reading</h2>
           <a class="rail__link" routerLink="/examples">Real situations</a>

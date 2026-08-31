@@ -13,11 +13,3 @@ export const chapterContentResolver: ResolveFn<boolean> = async (route) => {
   if (id) await inject(ContentService).loadChapter(id);
   return true;
 };
-
-/** The same wait for a page that always shows one particular chapter. */
-export function resolveChapter(id: string): ResolveFn<boolean> {
-  return async () => {
-    await inject(ContentService).loadChapter(id);
-    return true;
-  };
-}

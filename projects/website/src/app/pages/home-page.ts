@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
 import type { Chapter } from '../core/content.models';
+import { FEEDBACK_ADDRESS } from '../layout/site-footer';
 import { Seo } from '../core/seo.service';
 
 const CHAPTER_ICONS: Record<string, string> = {
@@ -34,7 +35,7 @@ const CHAPTER_TINTS: Record<string, string> = {
 
 /**
  * Card order on the front page, set by the author rather than by book order. `states` is the
- * state-lookup card and `history` is the standalone history page; neither is a chapter.
+ * state-lookup card, not a chapter.
  *
  * Chapters with no page of their own — the foreword, the federal tip summary and the state
  * differences essay — are absent, because there is nowhere for their card to go.
@@ -50,7 +51,6 @@ const PILLAR_ORDER = [
   'after-graduation',
   'estate-planning',
   'maximizing',
-  'history',
 ];
 
 interface Pillar {
@@ -82,9 +82,11 @@ export class HomePage {
   readonly site = this.content.site;
   readonly chapters = this.content.chapters;
   readonly states = this.content.states;
-  readonly totalSections = this.content.totalSections;
   readonly totalExamples = this.content.totalExamples;
   readonly totalPlans = this.content.totalPlans;
+
+  readonly feedbackAddress = FEEDBACK_ADDRESS;
+  readonly feedbackHref = `mailto:${FEEDBACK_ADDRESS}?subject=${encodeURIComponent('Total529 site feedback')}`;
 
   readonly headlineFigures = computed(() => this.site()?.figures.headline ?? []);
   readonly quickAnswers = computed(() => (this.site()?.quickAnswers ?? []).slice(0, 9));
@@ -98,8 +100,6 @@ export class HomePage {
     return PILLAR_ORDER.flatMap((id): Pillar[] => {
       if (id === 'states')
         return [{ id, chapter: null, route: ['/states'], label: 'Look yours up' }];
-      if (id === 'history')
-        return [{ id, chapter: null, route: ['/history'], label: 'Read the history' }];
 
       const chapter = byId.get(id);
       const first = chapter?.sections[0];
@@ -121,7 +121,11 @@ export class HomePage {
       label: 'A mid-age college graduate',
       route: ['/guide', 'after-graduation', 'continuing-education'],
     },
-    { icon: '👵', label: 'My grandchildren', route: ['/guide', 'estate-planning', 'superfunding'] },
+    {
+      icon: '👵',
+      label: 'My grandchildren',
+      route: ['/guide', 'basics', 'unlimited-accounts-owner'],
+    },
     {
       icon: '🏡',
       label: 'Estate planning',

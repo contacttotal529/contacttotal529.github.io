@@ -877,7 +877,16 @@ for (const w of warnings) console.warn(`  warning: ${w}`);
 // Prerendering gives every route a real HTML file; the sitemap tells crawlers they exist.
 // Generated here so a rule added to the manuscript is listed without anyone remembering to.
 const ORIGIN = 'https://total529.com';
-const STATIC_ROUTES = ['', 'examples', 'states', 'costs', 'history', 'reference', 'about'];
+const STATIC_ROUTES = [
+  '',
+  'examples',
+  'states',
+  'costs',
+  'history',
+  'reference',
+  'about',
+  'coming-soon',
+];
 
 const urls = [
   ...STATIC_ROUTES.map((path) => ({ path, priority: path === '' ? '1.0' : '0.8' })),

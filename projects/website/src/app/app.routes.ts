@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { chapterContentResolver, resolveChapter } from './core/chapter.resolver';
+import { chapterContentResolver } from './core/chapter.resolver';
 
 export const routes: Routes = [
   {
@@ -32,7 +32,6 @@ export const routes: Routes = [
   },
   {
     path: 'history',
-    resolve: { chapterContent: resolveChapter('history') },
     loadComponent: () => import('./pages/history-page').then((m) => m.HistoryPage),
   },
   {
@@ -42,6 +41,11 @@ export const routes: Routes = [
   {
     path: 'search',
     loadComponent: () => import('./pages/search-page').then((m) => m.SearchPage),
+  },
+  {
+    // Every link that would take a reader past the published sample lands here.
+    path: 'coming-soon',
+    loadComponent: () => import('./pages/coming-soon-page').then((m) => m.ComingSoonPage),
   },
   {
     path: 'about',

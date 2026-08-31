@@ -44,31 +44,15 @@ import { Seo } from '../core/seo.service';
       <div class="shell">
         <div class="section-head section-head--left">
           <p class="eyebrow">Every example</p>
-          <h2>Which rules come with a worked example?</h2>
+          <h2>The rest arrive with the book.</h2>
           <p>
-            {{ rulesWithExamples() }} of the guide's {{ totalSections() }} rules do. Open the rule
-            to read its example in full.
+            Those five are the sample; the rest of the families &mdash; and the rules they are
+            attached to &mdash; arrive with the book itself.
           </p>
+          <a class="btn btn--forest" routerLink="/coming-soon"
+            >Total529, the book: Coming Soon &rarr;</a
+          >
         </div>
-
-        @for (group of groups(); track group.chapterId) {
-          <section class="group">
-            <h3>
-              {{ group.chapterTitle }}
-              <span class="group__count">{{ group.total }} examples</span>
-            </h3>
-            <ol class="rules">
-              @for (rule of group.rules; track rule.id) {
-                <li>
-                  <a [routerLink]="['/guide', group.chapterId, rule.id]">
-                    <span class="rules__title">{{ rule.title }}</span>
-                    <span class="rules__count">{{ rule.exampleCount }}</span>
-                  </a>
-                </li>
-              }
-            </ol>
-          </section>
-        }
       </div>
     </section>
   `,
@@ -151,71 +135,9 @@ import { Seo } from '../core/seo.service';
       margin-top: 56px;
     }
 
-    .group {
-      border-top: 1px solid var(--line);
-      padding: 26px 0;
-    }
-
-    .group h3 {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      font-size: 22px;
-      margin: 0 0 14px;
-    }
-
-    .group__count {
-      font-size: 12.5px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--faint);
-      font-weight: 700;
-    }
-
-    .rules {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      columns: 2;
-      column-gap: 36px;
-    }
-
-    .rules li {
-      break-inside: avoid;
-    }
-
-    .rules a {
-      display: flex;
-      gap: 14px;
-      align-items: baseline;
-      text-decoration: none;
-      color: var(--text);
-      padding: 9px 12px;
-      border-radius: var(--radius-sm);
-    }
-
-    .rules a:hover {
-      background: var(--cream);
-      color: var(--moss);
-    }
-
-    .rules__title {
-      font-size: 16px;
-      line-height: 1.45;
-    }
-
-    .rules__count {
-      margin-left: auto;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--faint);
-    }
-
     @media (max-width: 900px) {
-      .cards,
-      .rules {
+      .cards {
         grid-template-columns: 1fr;
-        columns: 1;
       }
     }
   `,
@@ -225,36 +147,17 @@ export class ExamplesPage {
     inject(Seo).set({
       title: 'Real situations — Total529',
       description:
-        'Every worked example in Understanding, Using, and Maximizing 529 Accounts, indexed by the rule it demonstrates — grandparents, students, parents and employers.',
+        'Five worked examples from Understanding, Using, and Maximizing 529 Accounts, each on the page of the rule it demonstrates — grandparents, students, parents and employers.',
     });
   }
 
   private readonly content = inject(ContentService);
 
   readonly totalExamples = this.content.totalExamples;
-  readonly totalSections = this.content.totalSections;
-  readonly featured = computed(() => this.content.site()?.highlights.featured ?? []);
 
   /**
-   * An index rather than the examples themselves: the prose lives in the per-chapter files, and
-   * lifting all of it here would make this page a copy of the book.
+   * The site publishes five of the examples as a sample; the rest ship with the book, so the rule
+   * index that used to live under them now points at /coming-soon.
    */
-  readonly groups = computed(() =>
-    this.content
-      .chapters()
-      .map((chapter) => ({
-        chapterId: chapter.id,
-        chapterTitle: chapter.title,
-        rules: chapter.sections.filter((section) => section.exampleCount > 0),
-      }))
-      .filter((group) => group.rules.length > 0)
-      .map((group) => ({
-        ...group,
-        total: group.rules.reduce((n, rule) => n + rule.exampleCount, 0),
-      })),
-  );
-
-  readonly rulesWithExamples = computed(() =>
-    this.groups().reduce((n, group) => n + group.rules.length, 0),
-  );
+  readonly featured = computed(() => this.content.site()?.highlights.featured ?? []);
 }
