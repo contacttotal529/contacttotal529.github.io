@@ -28,10 +28,10 @@ import { Seo } from '../core/seo.service';
           </p>
           <p>
             The book is an attempt to both advertise and clarify the numerous underutilized
-            advantages Section 529 plans have for younger children, college students, parents, and
-            grandparents or other benevolent relatives and friends. Half of families now save with a
-            529 account; as recently as 2025, fifty-two percent of parents said they did not know
-            what a 529 plan was. That gap is the reason this exists.
+            advantages IRS Section 529 plans have for young children, vocational school and college
+            students, parents, grandparents, and other benevolent relatives and friends. Half of
+            families now save with a 529 account; as recently as 2025, fifty-two percent of parents
+            said they did not know what a 529 plan was. That gap is the reason this exists.
           </p>
 
           <h2>How it's put together</h2>

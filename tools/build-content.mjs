@@ -7,8 +7,8 @@
 //
 //   node tools/build-content.mjs
 //
-// Fails with a non-zero exit if an outline heading no longer matches the manuscript, so a
-// silently half-parsed book can never reach the build.
+// Fails with a non-zero exit if an outline heading or a declared table no longer matches the
+// manuscript, so a silently half-parsed book can never reach the build.
 //
 // The manuscript lives in a private submodule (see resources/manuscript/README.md): this repo
 // is public to serve GitHub Pages, and the book is not.
@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { outline } from './book-outline.mjs';
+import { outline, tables } from './book-outline.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE = join(root, 'resources', 'manuscript', 'full-document.md');
@@ -118,24 +118,49 @@ const stripBullet = (line) =>
     .replace(/^\*\s*/, '')
     .trim();
 
+const tableFor = (id) => (id ? tables.find((t) => t.section === id) : undefined);
+
 /**
- * The "Teacher vs. Tutor" comparison is the manuscript's only real table outside the
- * appendices, and it arrives as one cell per line. Rebuild it rather than emit 15 stray
- * paragraphs.
+ * Rebuild a declared table (see `tables` in book-outline.mjs) from the one-cell-per-line run
+ * the manuscript stores it as. Pinned by first and last cell and checked against the declared
+ * column count, so a table that drifts fails the build rather than silently becoming several
+ * dozen one-word paragraphs.
  */
-function extractTutorTable(groups) {
-  const index = groups.findIndex((g) => normalise(g[0]) === 'feature');
-  if (index === -1) return groups;
+function extractTable(lines, spec) {
+  const trimmed = lines.map((l) => l.trim());
+  const first = trimmed.findIndex((l) => normalise(l) === normalise(spec.firstCell));
+  const last =
+    first === -1
+      ? -1
+      : trimmed.findIndex((l, i) => i >= first && normalise(l) === normalise(spec.lastCell));
 
-  const cells = groups[index].map((l) => l.trim());
-  if (cells.length < 12) return groups;
+  if (first === -1 || last === -1) {
+    throw new Error(
+      `Table for section "${spec.section}" not found: ` +
+        `${first === -1 ? `first cell "${spec.firstCell}"` : `last cell "${spec.lastCell}"`} ` +
+        `is missing.\nFix the \`tables\` list in tools/book-outline.mjs or the manuscript.`,
+    );
+  }
 
-  const header = cells.slice(0, 3);
+  const cells = [...(spec.headerCells ?? []), ...trimmed.slice(first, last + 1).filter(Boolean)];
+  if (cells.length % spec.columns !== 0) {
+    throw new Error(
+      `Table for section "${spec.section}" has ${cells.length} cells, which is not a multiple ` +
+        `of the declared ${spec.columns} columns.\n` +
+        `Fix the \`tables\` list in tools/book-outline.mjs or the manuscript.`,
+    );
+  }
+
   const rows = [];
-  for (let i = 3; i + 2 < cells.length; i += 3) rows.push(cells.slice(i, i + 3));
+  for (let i = spec.columns; i < cells.length; i += spec.columns) {
+    rows.push(cells.slice(i, i + spec.columns));
+  }
 
-  const table = { type: 'table', header, rows };
-  return [...groups.slice(0, index), table, ...groups.slice(index + 1)];
+  return {
+    table: { type: 'table', header: cells.slice(0, spec.columns), rows },
+    before: lines.slice(0, first),
+    after: lines.slice(last + 1),
+  };
 }
 
 /**
@@ -225,6 +250,7 @@ function segmentProse(body, links) {
   let prose = [];
   let items = [];
   let lead = null;
+  let bulleted = false;
 
   const flushProse = () => {
     if (prose.length) blocks.push({ type: 'prose', paragraphs: prose, links: [] });
@@ -239,19 +265,26 @@ function segmentProse(body, links) {
     }
     items = [];
     lead = null;
+    bulleted = false;
   };
+
+  // An unmarked list runs on until a line too long to be an item. Bulleted runs keep the
+  // stricter test: the manuscript drops unbulleted asides between bullets (cross-references
+  // like "See K-12, What is a 'tutor', p48."), and those are not items.
+  const looksLikeItem = (l) => /^[a-z]/.test(l) || (!bulleted && l.length <= 90);
 
   for (let i = 0; i < body.length; i += 1) {
     const line = body[i].trim();
     const previous = i > 0 ? body[i - 1].trim() : '';
     const continuesColonList =
-      items.length > 0 ? /^[a-z]/.test(line) : previous.endsWith(':') && /^[a-z]/.test(line);
+      items.length > 0 ? looksLikeItem(line) : previous.endsWith(':') && looksLikeItem(line);
 
     if (isBullet(line)) {
       if (!items.length) {
         // A short trailing line before the run reads as the list's lead-in.
         if (prose.length && prose[prose.length - 1].endsWith(':')) lead = prose.pop();
         flushProse();
+        bulleted = true;
       }
       items.push(stripBullet(line));
     } else if (continuesColonList) {
@@ -276,13 +309,19 @@ function segmentProse(body, links) {
   return blocks;
 }
 
-function toBlocks(lines) {
-  return splitOnMarkers(extractTutorTable(groupLines(lines)))
-    .flatMap((group) => {
-      const result = classify(group);
-      return Array.isArray(result) ? result : [result];
-    })
-    .filter((b) => b && (b.type !== 'prose' || b.paragraphs.length || b.links.length));
+function toBlocks(lines, spec) {
+  const run = (source) =>
+    splitOnMarkers(groupLines(source))
+      .flatMap((group) => {
+        const result = classify(group);
+        return Array.isArray(result) ? result : [result];
+      })
+      .filter((b) => b && (b.type !== 'prose' || b.paragraphs.length || b.links.length));
+
+  if (!spec) return run(lines);
+
+  const { table, before, after } = extractTable(lines, spec);
+  return [...run(before), table, ...run(after)];
 }
 
 function plainText(blocks) {
@@ -410,15 +449,29 @@ function parseCosts(lines) {
   return { rows, national };
 }
 
+/**
+ * The appendix opens with intro sentences, the last of which runs on to a colon, and the family
+ * members follow it as an unbroken run of lines. Cutting the run at the first blank line
+ * matters: unrelated citations are parked below the list, separated by blank lines, and would
+ * otherwise be listed as relatives.
+ */
 function parseFamily(lines) {
-  const cells = lines.map((l) => l.trim()).filter(Boolean);
-  // Intro sentences run on to a colon; every family member is its own full-stop line.
-  const lead = cells.filter((c) => c.endsWith(':'));
-  const items = cells
-    .filter((c) => !lead.includes(c))
-    .map((c) => c.replace(BULLET_RE, '').trim())
-    .filter((c) => c.length > 3);
-  return { lead, items };
+  const trimmed = lines.map((l) => l.trim());
+  const leadEnd = trimmed.reduce((last, c, i) => (c.endsWith(':') ? i : last), -1);
+  if (leadEnd === -1) throw new Error('Appendix 3 has no "including:" lead-in line');
+
+  const lead = trimmed.slice(0, leadEnd + 1).filter(Boolean);
+
+  const items = [];
+  for (const line of trimmed.slice(leadEnd + 1)) {
+    if (!line) {
+      if (items.length) break;
+      continue;
+    }
+    items.push(line.replace(BULLET_RE, '').trim());
+  }
+
+  return { lead, items: items.filter((c) => c.length > 3) };
 }
 
 // ---------------------------------------------------------------- assemble
@@ -458,7 +511,7 @@ for (const { boundary, start, end, headingLine } of slices) {
       title: boundary.title,
       subtitle: boundary.subtitle ?? null,
       heading: rawLines[headingLine].trim(),
-      intro: toBlocks(lines),
+      intro: toBlocks(lines, tableFor(boundary.id)),
       sections: [],
     };
     currentChapter.summary = summarise(currentChapter.intro);
@@ -468,7 +521,7 @@ for (const { boundary, start, end, headingLine } of slices) {
 
   if (!currentChapter) throw new Error(`Section "${boundary.heading}" appears before any chapter`);
 
-  const blocks = toBlocks(lines);
+  const blocks = toBlocks(lines, tableFor(boundary.id));
   currentChapter.sections.push({
     id: boundary.id,
     chapterId: currentChapter.id,
@@ -666,7 +719,7 @@ const book = {
   title: 'Total529.com',
   subtitle: 'Understanding, Using, and Maximizing 529 Accounts',
   edition: '529 30th Anniversary Edition',
-  author: 'C. Richard Hopkins, MD, CRPC',
+  author: 'C. Richard Hopkins, MD, CRPC®',
   taxYear: 2026,
   chapters: chapters.map((chapter) => ({
     id: chapter.id,

@@ -28,7 +28,7 @@ export class StatesPage {
     inject(Seo).set({
       title: 'State 529 plan guide — Total529',
       description:
-        'All 51 jurisdictions and 89 plans: contribution tax benefit, K–12 conformity, aggregate maximum and the official program description for each.',
+        'All 51 jurisdictions and 89 plans: contribution tax benefit, K–12 conformity, aggregate maximum and the official program description the book cites for each.',
     });
   }
 

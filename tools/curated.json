@@ -120,7 +120,13 @@
     }
   ],
   "comparison": {
-    "columns": ["529 Plan", "530A \"Trump Account\"", "Coverdell ESA", "UGMA / UTMA"],
+    "columns": [
+      "529 Plan",
+      "530A \"Trump Account\"",
+      "Coverdell ESA",
+      "UGMA / UTMA",
+      "Child Roth IRA"
+    ],
     "rows": [
       {
         "label": "State tax break on contributions",
@@ -128,7 +134,8 @@
           "37 states and D.C. offer a deduction or credit",
           "None — after-tax dollars only",
           "None",
-          "None"
+          "None",
+          "None — no state or federal deduction or credit"
         ],
         "best": 0
       },
@@ -138,7 +145,8 @@
           "Tax-free for qualified expenses, federal and state",
           "Tax-deferred; taxed as ordinary income on withdrawal",
           "Tax-deferred for qualified education expenses",
-          "Taxed annually; \"kiddie tax\" once gains top $1,350"
+          "Taxed annually; \"kiddie tax\" once gains top $1,350",
+          "Tax-deferred; tax-free from age 59½"
         ],
         "best": 0
       },
@@ -146,15 +154,22 @@
         "label": "Annual contribution cap",
         "values": [
           "No cap; superfund $95,000 individual / $190,000 couple",
-          "$5,000 per child from all sources; employer may fund $2,500",
+          "$5,000 per child from all sources; one account per child",
           "$2,000 per student",
-          "Gift-tax limits"
+          "Gift-tax limits",
+          "$7,500 in 2026, and only against the child’s own earned income"
         ],
         "best": 0
       },
       {
         "label": "Owner income limit",
-        "values": ["None", "None", "$110,000 single / $220,000 joint MAGI", "None"],
+        "values": [
+          "None",
+          "None",
+          "$110,000 single / $220,000 joint MAGI",
+          "None",
+          "None, but the child must have documented earned income"
+        ],
         "best": 0
       },
       {
@@ -163,7 +178,8 @@
           "The account owner, permanently",
           "The child — may liquidate entirely",
           "Funds must be used by age 30",
-          "The child, with no restrictions"
+          "The child, with no restrictions",
+          "The child, for any purpose"
         ],
         "best": 0
       },
@@ -173,7 +189,8 @@
           "5.64% parent-owned; grandparent accounts not reported",
           "Likely 20% as a student asset",
           "5.64% as a parental asset",
-          "20% as a student asset"
+          "20% as a student asset",
+          "0% while no distribution is taken"
         ],
         "best": 0
       },
@@ -181,9 +198,10 @@
         "label": "Roth IRA rollover",
         "values": [
           "Up to $35,000, regardless of beneficiary income",
-          "Converts to a traditional IRA; conversion is taxable",
+          "Converts to a traditional IRA; converting before 59½ is taxed and penalised",
           "Not available",
-          "Not available"
+          "Not available",
+          "Not applicable — it is already a Roth"
         ],
         "best": 0
       },
@@ -193,7 +211,30 @@
           "Any family member, unlimited, no fee",
           "No",
           "Limited",
-          "Never — irrevocably the named child's"
+          "Never — irrevocably the named child's",
+          "Never — one account per person"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Use for K–12 expenses",
+        "values": [
+          "Up to $20,000 a year, tax-free in most states",
+          "No — no distributions at all before age 18",
+          "Qualified, and historically its main draw",
+          "Yes, but taxed as it grows",
+          "Contributions only"
+        ],
+        "best": 0
+      },
+      {
+        "label": "Investment choice",
+        "values": [
+          "Many portfolios, across any number of state plans",
+          "A single portfolio fund option",
+          "Historically more options than a 529",
+          "Many",
+          "Many"
         ],
         "best": 0
       }
@@ -216,7 +257,7 @@
     {
       "item": "A tutor outside your home",
       "status": "conditional",
-      "detail": "The tutor must be unrelated to the student and licensed as a teacher, have taught at an eligible institution, or be a subject-matter expert. No IRS case guidance yet — keep receipts.",
+      "detail": "The tutoring must happen outside your home, and the tutor must be unrelated to the student and licensed as a teacher, have taught at an eligible institution, or be a subject-matter expert. No IRS case guidance yet — keep receipts.",
       "link": ["k-12", "tutors"]
     },
     {
@@ -228,7 +269,7 @@
     {
       "item": "SAT, ACT, and AP examination fees",
       "status": "qualified",
-      "detail": "Nationally standardized achievement tests and examinations related to college admission.",
+      "detail": "Nationally standardized achievement tests and examinations related to college admission. Preparation courses for them qualify too.",
       "link": ["k-12", "tests-and-dual-enrollment"]
     },
     {
@@ -388,8 +429,8 @@
         "Entity accounts have deposit rates of a single filer — a 2026 maximum of $2,560 per beneficiary ($5,120 joint).",
         "my529 reports a transfer to the Utah State Tax Commission for likely taxation when a Utah taxpayer moves money from an account whose beneficiary was under 19 when designated to one whose beneficiary was 19 or older.",
         "For K–12 expenses, my529 will issue a check only to the account owner.",
-        "Rollovers for a different beneficiary are limited to 2 times per year.",
-        "No minimum initial contribution."
+        "No minimum initial contribution.",
+        "The plan offers its own prepaid card, which can carry merchant and product restrictions that help keep expenses qualified."
       ]
     },
     {
@@ -438,7 +479,7 @@
       "k12": "not-allowed",
       "recapture": [],
       "notes": [
-        "Twelve states and D.C. charge a state estate tax; Oregon's reaches 16% on estates over $1,000,000. There is no state estate tax on 529 assets."
+        "Twelve states and D.C. charge their own state estate tax, in various forms and up to 35%. There is no state estate tax on 529 assets."
       ]
     },
     {
@@ -447,7 +488,9 @@
       "taxBenefitDetail": "Provides a tax credit rather than a deduction.",
       "k12": "not-allowed",
       "recapture": ["Roth IRA conversions"],
-      "notes": []
+      "notes": [
+        "The plan offers its own prepaid card, which can carry merchant and product restrictions that help keep expenses qualified."
+      ]
     },
     {
       "state": "Minnesota",
@@ -701,7 +744,7 @@
       "k12": "not-listed",
       "recapture": [],
       "notes": [
-        "Washington charges a state estate tax reaching 35% over $3,000,000. There is no state estate tax on 529 assets."
+        "Charges a state estate tax; the manuscript’s worked example turns on 529 assets sitting outside the taxable estate. There is no state estate tax on 529 assets."
       ]
     },
     {
@@ -718,15 +761,15 @@
     "federal-tips": "The whole federal framework in one place: control, deposits, taxes, K–12, college, life after graduation, and estate planning.",
     "history": "How a state-capital experiment became federal law in 1996, and the eight expansions that followed it.",
     "state-differences": "Every state but Wyoming runs its own plan with its own rules. What actually varies, and what to check before choosing one.",
-    "basics": "Owner, beneficiary, successor — who controls the money, how to change any of it without a fee, and every route for getting money in.",
+    "basics": "Owner, beneficiary, successor — who controls the money, how to change any of it without a fee, how to roll it to another state, and every route for getting money in.",
     "taxes": "Deduction or credit, tax-free growth, contribution ceilings and deadlines, and exactly what a non-qualified withdrawal costs you.",
-    "fund-selection": "Target-date against static allocations, the two-changes-a-year rule, the real risk of loss, and why starting early beats timing the market.",
+    "fund-selection": "What you need to open an account, target-date against static allocations, the two-changes-a-year rule, the real risk of loss, and why starting early beats timing the market.",
     "k-12": "Private tuition, curriculum and software, tutors, therapies and test fees — plus the thirteen states that don't allow any of it.",
     "post-secondary": "Qualified schools, room and board, computers, apprenticeships, credentials and scholarships — and how a 529 affects financial aid.",
     "after-graduation": "Student loans, transfers down the family, the Roth rollover, and paying for licensing and continuing education across a whole career.",
     "estate-planning": "Completed gifts, superfunding, generation-skipping transfer tax, bankruptcy protection, and moving wealth across generations.",
     "maximizing": "Five advanced playbooks — funding, K–12, post-secondary, after graduation, and estate planning.",
-    "comparisons": "Head to head against prepaid tuition plans, Coverdell ESAs, UGMA/UTMA custodial accounts, and the new 530A “Trump account”."
+    "comparisons": "Head to head against prepaid tuition plans, Coverdell ESAs, UGMA/UTMA custodial accounts, a child Roth IRA, and the new 530A “Trump account”."
   },
   "homeFeatured": [
     {
@@ -748,7 +791,7 @@
     {
       "chapter": "basics",
       "section": "change-successor",
-      "index": 0,
+      "index": 1,
       "name": "Isaac",
       "tag": "Grandparent · Control",
       "tone": "gp"
@@ -757,7 +800,7 @@
       "chapter": "basics",
       "section": "employers-and-trusts",
       "index": 0,
-      "name": "Don",
+      "name": "Dave",
       "tag": "Employer · Institutional account",
       "tone": "business"
     },

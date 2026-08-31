@@ -10,6 +10,36 @@
  * @typedef {{type:'chapter'|'section'|'skip'|'appendix', id?:string, title?:string, heading:string, kind?:string}} Boundary
  */
 
+/**
+ * Tables arrive from the manuscript as one cell per line, indistinguishable from a run of very
+ * short paragraphs, so each one is declared here and pinned by its first and last cell. Without
+ * this a table renders as several dozen stray one-word paragraphs.
+ *
+ * `columns` counts the label column. `headerCells` fills in header cells the manuscript leaves
+ * blank; anything else is read from the source.
+ *
+ * @typedef {{section:string, columns:number, firstCell:string, lastCell:string, headerCells?:string[]}} TableSpec
+ */
+
+/** @type {TableSpec[]} */
+export const tables = [
+  {
+    section: 'what-is-a-tutor',
+    columns: 3,
+    firstCell: 'Feature',
+    lastCell: "Customizes the pace exclusively to the individual student's needs.",
+  },
+  {
+    section: 'vs-trump-account',
+    columns: 5,
+    // The label column's header cell is blank in the manuscript. "Feature" is the word the
+    // book's own Teacher-vs-Tutor table uses for the same column.
+    headerCells: ['Feature'],
+    firstCell: '530A Trump',
+    lastCell: 'NA',
+  },
+];
+
 /** @type {Boundary[]} */
 export const outline = [
   { type: 'chapter', id: 'forward', title: 'Foreword', heading: 'Forward' },
@@ -69,6 +99,11 @@ export const outline = [
   },
   {
     type: 'section',
+    id: 'rollover-to-another-state',
+    heading: 'You can roll-over your account to another state’s plan at any time.',
+  },
+  {
+    type: 'section',
     id: 'unlimited-accounts-owner',
     heading: 'Account owners can have unlimited family and friend beneficiary accounts.',
   },
@@ -103,7 +138,7 @@ export const outline = [
   {
     type: 'section',
     id: 'family-transfers',
-    heading: 'Transfers may be made between accounts of family members.',
+    heading: 'Transfers may be made between accounts of family members without penalty.',
   },
   {
     type: 'section',
@@ -143,7 +178,6 @@ export const outline = [
     id: 'contribution-deadlines',
     heading: 'Contribution deadlines correspond to the current calendar/tax year.',
   },
-  { type: 'section', id: 'rollovers', heading: 'Account Rollovers are allowed.' },
   { type: 'section', id: 'receiving-distributions', heading: 'Receiving Distributions' },
   {
     type: 'section',
@@ -160,9 +194,15 @@ export const outline = [
   {
     type: 'chapter',
     id: 'fund-selection',
-    title: 'Fund Selection & Distribution Logistics',
-    heading: 'Fund Selection and Logistics of Distribution',
+    title: 'Signing Up, Fund Selection & Distribution Logistics',
+    heading: 'Signing Up, Fund Selection, and Distribution Logistics',
   },
+  {
+    type: 'section',
+    id: 'signing-up',
+    heading: 'You will need names, social security numbers, and addresses.',
+  },
+  { type: 'section', id: 'choosing-funds', title: 'Fund Selection', heading: 'Fund Selection.' },
   {
     type: 'section',
     id: 'changing-allocation',
@@ -211,7 +251,7 @@ export const outline = [
     title: 'Post-Secondary School',
     heading: 'Post- Secondary school',
   },
-  { type: 'section', id: 'getting-a-plan', heading: 'Getting a Plan' },
+  { type: 'section', id: 'getting-a-plan', heading: 'Forming and Communicating a Plan' },
   { type: 'section', id: 'how-much-to-help', heading: 'How much should I help?' },
   { type: 'section', id: 'qualified-schools', heading: 'What schools are “qualified”?' },
   {
@@ -303,26 +343,20 @@ export const outline = [
   },
   {
     type: 'section',
-    id: 'continuing-education',
+    id: 'extra-credentialing',
     heading:
-      'You may pay for continuing education through a 529 account, the rest of your entire career.',
+      'You may pay for registered apprenticeship expenses or certificates from a 529 account.',
   },
   {
     type: 'section',
-    id: 'extra-credentialing',
-    heading:
-      'You may pay for extra credentialing, registered apprenticeship expenses, or certificates through a 529 account.',
+    id: 'continuing-education',
+    heading: 'You may pay for continuing education through a 529 account, the rest of your career.',
   },
   {
     type: 'section',
     id: 'career-credentialing',
     heading:
-      'You may pay for your Credentialing expenses or your occupational licensing through a 529 account, including years after graduation.',
-  },
-  {
-    type: 'section',
-    id: 'licensing',
-    heading: 'You may pay for your licensing through a 529 account, throughout your career.',
+      'You may pay for credentialing expenses or occupational licensing from a 529 account, throughout your career.',
   },
   {
     type: 'section',
@@ -409,10 +443,13 @@ export const outline = [
   },
   {
     type: 'section',
+    id: 'vs-child-roth',
+    heading: 'A 529 account is better than a child Roth IRA.',
+  },
+  {
+    type: 'section',
     id: 'vs-trump-account',
-    // "529 count" in the manuscript heading is a typo for "529 account".
-    heading: 'A 529 count is better than a 530A “Trump account” child IRA.',
-    title: 'A 529 account is better than a 530A “Trump account” child IRA.',
+    heading: 'A 529 account is better than a 530A “Trump account” child IRA.',
   },
   {
     type: 'section',

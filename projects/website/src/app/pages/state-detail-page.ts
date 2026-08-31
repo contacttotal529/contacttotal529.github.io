@@ -25,7 +25,7 @@ export class StateDetailPage {
       this.seo.set({
         title: found ? `${found.name} 529 plans — Total529` : 'State not found — Total529',
         description: found
-          ? `${found.name} has ${plans} 529 plan${plans === 1 ? '' : 's'} in this edition: tax benefit, K–12 conformity, contribution ceiling and the official program description.`
+          ? `${found.name} has ${plans} 529 plan${plans === 1 ? '' : 's'} in this edition: tax benefit, K–12 conformity, contribution ceiling and the program description the book cites.`
           : null,
       });
     });

@@ -133,7 +133,7 @@ export class HomePage {
     {
       myth: "It's only for college.",
       truth:
-        'It is a K–12 account, a trade-school account, a credentialing account, and an estate-planning account too. Up to $20,000 a year can go toward K–12 tuition, curriculum, and tutoring.',
+        'It is a K–12 account, a trade-school account, a credentialing account, a retirement account, and an estate-planning account too. Up to $20,000 a year can go toward K–12 tuition, curriculum, and tutoring.',
       route: ['/guide', 'k-12', 'tuition-books-software'],
     },
     {
