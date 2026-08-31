@@ -307,11 +307,11 @@
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 6px 0 26px;
-  /* The rail bleeds to the viewport so cards can scroll off the edge, but the
-     first and last card still line up with the shell the rest of the section
-     sits in. */
-  padding-inline: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
+  /* `safe` keeps the row centred while the cards fit the viewport and drops
+     back to a left-aligned scroll once they don't, instead of clipping the
+     first card off the scrollable area. */
+  justify-content: safe center;
+  padding: 6px var(--gutter) 26px;
   scroll-snap-type: x mandatory;
 }
 
