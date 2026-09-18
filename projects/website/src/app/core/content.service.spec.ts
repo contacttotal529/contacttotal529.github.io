@@ -58,7 +58,14 @@ describe('ContentService', () => {
     await service.loadChapter('k-12');
 
     expect(service.sectionBlocks('k-12', 'tutors').some((b) => b.type === 'example')).toBe(true);
-    expect(service.chapterIntro('k-12').length).toBeGreaterThan(0);
+  });
+
+  // Most chapters open straight into their first rule. The few that do carry an introduction
+  // have to load it along with the rest of the chapter.
+  it('loads a chapter introduction where the book has one', async () => {
+    await service.loadChapter('estate-planning');
+
+    expect(service.chapterIntro('estate-planning').length).toBeGreaterThan(0);
   });
 
   /**

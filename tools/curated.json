@@ -33,7 +33,7 @@
         "amount": "$20,000",
         "label": "K–12 expenses per student, per year",
         "sub": "The federal annual cap as of 2026, up from the $10,000 allowed in 2024",
-        "link": ["k-12", "state-k12-conformity"]
+        "link": ["k-12", "annual-limit"]
       },
       {
         "amount": "$35,000",
@@ -360,7 +360,7 @@
       "states": ["California", "Hawaii", "Kentucky", "North Carolina"]
     },
     "k12NotAllowed": {
-      "label": "Do not allow K–12 qualified distributions",
+      "label": "Treat K–12 distributions as non-qualified",
       "detail": "A withdrawal for K–12 may be tax-free federally but taxable at the state level in these jurisdictions. California further penalizes such withdrawals by an extra 2.5%.",
       "states": [
         "California",
@@ -386,8 +386,8 @@
   },
   "stateSources": [
     {
-      "label": "Morningstar 529 Ratings: The Best Plans of 2025",
-      "url": "https://www.morningstar.com/funds/529-ratings-best-plans-2025"
+      "label": "Morningstar 529 Ratings: The Best Plans",
+      "url": "https://www.morningstar.com/personal-finance/morningstar-529-ratings-best-plans"
     },
     {
       "label": "Saving For College plan ratings",
@@ -430,7 +430,7 @@
         "my529 reports a transfer to the Utah State Tax Commission for likely taxation when a Utah taxpayer moves money from an account whose beneficiary was under 19 when designated to one whose beneficiary was 19 or older.",
         "For K–12 expenses, my529 will issue a check only to the account owner.",
         "No minimum initial contribution.",
-        "The plan offers its own prepaid card, which can carry merchant and product restrictions that help keep expenses qualified."
+        "my529 renewed its matching-grant program as this edition went to print: a Utah taxpaying parent of a child born between 1 September 2026 and 30 August 2031 may qualify for $929 of matching funds on top of the 4.45% credit."
       ]
     },
     {
@@ -467,7 +467,7 @@
     {
       "state": "Indiana",
       "taxBenefit": "credit",
-      "taxBenefitDetail": "A 20% state tax credit worth up to $750 filing single or $1,500 filing jointly, for tax year 2026.",
+      "taxBenefitDetail": "A 20% credit on up to $5,000 of contributions — worth up to $1,000 per year.",
       "k12": "not-listed",
       "recapture": ["Roth IRA conversions", "Education loan repayments"],
       "notes": []
@@ -614,7 +614,7 @@
       "state": "Colorado",
       "taxBenefit": "unstated",
       "k12": "not-allowed",
-      "recapture": [],
+      "recapture": ["Rollovers out of state"],
       "notes": []
     },
     {
@@ -637,7 +637,7 @@
       "taxBenefit": "unstated",
       "taxBenefitDetail": "Extends its state tax benefit to contributions made to any state's 529 plan.",
       "k12": "not-allowed",
-      "recapture": [],
+      "recapture": ["Rollovers out of state"],
       "notes": []
     },
     {

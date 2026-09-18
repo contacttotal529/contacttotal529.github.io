@@ -364,7 +364,7 @@ function summarise(blocks) {
 
 function parsePlans(lines) {
   const cells = lines.map((l) => l.trim()).filter(Boolean);
-  const headerEnd = cells.findIndex((c) => /program description pdf link/i.test(c));
+  const headerEnd = cells.findIndex((c) => /pdf link/i.test(c));
   const records = cells.slice(headerEnd + 1);
 
   const byState = new Map();
@@ -399,6 +399,10 @@ function parsePlans(lines) {
       url: link && isUrl(link) ? link.trim() : null,
       note: link && !isUrl(link) ? link.trim() : null,
     };
+    if (plan.note && !/^[-–—]$/.test(plan.note)) {
+      warnings.push(`Plan "${name}" (${stateName}) has no program-description URL: "${plan.note}"`);
+    }
+
     if (!entry.plans.some((p) => p.name === plan.name && p.type === plan.type)) {
       entry.plans.push(plan);
     }
@@ -411,20 +415,25 @@ function parsePlans(lines) {
 
 function parseCosts(lines) {
   const cells = lines.map((l) => l.trim()).filter(Boolean);
-  const headerEnd = cells.findIndex((c) => /^vs\. natl avg$/i.test(c));
+  const headerEnd = cells.findIndex((c) => /^vs\.? (natl )?avg$/i.test(c));
   const records = cells.slice(headerEnd + 1);
 
   const rows = [];
   let national = null;
 
   for (let i = 0; i < records.length;) {
-    if (/^NATIONAL AVERAGE/i.test(records[i])) {
+    if (/^NATIONAL AV/i.test(records[i])) {
+      // The label sits on its own cell in one edition and shares a cell with "(All 50 States)"
+      // in the next, so read the five money cells that follow rather than fixed offsets.
+      const [tuition, room, board, books, total] = records
+        .slice(i)
+        .filter((c) => c.startsWith('$'));
       national = {
-        tuition: money(records[i + 2]),
-        room: money(records[i + 3]),
-        board: money(records[i + 4]),
-        books: money(records[i + 5]),
-        total: money(records[i + 6]),
+        tuition: money(tuition),
+        room: money(room),
+        board: money(board),
+        books: money(books),
+        total: money(total),
       };
       break;
     }
@@ -708,10 +717,10 @@ for (const section of allSections) {
         .map((r) => ({ chapterId: r.other.chapterId, id: r.other.id }));
 }
 
-// Three chapters carry no rules and no page links to them, so the site never renders their
+// Four chapters carry no rules and no page links to them, so the site never renders their
 // prose. They stay in book.json as a heading and nothing else — no summary lifted from the
 // text, no chapter file, no loader entry, so none of their prose is shipped at all.
-const HEADING_ONLY = new Set(['forward', 'federal-tips', 'state-differences']);
+const HEADING_ONLY = new Set(['forward', 'federal-tips', 'state-differences', 'glossary']);
 
 // book.json is the table of contents and nothing more: titles, counts, and the derived bits
 // above. Every block of prose lives in a per-chapter file beside it.

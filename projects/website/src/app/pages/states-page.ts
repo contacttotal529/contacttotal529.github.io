@@ -12,7 +12,7 @@ const FILTERS: { key: FilterKey; label: string; test: (s: StateEntry) => boolean
   { key: 'deduction', label: 'Tax deduction', test: (s) => s.taxBenefit === 'deduction' },
   { key: 'none', label: 'No contribution benefit', test: (s) => s.taxBenefit === 'none' },
   { key: 'anyPlan', label: "Benefit on any state's plan", test: (s) => s.anyPlanDeduction },
-  { key: 'k12No', label: 'K–12 not allowed', test: (s) => s.k12 === 'not-allowed' },
+  { key: 'k12No', label: 'K–12 non-qualified', test: (s) => s.k12 === 'not-allowed' },
   { key: 'gold', label: 'Morningstar Gold', test: (s) => s.morningstarGold },
 ];
 

@@ -42,8 +42,9 @@ export const tables = [
 
 /** @type {Boundary[]} */
 export const outline = [
-  { type: 'chapter', id: 'forward', title: 'Foreword', heading: 'Forward' },
-  { type: 'skip', heading: 'Table of Contents' },
+  { type: 'chapter', id: 'forward', title: 'Foreword', heading: 'Foreword' },
+  { type: 'skip', heading: 'About the Author' },
+  { type: 'skip', heading: 'Contents' },
 
   {
     type: 'chapter',
@@ -64,10 +65,10 @@ export const outline = [
     type: 'chapter',
     id: 'state-differences',
     title: 'State Plan Differences',
-    heading: 'Federal laws now give guidance, but each state has its OWN plan with its OWN rules.',
+    heading: 'Federal laws give guidance, but each state has its OWN plan with its OWN rules.',
   },
 
-  { type: 'chapter', id: 'basics', title: 'Account Basics', heading: 'Account Basics' },
+  { type: 'chapter', id: 'basics', title: 'Account Basics', heading: 'Account Basics:' },
   { type: 'section', id: 'you-are-in-control', heading: 'You are in control.' },
   {
     type: 'section',
@@ -84,23 +85,23 @@ export const outline = [
   {
     type: 'section',
     id: 'change-ownership',
-    heading: 'You can decide to CHANGE your ownership to someone else without a fee at any time.',
+    heading: 'You can decide to change your ownership to someone else without a fee at any time.',
   },
   {
     type: 'section',
     id: 'change-beneficiary',
     heading:
-      'You can decide to CHANGE the Beneficiary to someone else–including yourself–without a fee at any time.',
+      'You can decide to change the Beneficiary to someone else–including yourself–without a fee at any time.',
   },
   {
     type: 'section',
     id: 'change-successor',
-    heading: 'You can decide to CHANGE the Successor to someone else without a fee at any time.',
+    heading: 'You can decide to change the Successor to someone else without a fee at any time.',
   },
   {
     type: 'section',
     id: 'rollover-to-another-state',
-    heading: 'You can roll-over your account to another state’s plan at any time.',
+    heading: 'You can roll over your account to another state’s plan at any time.',
   },
   {
     type: 'section',
@@ -151,7 +152,7 @@ export const outline = [
     type: 'chapter',
     id: 'taxes',
     title: 'Understanding Tax Differences',
-    heading: 'Understanding Tax Differences',
+    heading: 'Understanding Tax Differences:',
   },
   {
     type: 'section',
@@ -182,8 +183,7 @@ export const outline = [
   {
     type: 'section',
     id: 'non-qualified-withdrawals',
-    heading:
-      'For any non-qualified disbursement, any taxes or fees are ONLY on the earnings portion.',
+    heading: 'For any non-qualified disbursement, any taxes or penalties are ONLY on the earnings.',
   },
   {
     type: 'section',
@@ -195,19 +195,19 @@ export const outline = [
     type: 'chapter',
     id: 'fund-selection',
     title: 'Signing Up, Fund Selection & Distribution Logistics',
-    heading: 'Signing Up, Fund Selection, and Distribution Logistics',
+    heading: 'Signing Up, Fund Selection, and Distribution Logistics:',
   },
   {
     type: 'section',
     id: 'signing-up',
-    heading: 'You will need names, social security numbers, and addresses.',
+    heading: 'You will need an email, names, social security numbers, and addresses.',
   },
   { type: 'section', id: 'choosing-funds', title: 'Fund Selection', heading: 'Fund Selection.' },
   {
     type: 'section',
     id: 'changing-allocation',
     heading:
-      'You can change your Fund Allocation up to 2 times per year without a fee at any time.',
+      'You can change your fund allocation up to 2 times per year without a fee at any time.',
   },
   {
     type: 'section',
@@ -220,7 +220,12 @@ export const outline = [
     type: 'chapter',
     id: 'k-12',
     title: 'Using the 529 for K–12',
-    heading: 'Using the 529 for K – 12:',
+    heading: 'Using the 529 for K-12:',
+  },
+  {
+    type: 'section',
+    id: 'annual-limit',
+    heading: 'Up to $20,000 may be now used per year per K-12 student.',
   },
   {
     type: 'section',
@@ -249,10 +254,15 @@ export const outline = [
     type: 'chapter',
     id: 'post-secondary',
     title: 'Post-Secondary School',
-    heading: 'Post- Secondary school',
+    heading: 'Post- Secondary school:',
   },
   { type: 'section', id: 'getting-a-plan', heading: 'Forming and Communicating a Plan' },
-  { type: 'section', id: 'how-much-to-help', heading: 'How much should I help?' },
+  {
+    type: 'section',
+    id: 'how-much-to-help',
+    title: 'How much should I help? Gifting vs. Loaning',
+    heading: 'How much should I help? Gifting vs. Loaning: Decision tree',
+  },
   { type: 'section', id: 'qualified-schools', heading: 'What schools are “qualified”?' },
   {
     type: 'section',
@@ -287,7 +297,8 @@ export const outline = [
   {
     type: 'section',
     id: 'computers-and-internet',
-    heading: 'You may pay for computer hardware, software and internet access fees while enrolled.',
+    heading:
+      'You may pay for computer hardware, software, and internet access fees while enrolled.',
   },
   {
     type: 'section',
@@ -298,14 +309,14 @@ export const outline = [
     type: 'section',
     id: 'recordkeeping',
     heading:
-      'Account owners are responsible for keeping any documents that support a qualified or nonqualified withdrawal.',
+      'Account owners are responsible for keeping any documents that support a qualified or non-qualified withdrawal.',
   },
 
   {
     type: 'chapter',
     id: 'after-graduation',
     title: 'After Graduation',
-    heading: 'AFTER GRADUATION',
+    heading: 'After Graduation:',
   },
   {
     type: 'section',
@@ -350,7 +361,7 @@ export const outline = [
   {
     type: 'section',
     id: 'continuing-education',
-    heading: 'You may pay for continuing education through a 529 account, the rest of your career.',
+    heading: 'You may pay for continuing education through a 529 account, throughout your career.',
   },
   {
     type: 'section',
@@ -361,14 +372,21 @@ export const outline = [
   {
     type: 'section',
     id: 'closing-the-account',
-    heading: 'You may want to close the account and pull excess funds out:',
+    heading: 'You may want to close the account and pull excess funds out.',
   },
 
-  { type: 'chapter', id: 'estate-planning', title: 'Estate Planning', heading: 'ESTATE PLANNING' },
+  { type: 'chapter', id: 'estate-planning', title: 'Estate Planning', heading: 'Estate Planning:' },
   {
     type: 'section',
     id: 'completed-gifts',
     heading: 'Contributions to your 529 plans are considered “completed gifts” to the beneficiary.',
+  },
+  {
+    // Kept its id from the 30th-anniversary draft, where the same material sat in the
+    // comparisons chapter as "State Estate Tax Planning Differences".
+    type: 'section',
+    id: 'state-estate-tax',
+    heading: 'There are no state estate taxes on any 529 assets.',
   },
   {
     type: 'section',
@@ -378,7 +396,7 @@ export const outline = [
   {
     type: 'section',
     id: 'avoiding-gst-tax',
-    heading: 'A 529 account can help avoid the Generation-Skipping Transfer (GST) tax',
+    heading: '529 account contributions can help avoid the Generation-Skipping Transfer (GST) tax.',
   },
   {
     type: 'section',
@@ -398,14 +416,14 @@ export const outline = [
   {
     type: 'section',
     id: 'multigenerational-transfer',
-    heading: 'Multigenerational wealth transferred through superfunding the 529 account.',
+    heading: 'Multigenerational wealth transfer through superfunding the 529 account.',
   },
 
   {
     type: 'chapter',
     id: 'maximizing',
     title: 'Maximizing 529 Advantages',
-    heading: 'MAXIMIZING 529 ADVANTAGES',
+    heading: 'Maximizing 529 Advantages:',
   },
   { type: 'section', id: 'maximizing-funding', heading: 'Maximizing Funding' },
   { type: 'section', id: 'maximizing-k-12', heading: 'Maximizing K-12 Options' },
@@ -416,7 +434,15 @@ export const outline = [
   },
   { type: 'section', id: 'maximizing-after-graduation', heading: 'Maximizing After Graduation' },
   { type: 'section', id: 'maximizing-estate-planning', heading: 'Maximizing Estate Planning' },
+  {
+    type: 'section',
+    id: 'penalty-free-exits',
+    heading: 'Penalty-Free Exit Strategies for Unused Funds',
+  },
+  { type: 'section', id: 'summary', heading: 'Estate Planning Summary' },
 
+  // The chapter opens with its running-head title and then its full title on the next line.
+  { type: 'skip', heading: 'Other Account Comparisons:' },
   {
     type: 'chapter',
     id: 'comparisons',
@@ -431,10 +457,7 @@ export const outline = [
   {
     type: 'section',
     id: 'vs-coverdell',
-    // The manuscript heading misspells Coverdell as "Coverdale"; its own body text spells it
-    // correctly. Title the page correctly so a reader searching "Coverdell" finds it.
-    heading: 'A 529 account is better than a Coverdale account.',
-    title: 'A 529 account is better than a Coverdell ESA.',
+    heading: 'A 529 account is better than a Coverdell account.',
   },
   {
     type: 'section',
@@ -451,36 +474,20 @@ export const outline = [
     id: 'vs-trump-account',
     heading: 'A 529 account is better than a 530A “Trump account” child IRA.',
   },
-  {
-    type: 'section',
-    id: 'dynasty-plans',
-    heading: 'Multigenerational wealth transfer through super funding the 529 account.',
-  },
-  {
-    type: 'section',
-    id: 'state-estate-tax',
-    heading: 'State Estate Tax Planning Differences',
-  },
-  {
-    type: 'section',
-    id: 'penalty-free-exits',
-    heading: 'Penalty-Free Exit Strategies for Unused Funds',
-  },
-  { type: 'section', id: 'summary', heading: 'Summary' },
 
   {
     type: 'appendix',
     id: 'appendix-plans',
     kind: 'plans',
     title: 'Appendix 1 · State 529 Program Descriptions',
-    heading: "Appendix 1: Chart of Each State's Official 529 Program PDF",
+    heading: "Appendix 1: Table of Each State's Official 529 Program",
   },
   {
     type: 'appendix',
     id: 'appendix-costs',
     kind: 'costs',
     title: 'Appendix 2 · Flagship College Cost of Attendance',
-    heading: "Appendix 2: Chart of Each State's Flagship College Annual Cost of Attendance",
+    heading: "Appendix 2: Table of Each State's Flagship College Annual Cost of Attendance",
   },
   {
     type: 'appendix',
@@ -489,4 +496,6 @@ export const outline = [
     title: 'Appendix 3 · Who Is a "Member of My Family"?',
     heading: 'Appendix 3: Who Is A “Member of my Family”?',
   },
+
+  { type: 'chapter', id: 'glossary', title: 'Glossary', heading: 'Glossary:' },
 ];
