@@ -56,7 +56,7 @@
       <thead>
         <tr>
           <th scope="col">State</th>
-          <th scope="col">Plans in this edition</th>
+          <th scope="col">Plans &amp; official program description</th>
           <th scope="col">K–12 distributions</th>
           <th scope="col" class="num">Flagship cost</th>
         </tr>
@@ -72,9 +72,20 @@
             </th>
             <td class="plans">
               @for (plan of state.plans; track plan.name) {
-                <span class="plan"
-                  >{{ plan.name }} <em>{{ plan.type }}</em></span
-                >
+                @if (plan.url) {
+                  <a
+                    class="plan"
+                    [href]="plan.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    [attr.aria-label]="plan.name + ' — official program description (PDF)'"
+                    >{{ plan.name }} <em>{{ plan.type }}</em></a
+                  >
+                } @else {
+                  <span class="plan"
+                    >{{ plan.name }} <em>{{ plan.type }}</em></span
+                  >
+                }
               }
             </td>
             <td>
@@ -98,8 +109,9 @@
   </div>
 
   <p class="footnote">
-    Blank cells mean the manuscript does not state a figure for that jurisdiction &mdash; not that
-    the figure is zero. Check the state's own program description before acting.
+    Each plan name links to that plan's official program description, the PDF the book cites for it
+    in Appendix 1. Blank cells mean the manuscript does not state a figure for that jurisdiction
+    &mdash; not that the figure is zero. Check the state's own program description before acting.
   </p>
 
   <div class="sources">

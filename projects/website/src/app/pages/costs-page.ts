@@ -4,7 +4,7 @@ import { ContentService } from '../core/content.service';
 import { Seo } from '../core/seo.service';
 import type { CostRow } from '../core/content.models';
 
-type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
+type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'books' | 'total' | 'vsNational';
 
 @Component({
   selector: 'app-costs-page',
@@ -91,6 +91,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
                 <td class="num">{{ money(row.tuition) }}</td>
                 <td class="num">{{ money(row.room) }}</td>
                 <td class="num">{{ money(row.board) }}</td>
+                <td class="num">{{ money(row.books) }}</td>
                 <td class="num total">{{ money(row.total) }}</td>
                 <td class="num" [class.over]="(row.vsNational ?? 0) > 0">
                   {{ (row.vsNational ?? 0) > 0 ? '+' : '' }}{{ row.vsNational }}%
@@ -268,6 +269,7 @@ export class CostsPage {
     { key: 'tuition', label: 'Tuition & fees', numeric: true },
     { key: 'room', label: 'Room', numeric: true },
     { key: 'board', label: 'Board', numeric: true },
+    { key: 'books', label: 'Books & supplies', numeric: true },
     { key: 'total', label: 'Total', numeric: true },
     { key: 'vsNational', label: 'vs. national', numeric: true },
   ];

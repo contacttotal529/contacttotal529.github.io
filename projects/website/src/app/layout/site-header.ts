@@ -251,6 +251,6 @@ export class SiteHeader {
     event.preventDefault();
     if (!this.query().trim()) return;
     this.open.set(false);
-    void this.router.navigate(['/coming-soon']);
+    void this.router.navigate(['/the-book']);
   }
 }

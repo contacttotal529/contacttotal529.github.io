@@ -894,7 +894,7 @@ const STATIC_ROUTES = [
   'history',
   'reference',
   'about',
-  'coming-soon',
+  'the-book',
 ];
 
 const urls = [

@@ -26,7 +26,7 @@ import { Seo } from '../core/seo.service';
       <div class="suggest">
         <p class="suggest__label">Common questions</p>
         @for (item of suggestions; track item) {
-          <button class="chip" type="button" (click)="comingSoon()">{{ item }}</button>
+          <button class="chip" type="button" (click)="toTheBook()">{{ item }}</button>
         }
       </div>
     </div>
@@ -82,7 +82,7 @@ export class SearchPage {
 
   private readonly router = inject(Router);
 
-  /** Keeps the field controlled; searching the sample is not offered until the book ships. */
+  /** Keeps the field controlled; the site deliberately does not search the sample it publishes. */
   readonly query = signal('');
 
   readonly suggestions = [
@@ -99,10 +99,10 @@ export class SearchPage {
 
   submit(event: Event): void {
     event.preventDefault();
-    this.comingSoon();
+    this.toTheBook();
   }
 
-  comingSoon(): void {
-    void this.router.navigate(['/coming-soon']);
+  toTheBook(): void {
+    void this.router.navigate(['/the-book']);
   }
 }

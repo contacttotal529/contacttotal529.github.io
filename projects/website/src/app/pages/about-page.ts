@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content.service';
-import { FEEDBACK_ADDRESS } from '../layout/site-footer';
+import { BOOK_AMAZON_URL, FEEDBACK_ADDRESS } from '../layout/site-footer';
 import { Seo } from '../core/seo.service';
 
 @Component({
@@ -105,7 +105,14 @@ import { Seo } from '../core/seo.service';
           <div class="side__card">
             <p class="eyebrow">The printed book</p>
             <p class="side__note">
-              <strong>Coming soon.</strong> Total529 is currently in the publishing process.
+              <strong>Out now.</strong> Total529 is published and on sale on Amazon.
+            </p>
+            <p class="side__note">
+              <a class="link-more" [href]="amazonUrl" target="_blank" rel="noopener noreferrer"
+                >Buy it on Amazon &#8599;</a
+              >
+              &middot;
+              <a class="link-more" routerLink="/the-book">What's in it</a>
             </p>
           </div>
 
@@ -272,7 +279,7 @@ export class AboutPage {
     inject(Seo).set({
       title: 'About Total529',
       description:
-        'Total529 publishes Understanding, Using, and Maximizing 529 Accounts as a free, independent website. It sells nothing and takes no plan compensation.',
+        'The website for Understanding, Using, and Maximizing 529 Accounts, out now on Amazon. Total529 is independent and takes no compensation from any state plan, program manager or advisor.',
     });
   }
 
@@ -286,6 +293,7 @@ export class AboutPage {
   readonly sources = computed(() => this.content.statesDoc()?.sources ?? []);
   readonly disclaimer = computed(() => this.content.site()?.disclaimer ?? '');
 
+  readonly amazonUrl = BOOK_AMAZON_URL;
   readonly feedbackAddress = FEEDBACK_ADDRESS;
   readonly feedbackHref = `mailto:${FEEDBACK_ADDRESS}?subject=${encodeURIComponent('Total529 site feedback')}`;
 }

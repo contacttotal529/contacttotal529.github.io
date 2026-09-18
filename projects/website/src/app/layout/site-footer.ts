@@ -4,6 +4,13 @@ import { ContentService } from '../core/content.service';
 
 export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
 
+/**
+ * The canonical product address. Amazon's own share sheet hands out a search-referral URL
+ * carrying `ref`, `crid` and `dib` parameters from whoever copied it; `/dp/<ASIN>` is the part
+ * that is actually the book.
+ */
+export const BOOK_AMAZON_URL = 'https://www.amazon.com/dp/B0HK6MPP3K';
+
 @Component({
   selector: 'app-site-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,9 +40,9 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
             <p>
               A free educational resource built from <em>{{ book()?.subtitle }}</em
               >, {{ book()?.edition }}, by {{ book()?.author }}. The book itself is
-              <strong>coming soon</strong> in print and ebook.
+              <strong>out now</strong> on Amazon.
             </p>
-            <a class="link-more" routerLink="/examples">See the worked examples &rarr;</a>
+            <a class="link-more" routerLink="/the-book">Get the book &rarr;</a>
           </div>
 
           <div>

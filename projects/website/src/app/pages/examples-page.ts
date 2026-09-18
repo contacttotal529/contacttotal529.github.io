@@ -44,14 +44,12 @@ import { Seo } from '../core/seo.service';
       <div class="shell">
         <div class="section-head section-head--left">
           <p class="eyebrow">Every example</p>
-          <h2>The rest arrive with the book.</h2>
+          <h2>The rest are in the book.</h2>
           <p>
             Those five are the sample; the rest of the families &mdash; and the rules they are
-            attached to &mdash; arrive with the book itself.
+            attached to &mdash; are in the book itself, out now on Amazon.
           </p>
-          <a class="btn btn--navy" routerLink="/coming-soon"
-            >Total529, the book: Coming Soon &rarr;</a
-          >
+          <a class="btn btn--navy" routerLink="/the-book">Get the book &rarr;</a>
         </div>
       </div>
     </section>
@@ -156,8 +154,8 @@ export class ExamplesPage {
   readonly totalExamples = this.content.totalExamples;
 
   /**
-   * The site publishes five of the examples as a sample; the rest ship with the book, so the rule
-   * index that used to live under them now points at /coming-soon.
+   * The site publishes five of the examples as a sample; the rest are only in the book, so the
+   * rule index that used to live under them now points at /the-book.
    */
   readonly featured = computed(() => this.content.site()?.highlights.featured ?? []);
 }

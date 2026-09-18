@@ -109,6 +109,21 @@
   margin-left: 6px;
 }
 
+a.plan {
+  color: var(--navy-lt);
+  text-decoration: none;
+}
+
+a.plan::after {
+  content: '\2197';
+  color: var(--gold-deep);
+  margin-left: 5px;
+}
+
+a.plan:hover {
+  text-decoration: underline;
+}
+
 .data-table .chip {
   margin: 0 4px 4px 0;
 }

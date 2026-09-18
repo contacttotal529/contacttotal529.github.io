@@ -44,8 +44,15 @@ export const routes: Routes = [
   },
   {
     // Every link that would take a reader past the published sample lands here.
+    path: 'the-book',
+    loadComponent: () => import('./pages/the-book-page').then((m) => m.TheBookPage),
+  },
+  {
+    // The sink was /coming-soon until the book was published. Links to it are in the wild and
+    // in the sitemap Google already crawled, so the old path still has to arrive somewhere.
     path: 'coming-soon',
-    loadComponent: () => import('./pages/coming-soon-page').then((m) => m.ComingSoonPage),
+    redirectTo: 'the-book',
+    pathMatch: 'full',
   },
   {
     path: 'about',
