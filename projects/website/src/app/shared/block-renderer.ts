@@ -150,12 +150,12 @@ import type { Block } from '../core/content.models';
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--sage);
+      background: var(--gold);
     }
 
     .example {
-      background: var(--leaf-pale);
-      border: 1px solid #d5e5da;
+      background: var(--navy-pale);
+      border: 1px solid #cddcec;
       border-radius: var(--radius);
       padding: 24px 28px 18px;
       margin: 30px 0;
@@ -168,7 +168,7 @@ import type { Block } from '../core/content.models';
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--moss);
+      color: var(--navy-lt);
       font-weight: 800;
       margin-bottom: 12px;
     }
@@ -177,7 +177,7 @@ import type { Block } from '../core/content.models';
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--amber);
+      background: var(--gold);
     }
 
     .example p {
@@ -187,7 +187,7 @@ import type { Block } from '../core/content.models';
     }
 
     .note {
-      background: var(--amber-pale);
+      background: var(--gold-pale);
       border-radius: var(--radius);
       padding: 20px 26px 10px;
       margin: 28px 0;
@@ -198,7 +198,7 @@ import type { Block } from '../core/content.models';
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #96591a;
+      color: var(--gold-deep);
       font-weight: 800;
       margin-bottom: 9px;
     }
@@ -210,7 +210,7 @@ import type { Block } from '../core/content.models';
     }
 
     .tree {
-      background: var(--cream);
+      background: var(--paper);
       border: 2px solid var(--line);
       border-radius: var(--radius);
       padding: 24px 30px 20px;
@@ -221,7 +221,7 @@ import type { Block } from '../core/content.models';
       font-size: 12px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--sky);
+      color: var(--navy-lt);
       font-weight: 800;
       margin: 0 0 10px;
     }
@@ -249,8 +249,8 @@ import type { Block } from '../core/content.models';
       width: 26px;
       height: 26px;
       border-radius: 50%;
-      background: var(--sky-pale);
-      color: var(--sky);
+      background: var(--navy-pale);
+      color: var(--navy-lt);
       display: grid;
       place-items: center;
       font-size: 13px;
@@ -281,12 +281,12 @@ import type { Block } from '../core/content.models';
 
     .sources a::before {
       content: '↗';
-      color: var(--amber);
+      color: var(--gold-deep);
       margin-right: 7px;
     }
 
     .sources a:hover {
-      color: var(--moss);
+      color: var(--navy-lt);
       text-decoration: underline;
     }
   `,

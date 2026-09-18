@@ -22,15 +22,15 @@ const CHAPTER_ICONS: Record<string, string> = {
 };
 
 const CHAPTER_TINTS: Record<string, string> = {
-  basics: 'leaf',
-  taxes: 'amber',
-  'fund-selection': 'sky',
-  'k-12': 'leaf',
-  'post-secondary': 'amber',
-  'after-graduation': 'sky',
+  basics: 'navy',
+  taxes: 'gold',
+  'fund-selection': 'ink',
+  'k-12': 'navy',
+  'post-secondary': 'gold',
+  'after-graduation': 'ink',
   'estate-planning': 'plum',
-  maximizing: 'amber',
-  comparisons: 'sky',
+  maximizing: 'gold',
+  comparisons: 'ink',
 };
 
 /**
@@ -162,6 +162,6 @@ export class HomePage {
   }
 
   tint(chapterId: string): string {
-    return CHAPTER_TINTS[chapterId] ?? 'leaf';
+    return CHAPTER_TINTS[chapterId] ?? 'navy';
   }
 }

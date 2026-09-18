@@ -13,7 +13,7 @@ import { Seo } from '../core/seo.service';
       <h1>That page isn't here.</h1>
       <p class="lede">It may have moved, or the link may be wrong.</p>
       <div class="cta">
-        <a class="btn btn--forest" routerLink="/">Return home</a>
+        <a class="btn btn--navy" routerLink="/">Return home</a>
         @if (canGoBack()) {
           <button class="btn btn--outline" type="button" (click)="goBack()">
             Return to the last page

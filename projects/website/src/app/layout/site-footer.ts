@@ -14,7 +14,20 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
         <div class="grid">
           <div class="brand">
             <a class="logo" routerLink="/">
-              <span class="leaf" aria-hidden="true">529</span>
+              <svg class="mark" viewBox="50 50 200 200" aria-hidden="true" focusable="false">
+                <circle class="mark__disc" cx="150" cy="150" r="90" />
+                <path class="mark__sweep" d="M 214.74 87.48 A 90 90 0 1 1 195 72.06" />
+                <polygon class="mark__tip" points="210.59,81.06 179.11,75.58 190.11,56.53" />
+                <text
+                  class="mark__num"
+                  x="150"
+                  y="150"
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                >
+                  529
+                </text>
+              </svg>
               Total529
             </a>
             <p>
@@ -67,8 +80,8 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
   `,
   styles: `
     footer {
-      background: var(--forest-deep);
-      color: #a9c6b5;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+      color: var(--on-dark);
       padding: 62px 0 42px;
       font-size: 15px;
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -94,7 +107,7 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
 
     a {
       display: block;
-      color: #a9c6b5;
+      color: var(--on-dark);
       text-decoration: none;
       padding: 5px 0;
       font-size: 14.5px;
@@ -102,7 +115,7 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
     }
 
     a:hover {
-      color: var(--amber-lt);
+      color: var(--gold-lt);
     }
 
     .logo {
@@ -117,20 +130,37 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
       margin-bottom: 14px;
     }
 
-    .leaf {
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--amber-lt);
-      display: grid;
-      place-items: center;
-      font-size: 13.5px;
+    .mark {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 auto;
+    }
+
+    .mark__disc {
+      fill: var(--gold);
+    }
+
+    .mark__sweep {
+      fill: none;
+      stroke: var(--navy-deep);
+      stroke-width: 14;
+      stroke-linecap: round;
+    }
+
+    .mark__tip {
+      fill: var(--navy-deep);
+    }
+
+    .mark__num {
+      fill: var(--navy-deep);
+      font-family: var(--sans);
+      font-size: 64px;
       font-weight: 800;
+      letter-spacing: -2px;
     }
 
     .brand p {
-      color: #86a894;
+      color: var(--on-dark-faint);
       line-height: 1.6;
       max-width: 40ch;
       margin-bottom: 12px;
@@ -138,20 +168,20 @@ export const FEEDBACK_ADDRESS = 'contact.Total529@gmail.com';
 
     .brand .link-more {
       display: inline-block;
-      color: var(--amber-lt);
+      color: var(--gold-lt);
     }
 
     .disclaimer {
       font-size: 13px;
       line-height: 1.7;
-      color: #7a9c88;
+      color: var(--on-dark-faint);
       margin: 26px 0 0;
       max-width: 104ch;
     }
 
     .colophon {
       font-size: 12.5px;
-      color: #5f8271;
+      color: var(--on-dark-faint);
       margin: 10px 0 0;
     }
 

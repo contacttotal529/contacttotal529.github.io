@@ -1,5 +1,5 @@
 .gold {
-  color: var(--amber-lt);
+  color: var(--gold-lt);
   font-weight: 700;
 }
 
@@ -59,14 +59,14 @@
 }
 
 .facts dd p a {
-  color: var(--moss);
+  color: var(--navy-lt);
   font-weight: 700;
 }
 
 .figure {
   font-size: 30px;
   font-weight: 800;
-  color: var(--forest);
+  color: var(--navy);
   letter-spacing: -0.02em;
 }
 
@@ -82,7 +82,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 22px;
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 22px 26px;
@@ -99,7 +99,7 @@
   font-size: 12.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--moss);
+  color: var(--navy-lt);
   font-weight: 800;
   margin: 0;
 }
@@ -135,7 +135,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--amber);
+  background: var(--gold);
 }
 
 /* cost */
@@ -152,7 +152,7 @@
 }
 
 .cost__note a {
-  color: var(--moss);
+  color: var(--navy-lt);
   font-weight: 700;
 }
 
@@ -175,9 +175,9 @@
   line-height: 1.5;
   padding: 9px 14px;
   margin: 0 0 8px;
-  background: var(--leaf-pale);
+  background: var(--navy-pale);
   border-radius: var(--radius-sm);
-  color: var(--moss);
+  color: var(--navy-lt);
   font-weight: 700;
 }
 

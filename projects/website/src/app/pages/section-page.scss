@@ -13,7 +13,7 @@
 
 /* state watch */
 .watch {
-  background: var(--leaf-pale);
+  background: var(--navy-pale);
   border-radius: var(--radius);
   padding: 26px 30px 24px;
   margin: 40px 0 0;
@@ -69,11 +69,11 @@
 }
 
 .related a:hover {
-  background: var(--cream);
+  background: var(--paper);
 }
 
 .related a:hover .related__title {
-  color: var(--moss);
+  color: var(--navy-lt);
 }
 
 .related__chapter {

@@ -1,28 +1,40 @@
-/* Total529 — "Evergreen" design system.
-   Forest green, warm sand, amber. Rounded sans, soft cards, generous air. */
+/* Total529 — "Cover" design system, taken from the printed jacket:
+   a deep navy field, a gold 529 badge, cream and white type. */
 
 :root {
-  --forest: #12432f;
-  --forest-deep: #0b2c1f;
-  --moss: #2e6b4c;
-  --sage: #7fa38c;
-  --sand: #f6f1e6;
-  --sand-2: #efe7d7;
-  --cream: #fffdf7;
-  --amber: #d9862b;
-  --amber-lt: #f0b559;
-  --amber-pale: #fbf0e1;
-  --sky: #3e7c8f;
-  --sky-pale: #eaf2f5;
+  /* The jacket's background gradient runs --navy-lt (top) to --navy (bottom). */
+  --navy-lt: #1d4e7a;
+  --navy: #0b2540;
+  --navy-deep: #061829;
+  --navy-pale: #e6eef6;
+
+  --gold: #c9a227;
+  --gold-lt: #e4c560;
+  /* Gold is only ~2.1:1 on cream, so text in the gold family uses --gold-deep. */
+  --gold-deep: #7a5a12;
+  --gold-pale: #f8f0d9;
+
+  --cream: #f4efe3;
+  --cream-2: #e7dfcb;
+  --paper: #fdfbf5;
+
   --plum: #8a4a5c;
   --plum-pale: #f7edf0;
-  --leaf-pale: #edf4ef;
+  --ok: #1a6b47;
+  --ok-pale: #e2efe7;
+  --no: #9b3535;
+  --no-pale: #f7e2e2;
 
-  --text: #22322a;
-  --muted: #5e7166;
-  --faint: #8b9a90;
-  --line: #ded4c0;
-  --line-soft: #ebe3d3;
+  --on-dark: #c9d8e6;
+  --on-dark-faint: #a9bed2;
+
+  --text: #14283c;
+  --muted: #4e6072;
+  --faint: #54616f;
+  --line: #ded5c2;
+  --line-soft: #ebe4d6;
+  /* Card hairlines are decorative; a form outline is a UI boundary and needs 3:1. */
+  --line-strong: #7b8794;
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
@@ -30,8 +42,10 @@
   --radius: 22px;
   --radius-sm: 14px;
   --radius-lg: 32px;
-  --shadow: 0 16px 38px rgba(18, 67, 47, 0.11);
-  --shadow-sm: 0 6px 18px rgba(18, 67, 47, 0.07);
+  --shadow: 0 16px 38px rgba(11, 37, 64, 0.13);
+  --shadow-sm: 0 6px 18px rgba(11, 37, 64, 0.08);
+
+  --cover-gradient: linear-gradient(168deg, var(--navy-lt) 0%, var(--navy) 58%);
 
   --shell: 1160px;
   --gutter: 30px;
@@ -48,7 +62,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--sand);
+  background: var(--cream);
   color: var(--text);
   font-family: var(--sans);
   font-size: 18px;
@@ -80,8 +94,11 @@ img {
 }
 
 :focus-visible {
-  outline: 3px solid var(--amber);
+  outline: 3px solid var(--gold);
   outline-offset: 3px;
+  /* Gold is only ~2.1:1 against cream. The navy halo fills the offset so the ring
+     always sits against a colour it contrasts with, light surface or dark. */
+  box-shadow: 0 0 0 3px var(--navy);
   border-radius: 4px;
 }
 
@@ -112,12 +129,12 @@ img {
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--moss);
+  color: var(--navy-lt);
   margin: 0;
 }
 
 .eyebrow--on-dark {
-  color: var(--amber-lt);
+  color: var(--gold-lt);
 }
 
 .lede {
@@ -151,7 +168,7 @@ img {
 .link-more {
   font-weight: 700;
   font-size: 15.5px;
-  color: var(--moss);
+  color: var(--navy-lt);
   text-decoration: none;
 }
 
@@ -176,56 +193,56 @@ img {
   line-height: 1.3;
 }
 
-.btn--amber {
-  background: var(--amber);
-  color: #2b1b06;
+.btn--gold {
+  background: var(--gold);
+  color: var(--navy);
 }
 
-.btn--amber:hover {
-  background: var(--amber-lt);
+.btn--gold:hover {
+  background: var(--gold-lt);
 }
 
-.btn--forest {
-  background: var(--forest);
+.btn--navy {
+  background: var(--navy);
   color: #fff;
 }
 
-.btn--forest:hover {
-  background: var(--moss);
+.btn--navy:hover {
+  background: var(--navy-lt);
 }
 
 .btn--outline {
-  border-color: var(--forest);
-  color: var(--forest);
+  border-color: var(--navy);
+  color: var(--navy);
   background: transparent;
 }
 
 .btn--outline:hover {
-  background: var(--leaf-pale);
+  background: var(--navy-pale);
 }
 
 .btn--white {
   background: #fff;
-  color: var(--forest);
+  color: var(--navy);
 }
 
 .btn--white:hover {
-  background: var(--sand-2);
+  background: var(--cream-2);
 }
 
 .field {
   font-family: inherit;
   font-size: 16px;
   padding: 14px 18px;
-  border: 2px solid var(--line);
-  background: var(--cream);
+  border: 2px solid var(--line-strong);
+  background: var(--paper);
   color: var(--text);
   border-radius: 999px;
   width: 100%;
 }
 
 .field:focus {
-  border-color: var(--moss);
+  border-color: var(--navy-lt);
   outline: none;
 }
 
@@ -236,7 +253,7 @@ select.field {
 /* ---------------------------------------------------------------- surfaces */
 
 .card {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 28px 30px;
@@ -247,7 +264,7 @@ select.field {
   font-size: 13px;
   font-weight: 700;
   border: 1.5px solid var(--line);
-  background: var(--cream);
+  background: var(--paper);
   padding: 4px 13px;
   border-radius: 999px;
   color: var(--muted);
@@ -257,9 +274,9 @@ select.field {
 }
 
 .chip--yes {
-  border-color: #b6d3c0;
-  color: var(--moss);
-  background: var(--leaf-pale);
+  border-color: #b7d3c3;
+  color: var(--ok);
+  background: var(--ok-pale);
 }
 
 .chip--no {
@@ -268,16 +285,16 @@ select.field {
   background: var(--plum-pale);
 }
 
-.chip--amber {
-  border-color: #e8cb9c;
-  color: #96591a;
-  background: var(--amber-pale);
+.chip--gold {
+  border-color: #e0c88c;
+  color: var(--gold-deep);
+  background: var(--gold-pale);
 }
 
-.chip--sky {
-  border-color: #b8d3dc;
-  color: var(--sky);
-  background: var(--sky-pale);
+.chip--navy {
+  border-color: #bcd0e4;
+  color: var(--navy-lt);
+  background: var(--navy-pale);
 }
 
 a.chip,
@@ -287,7 +304,7 @@ button.chip {
 
 a.chip:hover,
 button.chip:hover {
-  border-color: var(--moss);
+  border-color: var(--navy-lt);
 }
 
 /* ---------------------------------------------------------------- tables */
@@ -296,7 +313,7 @@ button.chip:hover {
   width: 100%;
   border-collapse: collapse;
   font-size: 15.5px;
-  background: var(--cream);
+  background: var(--paper);
 }
 
 .data-table th,
@@ -315,11 +332,11 @@ button.chip:hover {
   font-weight: 800;
   border-bottom: 2px solid var(--line);
   white-space: nowrap;
-  background: var(--sand-2);
+  background: var(--cream-2);
 }
 
 .data-table tbody tr:hover {
-  background: var(--sand);
+  background: var(--cream);
 }
 
 .data-table .num {
@@ -337,8 +354,8 @@ button.chip:hover {
 /* ---------------------------------------------------------------- page banner */
 
 .page-banner {
-  background: var(--forest);
-  color: #e7f1ea;
+  background: var(--cover-gradient);
+  color: var(--on-dark);
   border-radius: var(--radius-lg);
   padding: 50px 46px 46px;
   margin-top: 24px;
@@ -353,7 +370,7 @@ button.chip:hover {
 
 .page-banner .lede,
 .page-banner__lede {
-  color: #a9c6b5;
+  color: var(--on-dark);
   font-size: 19px;
   max-width: 64ch;
   margin: 0;
@@ -362,7 +379,7 @@ button.chip:hover {
 .page-banner__sub {
   font-size: 19px;
   font-weight: 700;
-  color: var(--amber-lt);
+  color: var(--gold-lt);
   margin: 0 0 10px;
 }
 
@@ -370,7 +387,7 @@ button.chip:hover {
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #7fa38c;
+  color: var(--on-dark-faint);
   font-weight: 700;
   margin: 0;
 }
@@ -391,7 +408,7 @@ button.chip:hover {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--amber-lt);
+  color: var(--gold-lt);
   margin: 0 0 4px;
 }
 
@@ -401,7 +418,7 @@ button.chip:hover {
   list-style: none;
   margin: 0;
   padding: 8px;
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
@@ -417,7 +434,7 @@ button.chip:hover {
 }
 
 .answer > a:hover {
-  background: var(--sand);
+  background: var(--cream);
 }
 
 .answer__mark {
@@ -432,18 +449,18 @@ button.chip:hover {
 }
 
 .answer--qualified .answer__mark {
-  background: #dff0e4;
-  color: #1d6b3c;
+  background: var(--ok-pale);
+  color: var(--ok);
 }
 
 .answer--conditional .answer__mark {
-  background: var(--amber-pale);
-  color: #96591a;
+  background: var(--gold-pale);
+  color: var(--gold-deep);
 }
 
 .answer--not-qualified .answer__mark {
-  background: #f7e2e2;
-  color: #9b3535;
+  background: var(--no-pale);
+  color: var(--no);
 }
 
 /* ---------------------------------------------------------------- timeline */
@@ -478,13 +495,13 @@ button.chip:hover {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--amber);
-  border: 3px solid var(--sand);
+  background: var(--gold);
+  border: 3px solid var(--cream);
 }
 
 .timeline__year {
   font-weight: 800;
-  color: var(--moss);
+  color: var(--navy-lt);
   font-size: 15px;
   letter-spacing: 0.05em;
 }
@@ -533,18 +550,18 @@ button.chip:hover {
 }
 
 .rail__link:hover {
-  background: var(--cream);
-  color: var(--moss);
+  background: var(--paper);
+  color: var(--navy-lt);
 }
 
 .rail__link.on {
-  background: var(--forest);
+  background: var(--navy);
   color: #fff;
   font-weight: 700;
 }
 
 .rail__box {
-  background: var(--amber-pale);
+  background: var(--gold-pale);
   border-radius: var(--radius);
   padding: 20px 22px;
 }
@@ -556,7 +573,7 @@ button.chip:hover {
 }
 
 .rail__box .eyebrow {
-  color: #96591a;
+  color: var(--gold-deep);
   margin-bottom: 8px;
 }
 
@@ -593,7 +610,7 @@ button.chip:hover {
   left: -9999px;
   top: 0;
   z-index: 100;
-  background: var(--forest);
+  background: var(--navy);
   color: #fff;
   padding: 12px 20px;
   border-radius: 0 0 var(--radius-sm) 0;

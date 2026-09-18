@@ -17,7 +17,7 @@
   width: 620px;
   height: 620px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #e4efe5, transparent 68%);
+  background: radial-gradient(circle at 35% 35%, #dbe7f3, transparent 68%);
 }
 
 .hero__grid {
@@ -34,7 +34,7 @@
 }
 
 .hero h1 span {
-  color: var(--moss);
+  color: var(--navy-lt);
 }
 
 .hero__lede {
@@ -57,7 +57,7 @@
 }
 
 .starter {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 28px 30px 22px;
@@ -90,15 +90,15 @@
 }
 
 .starter__opt:hover {
-  border-color: var(--moss);
-  background: var(--leaf-pale);
+  border-color: var(--navy-lt);
+  background: var(--navy-pale);
 }
 
 .starter__icon {
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: var(--sand-2);
+  background: var(--cream-2);
   display: grid;
   place-items: center;
   font-size: 18px;
@@ -107,7 +107,7 @@
 
 .starter__go {
   margin-left: auto;
-  color: var(--moss);
+  color: var(--navy-lt);
 }
 
 /* myths */
@@ -122,7 +122,7 @@
 }
 
 .myth {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 26px 28px;
@@ -159,8 +159,8 @@
 
 /* stat band */
 .band {
-  background: var(--forest);
-  color: #e7f1ea;
+  background: var(--cover-gradient);
+  color: var(--on-dark);
   border-radius: var(--radius-lg);
   padding: 46px 34px;
   margin: 20px 0;
@@ -176,7 +176,7 @@
 .band__n {
   font-size: 42px;
   font-weight: 800;
-  color: var(--amber-lt);
+  color: var(--gold-lt);
   letter-spacing: -0.03em;
   line-height: 1;
   margin: 0;
@@ -190,7 +190,7 @@
 
 .band__note {
   font-size: 13.5px;
-  color: #a9c6b5;
+  color: var(--on-dark);
   line-height: 1.5;
   margin: 0;
 }
@@ -200,7 +200,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
-  color: #7f9f8d;
+  color: var(--on-dark-faint);
   margin: 8px 0 0;
 }
 
@@ -212,7 +212,7 @@
 }
 
 .pill {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 28px;
@@ -240,16 +240,16 @@
   margin-bottom: 16px;
 }
 
-.pill__icon--leaf {
-  background: var(--leaf-pale);
+.pill__icon--navy {
+  background: var(--navy-pale);
 }
 
-.pill__icon--amber {
-  background: var(--amber-pale);
+.pill__icon--gold {
+  background: var(--gold-pale);
 }
 
-.pill__icon--sky {
-  background: var(--sky-pale);
+.pill__icon--ink {
+  background: var(--navy);
 }
 
 .pill__icon--plum {
@@ -282,12 +282,12 @@
   padding-top: 16px;
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--moss);
+  color: var(--navy-lt);
 }
 
 .pill--dark {
-  background: var(--forest);
-  border-color: var(--forest);
+  background: var(--navy);
+  border-color: var(--navy);
 }
 
 .pill--dark h3 {
@@ -295,11 +295,11 @@
 }
 
 .pill--dark p {
-  color: #a9c6b5;
+  color: var(--on-dark);
 }
 
 .pill--dark .pill__meta {
-  color: var(--amber-lt);
+  color: var(--gold-lt);
 }
 
 /* examples rail */
@@ -319,7 +319,7 @@
   min-width: 360px;
   max-width: 360px;
   scroll-snap-align: start;
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 26px 28px;
@@ -328,7 +328,7 @@
 }
 
 .ex:hover {
-  border-color: var(--moss);
+  border-color: var(--navy-lt);
 }
 
 .ex__tag {
@@ -343,18 +343,18 @@
 }
 
 .ex__tag--gp {
-  background: var(--leaf-pale);
-  color: var(--moss);
+  background: var(--navy-pale);
+  color: var(--navy-lt);
 }
 
 .ex__tag--parent {
-  background: var(--amber-pale);
-  color: #96591a;
+  background: var(--gold-pale);
+  color: var(--gold-deep);
 }
 
 .ex__tag--student {
-  background: var(--sky-pale);
-  color: var(--sky);
+  background: var(--navy);
+  color: var(--gold-lt);
 }
 
 .ex__tag--business {
@@ -397,7 +397,7 @@
 
 /* checker */
 .checker {
-  background: var(--sand-2);
+  background: var(--cream-2);
   padding: 70px 0;
 }
 
@@ -419,7 +419,7 @@
 
 /* final */
 .final {
-  background: var(--forest-deep);
+  background: linear-gradient(168deg, var(--navy) 0%, var(--navy-deep) 70%);
   color: #fff;
   border-radius: var(--radius-lg);
   padding: 64px 40px;
@@ -434,7 +434,7 @@
 }
 
 .final > p {
-  color: #a9c6b5;
+  color: var(--on-dark);
   max-width: 58ch;
   margin: 0 auto 30px;
   font-size: 18.5px;

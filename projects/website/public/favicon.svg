@@ -1,13 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Total529">
-  <rect width="64" height="64" rx="22" fill="#12432f" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="46 46 208 208" role="img" aria-label="Total529">
+  <circle cx="150" cy="150" r="90" fill="#c9a227" />
+  <path
+    d="M 214.74 87.48 A 90 90 0 1 1 195 72.06"
+    fill="none"
+    stroke="#0b2540"
+    stroke-width="14"
+    stroke-linecap="round"
+  />
+  <polygon points="210.59,81.06 179.11,75.58 190.11,56.53" fill="#0b2540" />
   <text
-    x="32"
-    y="39.9"
+    x="150"
+    y="150"
     text-anchor="middle"
+    dominant-baseline="central"
     font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-    font-size="22"
+    font-size="74"
     font-weight="800"
-    letter-spacing="-0.7"
-    fill="#f0b559"
+    letter-spacing="-3"
+    fill="#0b2540"
   >529</text>
 </svg>

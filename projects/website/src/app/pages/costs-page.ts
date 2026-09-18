@@ -117,7 +117,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
       grid-template-columns: 260px 1fr;
       gap: 40px;
       align-items: center;
-      background: var(--cream);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 28px 32px;
@@ -128,7 +128,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
       font-size: 46px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--forest);
+      color: var(--navy);
       margin: 8px 0 0;
       line-height: 1;
     }
@@ -197,7 +197,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
     }
 
     thead button:hover {
-      color: var(--moss);
+      color: var(--navy-lt);
     }
 
     tbody th {
@@ -211,7 +211,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
     }
 
     tbody th a:hover {
-      color: var(--moss);
+      color: var(--navy-lt);
     }
 
     td.total {
@@ -231,7 +231,7 @@ type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'total' | 'vsNational';
     }
 
     .footnote a {
-      color: var(--moss);
+      color: var(--navy-lt);
       font-weight: 700;
     }
 

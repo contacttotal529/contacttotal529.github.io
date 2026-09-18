@@ -10,7 +10,20 @@ import { ContentService } from '../core/content.service';
     <header>
       <div class="shell bar">
         <a class="logo" routerLink="/" aria-label="Total529 home">
-          <span class="leaf" aria-hidden="true">529</span>
+          <svg class="mark" viewBox="50 50 200 200" aria-hidden="true" focusable="false">
+            <circle class="mark__disc" cx="150" cy="150" r="90" />
+            <path class="mark__sweep" d="M 214.74 87.48 A 90 90 0 1 1 195 72.06" />
+            <polygon class="mark__tip" points="210.59,81.06 179.11,75.58 190.11,56.53" />
+            <text
+              class="mark__num"
+              x="150"
+              y="150"
+              text-anchor="middle"
+              dominant-baseline="central"
+            >
+              529
+            </text>
+          </svg>
           Total529
         </a>
 
@@ -60,7 +73,7 @@ import { ContentService } from '../core/content.service';
     }
 
     header {
-      background: rgba(246, 241, 230, 0.93);
+      background: rgba(244, 239, 227, 0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
@@ -86,17 +99,34 @@ import { ContentService } from '../core/content.service';
       color: var(--text);
     }
 
-    .leaf {
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
-      background: var(--forest);
-      color: var(--amber-lt);
-      display: grid;
-      place-items: center;
-      font-size: 13.5px;
-      font-weight: 800;
+    /* The book jacket's badge: gold disc, navy 529, navy arrow sweeping round it. */
+    .mark {
+      width: 40px;
+      height: 40px;
       flex: 0 0 auto;
+    }
+
+    .mark__disc {
+      fill: var(--gold);
+    }
+
+    .mark__sweep {
+      fill: none;
+      stroke: var(--navy);
+      stroke-width: 14;
+      stroke-linecap: round;
+    }
+
+    .mark__tip {
+      fill: var(--navy);
+    }
+
+    .mark__num {
+      fill: var(--navy);
+      font-family: var(--sans);
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: -2px;
     }
 
     .nav {
@@ -115,21 +145,21 @@ import { ContentService } from '../core/content.service';
     }
 
     .nav a:hover {
-      background: var(--sand-2);
+      background: var(--cream-2);
       color: var(--text);
     }
 
     .nav a.on {
-      background: var(--forest);
+      background: var(--navy);
       color: #fff;
     }
 
     .search {
       display: flex;
       align-items: center;
-      border: 2px solid var(--line);
+      border: 2px solid var(--line-strong);
       border-radius: 999px;
-      background: var(--cream);
+      background: var(--paper);
       padding-right: 6px;
     }
 
@@ -150,7 +180,7 @@ import { ContentService } from '../core/content.service';
     .search button {
       border: 0;
       background: transparent;
-      color: var(--moss);
+      color: var(--navy-lt);
       font-size: 17px;
       padding: 0 8px;
       cursor: pointer;
@@ -161,7 +191,7 @@ import { ContentService } from '../core/content.service';
       font-family: inherit;
       font-size: 14px;
       font-weight: 700;
-      background: var(--forest);
+      background: var(--navy);
       color: #fff;
       border: 0;
       border-radius: 999px;

@@ -25,7 +25,7 @@ import { Seo } from '../core/seo.service';
         the state guide and the reference tables.
       </p>
       <div class="cta">
-        <a class="btn btn--forest" [href]="feedbackHref">Email {{ feedbackAddress }}</a>
+        <a class="btn btn--navy" [href]="feedbackHref">Email {{ feedbackAddress }}</a>
         <a class="btn btn--outline" routerLink="/">Back to the sample</a>
       </div>
     </div>

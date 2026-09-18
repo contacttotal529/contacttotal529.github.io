@@ -96,9 +96,9 @@ import { Seo } from '../core/seo.service';
             </dl>
           </div>
 
-          <div class="side__card side__card--amber">
+          <div class="side__card side__card--gold">
             <p class="eyebrow">Start reading</p>
-            <a class="btn btn--forest" routerLink="/search">Search for a rule</a>
+            <a class="btn btn--navy" routerLink="/search">Search for a rule</a>
             <a class="btn btn--outline" routerLink="/states">Look up your state</a>
           </div>
 
@@ -180,7 +180,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .sources a {
-      color: var(--moss);
+      color: var(--navy-lt);
       font-weight: 700;
       text-decoration: none;
       font-size: 16px;
@@ -196,16 +196,16 @@ import { Seo } from '../core/seo.service';
     }
 
     .side__card {
-      background: var(--cream);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px 26px;
       margin-bottom: 16px;
     }
 
-    .side__card--amber {
-      background: var(--amber-pale);
-      border-color: #e8cb9c;
+    .side__card--gold {
+      background: var(--gold-pale);
+      border-color: #e0c88c;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -240,7 +240,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .legal {
-      background: var(--sand-2);
+      background: var(--cream-2);
       padding: 56px 0 64px;
     }
 

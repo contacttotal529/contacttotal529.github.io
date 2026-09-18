@@ -49,7 +49,7 @@ import { Seo } from '../core/seo.service';
             Those five are the sample; the rest of the families &mdash; and the rules they are
             attached to &mdash; arrive with the book itself.
           </p>
-          <a class="btn btn--forest" routerLink="/coming-soon"
+          <a class="btn btn--navy" routerLink="/coming-soon"
             >Total529, the book: Coming Soon &rarr;</a
           >
         </div>
@@ -64,7 +64,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .ex {
-      background: var(--cream);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 26px 28px;
@@ -75,7 +75,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .ex:hover {
-      border-color: var(--moss);
+      border-color: var(--navy-lt);
     }
 
     .ex__tag {
@@ -90,18 +90,18 @@ import { Seo } from '../core/seo.service';
     }
 
     .ex__tag--gp {
-      background: var(--leaf-pale);
-      color: var(--moss);
+      background: var(--navy-pale);
+      color: var(--navy-lt);
     }
 
     .ex__tag--parent {
-      background: var(--amber-pale);
-      color: #96591a;
+      background: var(--gold-pale);
+      color: var(--gold-deep);
     }
 
     .ex__tag--student {
-      background: var(--sky-pale);
-      color: var(--sky);
+      background: var(--navy);
+      color: var(--gold-lt);
     }
 
     .ex__tag--business {
@@ -126,11 +126,11 @@ import { Seo } from '../core/seo.service';
       padding-top: 16px;
       font-size: 13.5px;
       font-weight: 700;
-      color: var(--moss);
+      color: var(--navy-lt);
     }
 
     .index {
-      background: var(--sand-2);
+      background: var(--cream-2);
       padding: 70px 0;
       margin-top: 56px;
     }

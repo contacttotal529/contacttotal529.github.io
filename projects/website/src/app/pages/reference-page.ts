@@ -28,7 +28,7 @@ import { Seo } from '../core/seo.service';
 
       <div class="legend">
         <span class="chip chip--yes">Qualified</span>
-        <span class="chip chip--amber">Conditions apply</span>
+        <span class="chip chip--gold">Conditions apply</span>
         <span class="chip chip--no">Not qualified</span>
       </div>
 
@@ -128,7 +128,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .family {
-      background: var(--sand-2);
+      background: var(--cream-2);
       padding: 66px 0 70px;
     }
 
@@ -142,7 +142,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .family__list li {
-      background: var(--cream);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
       padding: 14px 18px 14px 42px;
@@ -156,7 +156,7 @@ import { Seo } from '../core/seo.service';
       position: absolute;
       left: 16px;
       top: 14px;
-      color: var(--moss);
+      color: var(--navy-lt);
       font-weight: 800;
     }
 
@@ -168,7 +168,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .family__note a {
-      color: var(--moss);
+      color: var(--navy-lt);
       font-weight: 700;
     }
 
@@ -179,7 +179,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .figure {
-      background: var(--cream);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px 26px;
@@ -188,7 +188,7 @@ import { Seo } from '../core/seo.service';
     }
 
     .figure:hover {
-      border-color: var(--moss);
+      border-color: var(--navy-lt);
     }
 
     .figure__amount {
@@ -196,7 +196,7 @@ import { Seo } from '../core/seo.service';
       font-size: 34px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--forest);
+      color: var(--navy);
       line-height: 1;
     }
 

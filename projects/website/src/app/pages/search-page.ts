@@ -20,7 +20,7 @@ import { Seo } from '../core/seo.service';
           [value]="query()"
           (input)="query.set($any($event.target).value)"
         />
-        <button class="btn btn--forest" type="submit">Search</button>
+        <button class="btn btn--navy" type="submit">Search</button>
       </form>
 
       <div class="suggest">
