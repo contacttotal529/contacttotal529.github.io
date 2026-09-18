@@ -18,6 +18,13 @@ const states = statesJson as unknown as { states: { slug: string }[] };
  * router still renders it client-side.
  */
 export const serverRoutes: ServerRoute[] = [
+  // The retired comparisons URLs redirect in app.routes.ts, but they no longer appear in
+  // book.json, so the enumeration below would skip them and leave them to 404.html. Pin them
+  // here, above the pattern they would otherwise match, so each gets a real prerendered file.
+  ...['state-estate-tax', 'penalty-free-exits', 'summary', 'dynasty-plans'].map((sectionId) => ({
+    path: `guide/comparisons/${sectionId}`,
+    renderMode: RenderMode.Prerender as const,
+  })),
   {
     path: 'guide/:chapterId/:sectionId',
     renderMode: RenderMode.Prerender,

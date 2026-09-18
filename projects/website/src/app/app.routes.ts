@@ -7,6 +7,19 @@ export const routes: Routes = [
     path: '',
     loadComponent: () => import('./pages/home-page').then((m) => m.HomePage),
   },
+  // The final edition moved three rules out of the comparisons chapter and dropped a fourth
+  // that duplicated the estate-planning one. Their old URLs were published and crawled, so
+  // they redirect rather than 404. These must stay above `guide/:chapterId/:sectionId`.
+  ...[
+    ['state-estate-tax', 'estate-planning/state-estate-tax'],
+    ['penalty-free-exits', 'maximizing/penalty-free-exits'],
+    ['summary', 'maximizing/summary'],
+    ['dynasty-plans', 'estate-planning/multigenerational-transfer'],
+  ].map(([from, to]) => ({
+    path: `guide/comparisons/${from}`,
+    redirectTo: `/guide/${to}`,
+    pathMatch: 'full' as const,
+  })),
   {
     // Rules stand alone and are reached by search or by topic. There is deliberately no table
     // of contents and no chapter page: the site answers a question, it does not serve the book.
