@@ -365,6 +365,11 @@ function summarise(blocks) {
 function parsePlans(lines) {
   const cells = lines.map((l) => l.trim()).filter(Boolean);
   const headerEnd = cells.findIndex((c) => /pdf link/i.test(c));
+  if (headerEnd === -1) {
+    throw new Error(
+      'Appendix 1: no "PDF Link" header cell. Without it the header row is read as plan data.',
+    );
+  }
   const records = cells.slice(headerEnd + 1);
 
   const byState = new Map();
@@ -416,6 +421,11 @@ function parsePlans(lines) {
 function parseCosts(lines) {
   const cells = lines.map((l) => l.trim()).filter(Boolean);
   const headerEnd = cells.findIndex((c) => /^vs\.? (natl )?avg$/i.test(c));
+  if (headerEnd === -1) {
+    throw new Error(
+      'Appendix 2: no "vs Avg" header cell. Without it the header row is read as a cost row.',
+    );
+  }
   const records = cells.slice(headerEnd + 1);
 
   const rows = [];
@@ -425,9 +435,13 @@ function parseCosts(lines) {
     if (/^NATIONAL AV/i.test(records[i])) {
       // The label sits on its own cell in one edition and shares a cell with "(All 50 States)"
       // in the next, so read the five money cells that follow rather than fixed offsets.
-      const [tuition, room, board, books, total] = records
-        .slice(i)
-        .filter((c) => c.startsWith('$'));
+      const moneyCells = records.slice(i, i + 8).filter((c) => c.startsWith('$'));
+      if (moneyCells.length < 5) {
+        throw new Error(
+          `Appendix 2: the national-average row has ${moneyCells.length} money cells, expected 5.`,
+        );
+      }
+      const [tuition, room, board, books, total] = moneyCells;
       national = {
         tuition: money(tuition),
         room: money(room),

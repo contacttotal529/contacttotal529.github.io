@@ -78,7 +78,9 @@
                     [href]="plan.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    [attr.aria-label]="plan.name + ' — official program description (PDF)'"
+                    [attr.aria-label]="
+                      plan.name + ' ' + plan.type + ' — official program description'
+                    "
                     >{{ plan.name }} <em>{{ plan.type }}</em></a
                   >
                 } @else {
@@ -109,9 +111,10 @@
   </div>
 
   <p class="footnote">
-    Each plan name links to that plan's official program description, the PDF the book cites for it
-    in Appendix 1. Blank cells mean the manuscript does not state a figure for that jurisdiction
-    &mdash; not that the figure is zero. Check the state's own program description before acting.
+    Each plan name links to that plan's official program description, the document the book cites
+    for it in Appendix 1. Blank cells mean the manuscript does not state a figure for that
+    jurisdiction &mdash; not that the figure is zero. Check the state's own program description
+    before acting.
   </p>
 
   <div class="sources">

@@ -4,7 +4,7 @@ import { ContentService } from '../core/content.service';
 import { Seo } from '../core/seo.service';
 import type { CostRow } from '../core/content.models';
 
-type SortKey = 'state' | 'tuition' | 'room' | 'board' | 'books' | 'total' | 'vsNational';
+type SortKey = 'state' | 'school' | 'tuition' | 'room' | 'board' | 'books' | 'total' | 'vsNational';
 
 @Component({
   selector: 'app-costs-page',
@@ -265,7 +265,7 @@ export class CostsPage {
 
   readonly columns: { key: SortKey; label: string; numeric: boolean }[] = [
     { key: 'state', label: 'State', numeric: false },
-    { key: 'state', label: 'Flagship university', numeric: false },
+    { key: 'school', label: 'Flagship university', numeric: false },
     { key: 'tuition', label: 'Tuition & fees', numeric: true },
     { key: 'room', label: 'Room', numeric: true },
     { key: 'board', label: 'Board', numeric: true },
@@ -286,7 +286,7 @@ export class CostsPage {
       .filter((r) => !q || r.state.toLowerCase().includes(q) || r.school.toLowerCase().includes(q))
       .slice()
       .sort((a, b) => {
-        if (key === 'state') return a.state.localeCompare(b.state) * (this.desc() ? -1 : 1);
+        if (key === 'state' || key === 'school') return a[key].localeCompare(b[key]) * direction;
         return ((a[key] ?? 0) - (b[key] ?? 0)) * direction;
       });
   });
@@ -296,7 +296,7 @@ export class CostsPage {
       this.desc.set(!this.desc());
     } else {
       this.sort.set(key);
-      this.desc.set(key !== 'state');
+      this.desc.set(key !== 'state' && key !== 'school');
     }
   }
 
