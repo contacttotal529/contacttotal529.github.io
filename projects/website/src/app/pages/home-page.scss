@@ -97,7 +97,7 @@
 .starter__icon {
   width: 38px;
   height: 38px;
-  border-radius: 12px;
+  border-radius: 50%;
   background: var(--cream-2);
   display: grid;
   place-items: center;
@@ -233,7 +233,7 @@
 .pill__icon {
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-sm);
+  border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 24px;
